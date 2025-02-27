@@ -1,0 +1,12 @@
+node_modules
+dist
+*.tgz
+logs
+.idea
+cache
+typechain
+coverage
+.task/
+.env*
+!.env.example
+.keystore
