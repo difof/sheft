@@ -50,3 +50,11 @@ quote_style = "double"
 number_underscore = "thousands"
 hex_underscore = "remove"
 wrap_comments = false
+
+[doc]
+out = "docs/solidity"
+title = "Foo Docs"
+ignore = [
+    "node_modules",
+    "test"
+]
