@@ -19,3 +19,15 @@ verbosity = 3
 
 [profile.ci]
 verbosity = 4
+
+## Solidity "style" settings such as linter, formatter and doc gen
+
+[lint]
+ignore = [
+    "lib",
+    "node_modules"
+]
+exclude_lints = [
+    "unaliased-plain-import",
+    "asm-keccak256"
+]
