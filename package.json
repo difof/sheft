@@ -1,4 +1,8 @@
 {
     "name": "sheft-foo",
-    "type": "module"
+    "type": "module",
+    "dependencies": {
+        "keccak": "^3.0.4",
+        "merkletreejs": "^0.5.2"
+    }
 }
