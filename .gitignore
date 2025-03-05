@@ -4,6 +4,7 @@ dist
 logs
 .idea
 cache
+artifacts
 typechain
 coverage
 .task/
