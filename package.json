@@ -4,5 +4,8 @@
     "dependencies": {
         "keccak": "^3.0.4",
         "merkletreejs": "^0.5.2"
+    },
+    "devDependencies": {
+        "typescript": "~5.8.0"
     }
 }
