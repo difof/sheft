@@ -10,6 +10,19 @@ const __dirname = path.dirname(__filename)
 const compat = new FlatCompat({
     baseDirectory: __dirname,
 export default defineConfig([
+    {
+        ignores: [
+            "**/node_modules/**",
+            "**/coverage/**",
+            "**/cache/**",
+            "**/artifacts/**",
+            "**/lib/**",
+            "**/typechain/**",
+            "**/docs/**",
+            "**/package/**",
+            "**/typechain/**",
+        ],
+    },
     // TypeScript files
     {
         plugins: {
