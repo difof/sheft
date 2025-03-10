@@ -1,14 +1,20 @@
 import { defineConfig } from "eslint/config"
 import typescriptEslint from "@typescript-eslint/eslint-plugin"
 import prettier from "eslint-plugin-prettier"
+import jslint from "@eslint/js"
 import { FlatCompat } from "@eslint/eslintrc"
 import path from "path"
 import { fileURLToPath } from "url"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
+const { configs } = jslint
 const compat = new FlatCompat({
     baseDirectory: __dirname,
+    recommendedConfig: configs.recommended,
+    allConfig: configs.all,
+})
+
 export default defineConfig([
     {
         ignores: [
