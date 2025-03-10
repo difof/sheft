@@ -1,4 +1,6 @@
 import { defineConfig } from "eslint/config"
+import typescriptEslint from "@typescript-eslint/eslint-plugin"
+import prettier from "eslint-plugin-prettier"
 import { FlatCompat } from "@eslint/eslintrc"
 import path from "path"
 import { fileURLToPath } from "url"
@@ -10,10 +12,17 @@ const compat = new FlatCompat({
 export default defineConfig([
     // TypeScript files
     {
+        plugins: {
+            "@typescript-eslint": typescriptEslint,
+            prettier,
+        },
         extends: compat.extends(
             "eslint:recommended",
             "plugin:@typescript-eslint/recommended",
             "plugin:prettier/recommended"
         ),
+        rules: {
+            "prettier/prettier": "error",
+        },
     },
 ])
