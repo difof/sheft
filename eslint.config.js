@@ -1,4 +1,6 @@
 import { defineConfig } from "eslint/config"
+
+import tsParser from "@typescript-eslint/parser"
 import typescriptEslint from "@typescript-eslint/eslint-plugin"
 import prettier from "eslint-plugin-prettier"
 import nodeGlobals from "globals"
@@ -33,10 +35,18 @@ export default defineConfig([
             "**/typechain/**",
         ],
     },
+
     // TypeScript files
     {
         files: ["**/*.ts"],
         languageOptions: {
+            parser: tsParser,
+            ecmaVersion: 2022,
+            sourceType: "module",
+            parserOptions: {
+                project: path.join(__dirname, "tsconfig.json"),
+                tsconfigRootDir: __dirname,
+            },
             globals: {
                 ...node,
             },
