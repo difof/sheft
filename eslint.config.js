@@ -64,4 +64,12 @@ export default defineConfig([
             "prettier/prettier": "error",
         },
     },
+
+    // Test-specific tweaks (chai-style assertions)
+    {
+        files: ["test/**/*.ts"],
+        rules: {
+            "@typescript-eslint/no-unused-expressions": "off",
+        },
+    },
 ])
