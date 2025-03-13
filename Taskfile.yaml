@@ -32,3 +32,11 @@ tasks:
         generates:
             - lib/*/**/*
         cmd: forge install --shallow {{.CLI_ARGS}}
+
+    deps:
+        desc: Install all (Foundry/TS) dependencies
+        aliases:
+            - install
+        deps:
+            - deps:ts
+            - deps:sol
