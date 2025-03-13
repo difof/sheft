@@ -40,3 +40,9 @@ tasks:
         deps:
             - deps:ts
             - deps:sol
+
+    format:ts:
+        desc: Run prettier formatter for TypeScript
+        aliases:
+            - fmt:ts
+        cmd: bunx prettier --write .
