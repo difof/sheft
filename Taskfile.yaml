@@ -21,7 +21,7 @@ tasks:
         sources:
             - package.json
             - bun.lock
-        cmd: bun install
+        cmd: bun install {{.CLI_ARGS}}
 
     deps:sol:
         desc: Install Solidity dependencies
@@ -31,4 +31,4 @@ tasks:
             - .gitmodules
         generates:
             - lib/*/**/*
-        cmd: forge install --shallow
+        cmd: forge install --shallow {{.CLI_ARGS}}
