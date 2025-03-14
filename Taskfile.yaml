@@ -46,3 +46,9 @@ tasks:
         aliases:
             - fmt:ts
         cmd: bunx prettier --write .
+
+    format:sol:
+        desc: Run foundry formatter for Solidity
+        aliases:
+            - fmt:sol
+        cmd: forge fmt
