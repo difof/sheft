@@ -52,3 +52,11 @@ tasks:
         aliases:
             - fmt:sol
         cmd: forge fmt
+
+    format:
+        desc: Format all sources (Solidity and TypeScript)
+        aliases:
+            - fmt
+        deps:
+            - format:ts
+            - format:sol
