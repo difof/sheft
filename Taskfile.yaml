@@ -60,3 +60,11 @@ tasks:
         deps:
             - format:ts
             - format:sol
+
+    lint:ts:
+        desc: Lint TypeScript files
+        cmd: bunx eslint .
+
+    lint:ts:fix:
+        desc: Lint and fix TypeScript files
+        cmd: bunx eslint . --fix
