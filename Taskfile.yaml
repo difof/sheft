@@ -76,3 +76,9 @@ tasks:
     lint:sol:
         desc: Lint Solidity files
         cmd: forge lint
+
+    lint:
+        desc: Lint all sources (Solidity and TypeScript)
+        deps:
+            - lint:ts
+            - lint:sol
