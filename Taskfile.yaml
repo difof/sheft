@@ -72,3 +72,7 @@ tasks:
     lint:ts:check:
         desc: Lint check only
         cmd: bunx prettier --check .
+
+    lint:sol:
+        desc: Lint Solidity files
+        cmd: forge lint
