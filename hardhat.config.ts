@@ -31,4 +31,13 @@ const config: HardhatUserConfig = {
     },
 }
 
+function loadExternalNetworks() {
+    const networks: {
+        [key: string]: { chainId: number; url: string; type: string }
+    } = {}
+
+
+    return networks
+}
+
 export default config
