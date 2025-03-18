@@ -6,6 +6,12 @@ import hardhatToolboxMochaEthersPlugin from "@nomicfoundation/hardhat-toolbox-mo
 
 const config: HardhatUserConfig = {
     plugins: [hardhatToolboxMochaEthersPlugin],
+    paths: {
+        sources: "src/contracts",
+        tests: "test/hardhat",
+        cache: "cache/hardhat",
+        artifacts: "artifacts/hardhat",
+    },
 }
 
 export default config
