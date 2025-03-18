@@ -16,6 +16,19 @@ const config: HardhatUserConfig = {
         outDir: "typechain",
         alwaysGenerateOverloads: true,
     },
+    solidity: {
+        profiles: {
+            default: {
+                version: "0.8.23",
+                settings: {
+                    optimizer: {
+                        enabled: true,
+                        runs: 200,
+                    },
+                },
+            },
+        },
+    },
 }
 
 export default config
