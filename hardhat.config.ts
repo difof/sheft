@@ -6,6 +6,14 @@ import hardhatToolboxMochaEthersPlugin from "@nomicfoundation/hardhat-toolbox-mo
 
 const config: HardhatUserConfig = {
     plugins: [hardhatToolboxMochaEthersPlugin],
+    networks: {
+        hardhat: {
+            type: "edr-simulated",
+            chainType: "l1",
+            chainId: parseInt(process.env.HARDHAT_CHAINID!),
+        },
+        ...loadExternalNetworks(),
+    },
     paths: {
         sources: "src/contracts",
         tests: "test/hardhat",
