@@ -12,6 +12,10 @@ const config: HardhatUserConfig = {
         cache: "cache/hardhat",
         artifacts: "artifacts/hardhat",
     },
+    typechain: {
+        outDir: "typechain",
+        alwaysGenerateOverloads: true,
+    },
 }
 
 export default config
