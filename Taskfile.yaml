@@ -95,8 +95,7 @@ tasks:
             - cache/**/*
             - artifacts/**/*
         cmds:
-            - task deps:ts
-            - task deps:sol
+            - task deps
             - forge compile {{.CLI_ARGS}}
             - bunx hardhat compile
 
