@@ -82,3 +82,21 @@ tasks:
         deps:
             - lint:ts
             - lint:sol
+
+    build:sol:
+        desc: Compile smart contracts using both Foundry and Hardhat. Accepts CLI args for `forge compile`
+        aliases:
+            - build
+            - compile
+        sources:
+            - src/contracts/**/*.sol
+            - test/foundry/**/*.sol
+        generates:
+            - cache/**/*
+            - artifacts/**/*
+        cmds:
+            - task deps:ts
+            - task deps:sol
+            - forge compile {{.CLI_ARGS}}
+            - bunx hardhat compile
+
