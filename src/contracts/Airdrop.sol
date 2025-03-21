@@ -7,7 +7,11 @@ contract Airdrop is
 {
     bytes32 public merkleRoot = 0x0;
     event MerkleRootUpdated(bytes32 indexed previous, bytes32 indexed updated);
+    event ReceivedNative(address indexed sender, uint256 amount);
     constructor(
         address _admin
     ) Ownable(_admin) { }
+    receive() external payable {
+        emit ReceivedNative(msg.sender, msg.value);
+    }
 }
