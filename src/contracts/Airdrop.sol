@@ -6,8 +6,10 @@ import { IERC20 } from "openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { SafeERC20 } from
     "openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import { Address } from "openzeppelin/contracts/utils/Address.sol";
+import { Pausable } from "openzeppelin/contracts/utils/Pausable.sol";
 contract Airdrop is
     Ownable,
+    Pausable,
 {
     using Address for address payable;
     using SafeERC20 for IERC20;
@@ -19,6 +21,12 @@ contract Airdrop is
     ) Ownable(_admin) { }
     receive() external payable {
         emit ReceivedNative(msg.sender, msg.value);
+    }
+    function pause() external onlyOwner {
+        _pause();
+    }
+    function unpause() external onlyOwner {
+        _unpause();
     }
     function _transferToken(
         IERC20 _token,
