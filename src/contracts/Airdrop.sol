@@ -62,6 +62,12 @@ contract Airdrop is
     function unpause() external onlyOwner {
         _unpause();
     }
+    function verifyEligibility(
+        bytes32[] calldata _proof,
+        bytes32 _leaf
+    ) external view returns (bool) {
+        return _verifyProof(_proof, _leaf);
+    }
     function _transferToken(
         IERC20 _token,
         address _to,
