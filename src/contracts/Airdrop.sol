@@ -85,4 +85,27 @@ contract Airdrop is
     ) internal view returns (bool _isMember) {
         _isMember = _proof.verifyCalldata(merkleRoot, _leaf);
     }
+    function _computeLeaf(
+        address _user,
+        uint256 _amount,
+        address _token
+    ) internal view returns (bytes32 _hash) {
+        assembly {
+            // user 20 + amount 32 + token 20 + chainid 32 = 104 (0x68)
+            let mem := mload(0x40)
+            // pack data
+            // user (address): 20 bytes at offset 0
+            // shift left by 12 bytes (96 bits)
+            mstore(mem, shl(0x60, _user))
+            // amount (uint256): 32 bytes at offset 20 (0x14)
+            mstore(add(mem, 0x14), _amount)
+            // token (address): 20 bytes at offset 52 (0x34)
+            // shift left by 12 bytes to align address
+            mstore(add(mem, 0x34), shl(0x60, _token))
+            // chainid (uint256): 32 bytes at offset 72 (0x48)
+            mstore(add(mem, 0x48), chainid())
+
+            _hash := keccak256(mem, 0x68)
+        }
+    }
 }
