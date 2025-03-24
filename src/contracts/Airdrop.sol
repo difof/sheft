@@ -12,6 +12,7 @@ interface IAirdropErrors {
     error MerkleRootNotChanged();
 }
 contract Airdrop is
+    IAirdropErrors,
     Ownable,
     Pausable,
 {
