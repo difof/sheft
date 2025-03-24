@@ -7,6 +7,10 @@ import { SafeERC20 } from
     "openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import { Address } from "openzeppelin/contracts/utils/Address.sol";
 import { Pausable } from "openzeppelin/contracts/utils/Pausable.sol";
+interface IAirdropErrors {
+    error ZeroMerkleRoot();
+    error MerkleRootNotChanged();
+}
 contract Airdrop is
     Ownable,
     Pausable,
@@ -32,6 +36,22 @@ contract Airdrop is
     ) external onlyOwner {
         _transferToken(_token, _to, _amount);
         emit TokensWithdrawn(_token, _to, _amount);
+    }
+    function updateMerkleRoot(
+        bytes32 _root
+    ) external onlyOwner {
+        if (_root == bytes32(0)) {
+            revert ZeroMerkleRoot();
+        }
+
+        bytes32 current = merkleRoot;
+
+        if (_root == current) {
+            revert MerkleRootNotChanged();
+        }
+
+        merkleRoot = _root;
+        emit MerkleRootUpdated(current, _root);
     }
     function pause() external onlyOwner {
         _pause();
