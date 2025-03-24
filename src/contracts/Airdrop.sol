@@ -7,6 +7,7 @@ import { SafeERC20 } from
     "openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import { Address } from "openzeppelin/contracts/utils/Address.sol";
 import { Pausable } from "openzeppelin/contracts/utils/Pausable.sol";
+import { MerkleProofLib } from "solady/utils/MerkleProofLib.sol";
 interface IAirdropErrors {
     error ZeroMerkleRoot();
     error MerkleRootNotChanged();
@@ -18,6 +19,7 @@ contract Airdrop is
 {
     using Address for address payable;
     using SafeERC20 for IERC20;
+    using MerkleProofLib for bytes32[];
     bytes32 public merkleRoot = 0x0;
     event MerkleRootUpdated(bytes32 indexed previous, bytes32 indexed updated);
     event ReceivedNative(address indexed sender, uint256 amount);
@@ -70,5 +72,11 @@ contract Airdrop is
         } else {
             _token.safeTransfer(_to, _amount);
         }
+    }
+    function _verifyProof(
+        bytes32[] calldata _proof,
+        bytes32 _leaf
+    ) internal view returns (bool _isMember) {
+        _isMember = _proof.verifyCalldata(merkleRoot, _leaf);
     }
 }
