@@ -16,11 +16,22 @@ contract Airdrop is
     bytes32 public merkleRoot = 0x0;
     event MerkleRootUpdated(bytes32 indexed previous, bytes32 indexed updated);
     event ReceivedNative(address indexed sender, uint256 amount);
+    event TokensWithdrawn(
+        IERC20 indexed token, address indexed receiver, uint256 amount
+    );
     constructor(
         address _admin
     ) Ownable(_admin) { }
     receive() external payable {
         emit ReceivedNative(msg.sender, msg.value);
+    }
+    function withdrawTokens(
+        IERC20 _token,
+        address _to,
+        uint256 _amount
+    ) external onlyOwner {
+        _transferToken(_token, _to, _amount);
+        emit TokensWithdrawn(_token, _to, _amount);
     }
     function pause() external onlyOwner {
         _pause();
