@@ -8,6 +8,10 @@ import { SafeERC20 } from
 import { Address } from "openzeppelin/contracts/utils/Address.sol";
 import { Pausable } from "openzeppelin/contracts/utils/Pausable.sol";
 import { MerkleProofLib } from "solady/utils/MerkleProofLib.sol";
+struct AirdropMembership {
+    address userWallet;
+    uint256 claimAmount;
+}
 interface IAirdropErrors {
     error ZeroMerkleRoot();
     error MerkleRootNotChanged();
