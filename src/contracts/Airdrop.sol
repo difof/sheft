@@ -14,6 +14,36 @@ struct AirdropMembership {
     address userWallet;
     uint256 claimAmount;
 }
+interface IAirdrop {
+    function merkleRoot() external view returns (bytes32);
+    function claimed(
+        bytes32 _leaf
+    ) external view returns (bool);
+    function withdrawTokens(
+        IERC20 _token,
+        address _to,
+        uint256 _amount
+    ) external;
+    function updateMerkleRoot(
+        bytes32 _root
+    ) external;
+    function pause() external;
+    function unpause() external;
+    function getLeaf(
+        address _user,
+        uint256 _amount,
+        IERC20 _token
+    ) external view returns (bytes32);
+    function verifyEligibility(
+        bytes32[] calldata _proof,
+        bytes32 _leaf
+    ) external view returns (bool);
+    function claim(
+        bytes32[] calldata _proof,
+        AirdropMembership calldata _membership,
+        IERC20 _token
+    ) external;
+}
 interface IAirdropErrors {
     error NotEligible(address userWallet);
     error AlreadyClaimed(address userWallet);
@@ -21,6 +51,7 @@ interface IAirdropErrors {
     error MerkleRootNotChanged();
 }
 contract Airdrop is
+    IAirdrop,
     IAirdropErrors,
     Ownable,
     Pausable,
