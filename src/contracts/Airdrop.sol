@@ -90,9 +90,18 @@ interface IAirdrop {
 }
 
 interface IAirdropErrors {
+    /// @notice Thrown when the wallet is not included in the Merkle allowlist.
+    /// @param userWallet The wallet that attempted an invalid claim.
     error NotEligible(address userWallet);
+
+    /// @notice Thrown when a wallet attempts to claim more than once.
+    /// @param userWallet The wallet that already claimed its allocation.
     error AlreadyClaimed(address userWallet);
+
+    /// @notice Thrown when attempting to set the Merkle root to the zero value.
     error ZeroMerkleRoot();
+
+    /// @notice Thrown when the provided Merkle root is identical to the current root.
     error MerkleRootNotChanged();
 }
 contract Airdrop is
