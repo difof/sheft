@@ -104,6 +104,10 @@ interface IAirdropErrors {
     /// @notice Thrown when the provided Merkle root is identical to the current root.
     error MerkleRootNotChanged();
 }
+
+/// @title ETH/ERC20 Merkle Airdrop
+/// @notice Distributes ERC20 tokens or native ETH to addresses included in a Merkle tree allowlist. Each wallet can claim a predefined amount only once.
+/// @dev The leaf is calculated as `keccak256(abi.encodePacked(user, amount, token, block.chainid))` to prevent cross-chain replay attacks and token cross-over. Verification is performed via Solady's `MerkleProofLib` and security modules from OpenZeppelin are leveraged for ownership, pausing, and reentrancy protection.
 contract Airdrop is
     IAirdrop,
     IAirdropErrors,
