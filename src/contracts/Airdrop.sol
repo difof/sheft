@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 pragma solidity 0.8.23;
+
 import { Ownable } from "openzeppelin/contracts/access/Ownable.sol";
 import { IERC20 } from "openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { SafeERC20 } from
@@ -118,22 +119,56 @@ contract Airdrop is
     using Address for address payable;
     using SafeERC20 for IERC20;
     using MerkleProofLib for bytes32[];
+
+    /// @notice Active Merkle root used to verify eligibility.
     bytes32 public merkleRoot = 0x0;
+    /// @notice Tracks whether a specific Merkle leaf has been claimed.
     mapping(bytes32 => bool) public claimed;
+
+    /// @notice Emitted when the Merkle root is updated.
+    /// @param previous The previous Merkle root.
+    /// @param updated The new Merkle root.
     event MerkleRootUpdated(bytes32 indexed previous, bytes32 indexed updated);
+
+    /// @notice Emitted when the contract receives native ETH.
+    /// @param sender The address that sent the ETH.
+    /// @param amount The amount of ETH received.
     event ReceivedNative(address indexed sender, uint256 amount);
+
+    /// @notice Emitted after a successful claim.
+    /// @param token The ERC20 token address or address(0) if native.
+    /// @param receiver The wallet that received the airdrop.
+    /// @param amount The amount of tokens/native (in wei) sent to the receiver.
     event TokensClaimed(
         IERC20 indexed token, address indexed receiver, uint256 amount
     );
+
+    /// @notice Emitted after a successful administrative withdrawal.
+    /// @param token The ERC20 token address or address(0) if native.
+    /// @param receiver The wallet that received the withdrawn funds.
+    /// @param amount The amount withdrawn.
     event TokensWithdrawn(
         IERC20 indexed token, address indexed receiver, uint256 amount
     );
+
+    /// @notice Deploys the airdrop contract and sets the initial owner.
+    /// @param _admin The address that will be set as the contract owner.
     constructor(
         address _admin
     ) Ownable(_admin) { }
+
+    /// @notice Accepts plain ETH transfers sent to the contract.
+    /// @dev Emits a {ReceivedNative} event.
     receive() external payable {
         emit ReceivedNative(msg.sender, msg.value);
     }
+
+    /// @notice Withdraws tokens or native ETH held by the contract to a recipient.
+    /// @dev Only callable by the owner. Native token is specified with `_token == address(0)`.
+    /// @dev Emits a {TokensWithdrawn} event.
+    /// @param _token The ERC20 token to transfer, or address(0) for native ETH.
+    /// @param _to The address receiving the withdrawn funds.
+    /// @param _amount The amount to withdraw.
     function withdrawTokens(
         IERC20 _token,
         address _to,
@@ -142,6 +177,11 @@ contract Airdrop is
         _transferToken(_token, _to, _amount);
         emit TokensWithdrawn(_token, _to, _amount);
     }
+
+    /// @notice Updates the Merkle root controlling eligibility.
+    /// @dev Only callable by the contract owner.
+    /// @dev Emits a {MerkleRootUpdated} event.
+    /// @param _root The new Merkle root.
     function updateMerkleRoot(
         bytes32 _root
     ) external onlyOwner {
@@ -158,12 +198,25 @@ contract Airdrop is
         merkleRoot = _root;
         emit MerkleRootUpdated(current, _root);
     }
+
+    /// @notice Pauses claim functionality.
+    /// @dev Only callable by the contract owner.
     function pause() external onlyOwner {
         _pause();
     }
+
+    /// @notice Unpauses claim functionality.
+    /// @dev Only callable by the contract owner.
     function unpause() external onlyOwner {
         _unpause();
     }
+
+    /// @notice Computes the Merkle leaf for a given user and allocation for a token/native context.
+    /// @dev The current chain ID is included to make leaves chain-specific and token-specific.
+    /// @param _user Wallet address claiming the airdrop.
+    /// @param _amount Amount of tokens/native (in wei) the wallet is entitled to.
+    /// @param _token The ERC20 token address or address(0) to indicate native token.
+    /// @return The calculated leaf hash.
     function getLeaf(
         address _user,
         uint256 _amount,
@@ -171,12 +224,24 @@ contract Airdrop is
     ) external view returns (bytes32) {
         return _computeLeaf(_user, _amount, address(_token));
     }
+
+    /// @notice Verifies whether a leaf and proof are part of the stored Merkle root.
+    /// @param _proof Merkle proof from the off-chain tree.
+    /// @param _leaf Leaf computed via {getLeaf}.
+    /// @return True if the proof is valid for the current root.
     function verifyEligibility(
         bytes32[] calldata _proof,
         bytes32 _leaf
     ) external view returns (bool) {
         return _verifyProof(_proof, _leaf);
     }
+
+    /// @notice Claims the allocated tokens/native for the sender.
+    /// @dev Reverts with {NotEligible} if the proof is invalid and {AlreadyClaimed} if already claimed.
+    /// @dev Emits a {TokensClaimed} event if claim was successful.
+    /// @param _proof Corresponding Merkle proof.
+    /// @param _membership Packed claim data containing the caller's wallet and allocation.
+    /// @param _token The ERC20 token address or address(0) for native.
     function claim(
         bytes32[] calldata _proof,
         AirdropMembership calldata _membership,
@@ -200,6 +265,11 @@ contract Airdrop is
 
         emit TokensClaimed(_token, user, amount);
     }
+
+    /// @dev Transfers `_amount` of `_token` to `_to`. Treats address(0) as native token.
+    /// @param _token The ERC20 token address or address(0) for native token.
+    /// @param _to The recipient address.
+    /// @param _amount The amount to transfer.
     function _transferToken(
         IERC20 _token,
         address _to,
@@ -211,12 +281,24 @@ contract Airdrop is
             _token.safeTransfer(_to, _amount);
         }
     }
+
+    /// @dev Verifies a Merkle proof against the stored `merkleRoot`.
+    /// @param _proof The Merkle proof corresponding to `_leaf`.
+    /// @param _leaf The leaf being verified.
+    /// @return _isMember True if the proof is valid.
     function _verifyProof(
         bytes32[] calldata _proof,
         bytes32 _leaf
     ) internal view returns (bool _isMember) {
         _isMember = _proof.verifyCalldata(merkleRoot, _leaf);
     }
+
+    /// @dev Computes the leaf for `(user, amount, token, chainid)` packed as addresses and uint256.
+    /// @dev Using Yul inline assembly for gas optimization because keccak256 and abi.encodePacked are somewhat expensive.
+    /// @param _user The wallet address.
+    /// @param _amount The claim amount.
+    /// @param _token The token address (zero for native) used in the leaf.
+    /// @return _hash The keccak256 hash of the packed data.
     function _computeLeaf(
         address _user,
         uint256 _amount,
