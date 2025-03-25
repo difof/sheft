@@ -15,6 +15,7 @@ struct AirdropMembership {
     uint256 claimAmount;
 }
 interface IAirdropErrors {
+    error AlreadyClaimed(address userWallet);
     error ZeroMerkleRoot();
     error MerkleRootNotChanged();
 }
@@ -28,6 +29,7 @@ contract Airdrop is
     using SafeERC20 for IERC20;
     using MerkleProofLib for bytes32[];
     bytes32 public merkleRoot = 0x0;
+    mapping(bytes32 => bool) public claimed;
     event MerkleRootUpdated(bytes32 indexed previous, bytes32 indexed updated);
     event ReceivedNative(address indexed sender, uint256 amount);
     event TokensClaimed(
@@ -97,6 +99,13 @@ contract Airdrop is
         if (!_verifyProof(_proof, leaf)) {
             revert NotEligible(user);
         }
+
+        if (claimed[leaf]) {
+            revert AlreadyClaimed(user);
+        }
+
+        claimed[leaf] = true;
+
         _transferToken(_token, user, amount);
 
         emit TokensClaimed(_token, user, amount);
