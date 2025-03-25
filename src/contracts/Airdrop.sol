@@ -10,8 +10,14 @@ import { Pausable } from "openzeppelin/contracts/utils/Pausable.sol";
 import { ReentrancyGuard } from
     "openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import { MerkleProofLib } from "solady/utils/MerkleProofLib.sol";
+
+/// @notice Data describing a single eligible membership claim.
+/// @dev The Merkle leaf for each membership is derived from the fields of this struct.
+/// @dev Chain ID and token address should also be included in leaf hashing off-chain.
 struct AirdropMembership {
+    /// @notice Wallet that is eligible to claim.
     address userWallet;
+    /// @notice Amount of tokens (or native wei) the wallet may claim.
     uint256 claimAmount;
 }
 interface IAirdrop {
