@@ -20,36 +20,75 @@ struct AirdropMembership {
     /// @notice Amount of tokens (or native wei) the wallet may claim.
     uint256 claimAmount;
 }
+
+/// @title Airdrop external interface
 interface IAirdrop {
+    /// @return The active Merkle root.
     function merkleRoot() external view returns (bytes32);
+
+    /// @notice Returns whether the given Merkle leaf has been claimed already.
+    /// @param _leaf The Merkle leaf associated with a membership.
+    /// @return True if the leaf has been marked as claimed.
     function claimed(
         bytes32 _leaf
     ) external view returns (bool);
+
+    /// @notice Withdraws an arbitrary token (or native if `_token == address(0)`) to a recipient.
+    /// @dev Only callable by the owner.
+    /// @param _token The ERC20 to transfer, or address(0) for native token.
+    /// @param _to The recipient address to receive the tokens.
+    /// @param _amount The amount to withdraw.
     function withdrawTokens(
         IERC20 _token,
         address _to,
         uint256 _amount
     ) external;
+
+    /// @notice Updates the Merkle root controlling eligibility.
+    /// @dev Only callable by the owner.
+    /// @param _root The new Merkle root to set.
     function updateMerkleRoot(
         bytes32 _root
     ) external;
+
+    /// @notice Pauses claim functionality.
     function pause() external;
+
+    /// @notice Unpauses claim functionality.
     function unpause() external;
+
+    /// @notice Computes the Merkle leaf for a given user, amount and token.
+    /// @dev Implementations include `block.chainid` and token address to make leaves chain and token specific.
+    /// @param _user The wallet address.
+    /// @param _amount The amount claimable by the wallet.
+    /// @param _token The ERC20 address or address(0) for native token.
+    /// @return The leaf hash.
     function getLeaf(
         address _user,
         uint256 _amount,
         IERC20 _token
     ) external view returns (bytes32);
+
+    /// @notice Verifies if a provided proof is valid for a leaf under the current root.
+    /// @param _proof The Merkle proof corresponding to the leaf.
+    /// @param _leaf The leaf hash to verify.
+    /// @return True if the leaf is part of the tree referenced by the stored root.
     function verifyEligibility(
         bytes32[] calldata _proof,
         bytes32 _leaf
     ) external view returns (bool);
+
+    /// @notice Claims the allocated tokens/native for the caller based on membership data.
+    /// @param _proof The Merkle proof for the membership leaf.
+    /// @param _membership The membership data (wallet and amount) for the caller.
+    /// @param _token The ERC20 address or address(0) for native token to be transferred.
     function claim(
         bytes32[] calldata _proof,
         AirdropMembership calldata _membership,
         IERC20 _token
     ) external;
 }
+
 interface IAirdropErrors {
     error NotEligible(address userWallet);
     error AlreadyClaimed(address userWallet);
