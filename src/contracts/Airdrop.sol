@@ -85,6 +85,21 @@ contract Airdrop is
     ) external view returns (bool) {
         return _verifyProof(_proof, _leaf);
     }
+    function claim(
+        bytes32[] calldata _proof,
+        AirdropMembership calldata _membership,
+        IERC20 _token
+    ) external nonReentrant whenNotPaused {
+        address user = _membership.userWallet;
+        uint256 amount = _membership.claimAmount;
+        bytes32 leaf = _computeLeaf(user, amount, address(_token));
+
+        if (!_verifyProof(_proof, leaf)) {
+            revert NotEligible(user);
+        }
+        _transferToken(_token, user, amount);
+
+        emit TokensClaimed(_token, user, amount);
     function _transferToken(
         IERC20 _token,
         address _to,
