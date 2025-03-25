@@ -15,6 +15,7 @@ struct AirdropMembership {
     uint256 claimAmount;
 }
 interface IAirdropErrors {
+    error NotEligible(address userWallet);
     error AlreadyClaimed(address userWallet);
     error ZeroMerkleRoot();
     error MerkleRootNotChanged();
