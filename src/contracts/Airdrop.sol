@@ -110,6 +110,7 @@ contract Airdrop is
         _transferToken(_token, user, amount);
 
         emit TokensClaimed(_token, user, amount);
+    }
     function _transferToken(
         IERC20 _token,
         address _to,
