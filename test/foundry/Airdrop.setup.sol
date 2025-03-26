@@ -9,3 +9,13 @@ import { MerkleTreeLib } from "solady/utils/MerkleTreeLib.sol";
 
 import "../../src/contracts/FooToken.sol";
 import "../../src/contracts/Airdrop.sol";
+contract AirdropSetup is Test {
+    uint256 internal constant MOCK_CHAINID = 1234;
+    address internal owner = vm.addr(0xdeadbeef);
+    address internal claimant = vm.addr(0xbeeffeeAcc097);
+
+    function setUp() public {
+        vm.chainId(MOCK_CHAINID);
+    }
+
+}
