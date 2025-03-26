@@ -18,4 +18,13 @@ contract AirdropSetup is Test {
         vm.chainId(MOCK_CHAINID);
     }
 
+    function _setUpAirdrop()
+        internal
+        returns (Airdrop _airdrop, IERC20 _token)
+    {
+        _airdrop = new Airdrop(owner);
+        _token = new FooToken(type(uint256).max, address(_airdrop));
+        deal(address(_airdrop), type(uint256).max);
+    }
+
 }
