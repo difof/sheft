@@ -33,4 +33,19 @@ contract AirdropSetup is Test {
         _tree = MerkleTreeLib.build(_leaves);
     }
 
+    function _updateRoot(
+        Airdrop _airdrop,
+        bytes32[] memory _leaves
+    ) internal returns (bytes32[] memory _tree, bytes32 _root) {
+        _tree = _buildTree(_leaves);
+        _root = MerkleTreeLib.root(_tree);
+
+        vm.startPrank(_airdrop.owner());
+        vm.expectEmit(address(_airdrop));
+        emit Airdrop.MerkleRootUpdated(bytes32(0x0), _root);
+        {
+            _airdrop.updateMerkleRoot(_root);
+        }
+        vm.stopPrank();
+    }
 }
