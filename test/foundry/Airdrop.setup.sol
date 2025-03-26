@@ -27,6 +27,23 @@ contract AirdropSetup is Test {
         deal(address(_airdrop), type(uint256).max);
     }
 
+    function _hashData(
+        AirdropMembership[] memory _data,
+        IERC20 _token
+    ) internal pure returns (bytes32[] memory _buffer) {
+        _buffer = new bytes32[](_data.length);
+        for (uint256 i = 0; i < _data.length; i++) {
+            _buffer[i] = keccak256(
+                abi.encodePacked(
+                    _data[i].userWallet,
+                    _data[i].claimAmount,
+                    address(_token),
+                    MOCK_CHAINID
+                )
+            );
+        }
+    }
+
     function _buildTree(
         bytes32[] memory _leaves
     ) internal pure returns (bytes32[] memory _tree) {
