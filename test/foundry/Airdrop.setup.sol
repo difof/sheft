@@ -27,4 +27,10 @@ contract AirdropSetup is Test {
         deal(address(_airdrop), type(uint256).max);
     }
 
+    function _buildTree(
+        bytes32[] memory _leaves
+    ) internal pure returns (bytes32[] memory _tree) {
+        _tree = MerkleTreeLib.build(_leaves);
+    }
+
 }
