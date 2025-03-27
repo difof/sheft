@@ -5,6 +5,7 @@ pragma solidity 0.8.23;
 import { MerkleTreeLib } from "solady/utils/MerkleTreeLib.sol";
 import { IERC20 } from "openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { Address } from "openzeppelin/contracts/utils/Address.sol";
+import { Pausable } from "openzeppelin/contracts/utils/Pausable.sol";
 
 import { AirdropSetup } from "./Airdrop.setup.sol";
 
@@ -32,4 +33,21 @@ contract Test_Airdrop_Generic is AirdropSetup {
 
         vm.stopPrank();
     }
+
+    function test_PauseAndUnpause() public {
+        Airdrop airdrop = new Airdrop(owner);
+
+        vm.startPrank(owner);
+
+        vm.expectEmit(address(airdrop));
+        emit Pausable.Paused(owner);
+        airdrop.pause();
+
+        vm.expectEmit(address(airdrop));
+        emit Pausable.Unpaused(owner);
+        airdrop.unpause();
+
+        vm.stopPrank();
+    }
+
 }
