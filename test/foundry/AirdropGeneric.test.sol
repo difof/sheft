@@ -61,4 +61,17 @@ contract Test_Airdrop_Generic is AirdropSetup {
         vm.stopPrank();
     }
 
+    function test_UpdateMerkleRoot_SameRoot_Reverts() public {
+        Airdrop airdrop = new Airdrop(owner);
+        bytes32 testRoot = keccak256("test root");
+
+        vm.startPrank(owner);
+
+        airdrop.updateMerkleRoot(testRoot);
+        vm.expectRevert(IAirdropErrors.MerkleRootNotChanged.selector);
+        airdrop.updateMerkleRoot(testRoot);
+
+        vm.stopPrank();
+    }
+
 }
