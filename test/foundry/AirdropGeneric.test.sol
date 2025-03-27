@@ -74,4 +74,18 @@ contract Test_Airdrop_Generic is AirdropSetup {
         vm.stopPrank();
     }
 
+    function test_GetLeaf() public {
+        Airdrop airdrop = new Airdrop(owner);
+        IERC20 token = IERC20(address(0x123));
+
+        bytes32 leaf = airdrop.getLeaf(claimant, 1 ether, token);
+        bytes32 expectedLeaf = keccak256(
+            abi.encodePacked(
+                claimant, uint256(1 ether), address(token), MOCK_CHAINID
+            )
+        );
+
+        assertEq(leaf, expectedLeaf);
+    }
+
 }
