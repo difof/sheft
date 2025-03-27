@@ -88,4 +88,22 @@ contract Test_Airdrop_Generic is AirdropSetup {
         assertEq(leaf, expectedLeaf);
     }
 
+    function test_VerifyEligibility() public {
+        Airdrop airdrop = new Airdrop(owner);
+
+        bytes32 leaf = keccak256("test leaf");
+        bytes32[] memory leaves = new bytes32[](1);
+        leaves[0] = leaf;
+
+        bytes32[] memory tree = MerkleTreeLib.build(leaves);
+        bytes32 root = MerkleTreeLib.root(tree);
+
+        vm.prank(owner);
+        airdrop.updateMerkleRoot(root);
+
+        bytes32[] memory proof = MerkleTreeLib.leafProof(tree, 0);
+
+        assertTrue(airdrop.verifyEligibility(proof, leaf));
+    }
+
 }
