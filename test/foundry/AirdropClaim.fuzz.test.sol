@@ -8,3 +8,6 @@ import { IERC20 } from "openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { AirdropSetup } from "./Airdrop.setup.sol";
 
 import "../../src/contracts/Airdrop.sol";
+
+contract TestFuzz_AirdropClaim is AirdropSetup {
+}
