@@ -10,4 +10,12 @@ import { AirdropSetup } from "./Airdrop.setup.sol";
 import "../../src/contracts/Airdrop.sol";
 
 contract TestFuzz_AirdropClaim is AirdropSetup {
+    function testFuzz_Claim_ERC20_HappyPath(
+        AirdropMembership[] memory _data,
+        uint256 _leafIndex
+    ) public {
+        _fuzzDefaultCaps(_data, _leafIndex);
+
+        (Airdrop airdrop, IERC20 token) = _setUpAirdrop();
+    }
 }
