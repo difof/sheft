@@ -11,8 +11,12 @@ import { AirdropSetup } from "./Airdrop.setup.sol";
 
 import "../../src/contracts/Airdrop.sol";
 
+/// @title Airdrop generic behavior tests
+/// @notice Covers deposit/withdraw, pause/unpause and basic leaf/proof verification flow.
 contract Test_Airdrop_Generic is AirdropSetup {
     using Address for address payable;
+
+    /// @notice Verifies native token deposit via receive() and owner withdrawal path.
     function test_DepositAndWithdraw_Native() public {
         uint256 amount = 10 ether;
         deal(address(owner), amount);
@@ -34,6 +38,8 @@ contract Test_Airdrop_Generic is AirdropSetup {
         vm.stopPrank();
     }
 
+    /// @notice Ensures pause and unpause emit the expected OZ events and succeed under owner.
+    /// @dev This test exists to cover pause and unpause functions.
     function test_PauseAndUnpause() public {
         Airdrop airdrop = new Airdrop(owner);
 
@@ -50,6 +56,7 @@ contract Test_Airdrop_Generic is AirdropSetup {
         vm.stopPrank();
     }
 
+    /// @notice Reverts when setting the Merkle root to zero.
     function test_UpdateMerkleRoot_ZeroRoot_Reverts() public {
         Airdrop airdrop = new Airdrop(owner);
 
@@ -61,6 +68,7 @@ contract Test_Airdrop_Generic is AirdropSetup {
         vm.stopPrank();
     }
 
+    /// @notice Reverts when setting the same Merkle root twice.
     function test_UpdateMerkleRoot_SameRoot_Reverts() public {
         Airdrop airdrop = new Airdrop(owner);
         bytes32 testRoot = keccak256("test root");
@@ -74,6 +82,7 @@ contract Test_Airdrop_Generic is AirdropSetup {
         vm.stopPrank();
     }
 
+    /// @notice Validates that on-chain `getLeaf` reproduces the expected packed hash.
     function test_GetLeaf() public {
         Airdrop airdrop = new Airdrop(owner);
         IERC20 token = IERC20(address(0x123));
@@ -88,6 +97,7 @@ contract Test_Airdrop_Generic is AirdropSetup {
         assertEq(leaf, expectedLeaf);
     }
 
+    /// @notice Confirms that a valid Merkle proof verifies under the stored root.
     function test_VerifyEligibility() public {
         Airdrop airdrop = new Airdrop(owner);
 
@@ -106,6 +116,7 @@ contract Test_Airdrop_Generic is AirdropSetup {
         assertTrue(airdrop.verifyEligibility(proof, leaf));
     }
 
+    /// @notice Reverts with {IAirdropErrors.NotEligible} for invalid proof/leaf pair.
     function test_Claim_NotEligible_Reverts() public {
         (Airdrop airdrop, IERC20 token) = _setUpAirdrop();
 
