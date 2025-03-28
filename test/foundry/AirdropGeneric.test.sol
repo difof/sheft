@@ -106,4 +106,23 @@ contract Test_Airdrop_Generic is AirdropSetup {
         assertTrue(airdrop.verifyEligibility(proof, leaf));
     }
 
+    function test_Claim_NotEligible_Reverts() public {
+        (Airdrop airdrop, IERC20 token) = _setUpAirdrop();
+
+        bytes32[] memory leaves = new bytes32[](1);
+        leaves[0] = keccak256("different leaf");
+
+        (bytes32[] memory tree,) = _updateRoot(airdrop, leaves);
+        bytes32[] memory wrongProof = MerkleTreeLib.leafProof(tree, 0);
+
+        AirdropMembership memory member =
+            AirdropMembership({ userWallet: claimant, claimAmount: 1 ether });
+
+        vm.expectRevert(
+            abi.encodeWithSelector(
+                IAirdropErrors.NotEligible.selector, claimant
+            )
+        );
+        airdrop.claim(wrongProof, member, token);
+    }
 }
