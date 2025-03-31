@@ -38,5 +38,36 @@ contract TestFuzz_AirdropClaim is AirdropSetup {
         assertTrue(balanceAfter - balanceBefore == memberToClaim.claimAmount);
     }
 
+    function testFuzz_Claim_NativeToken_HappyPath(
+        AirdropMembership[] memory _data,
+        uint256 _leafIndex
+    ) public {
+        _fuzzDefaultCaps(_data, _leafIndex);
+        vm.assume(_isAddressPayable(_data[_leafIndex].userWallet));
+
+        (Airdrop airdrop,) = _setUpAirdrop();
+
+        bytes32[] memory leaves = _hashData(_data, IERC20(address(0)));
+        (bytes32[] memory tree,) = _updateRoot(airdrop, leaves);
+        bytes32[] memory proof = MerkleTreeLib.leafProof(tree, _leafIndex);
+        AirdropMembership memory memberToClaim = _data[_leafIndex];
+
+        uint256 balanceBefore = memberToClaim.userWallet.balance;
+
+        vm.expectEmit(address(airdrop));
+        emit Airdrop.TokensClaimed(
+            IERC20(address(0)),
+            memberToClaim.userWallet,
+            memberToClaim.claimAmount
+        );
+        {
+            airdrop.claim(proof, memberToClaim, IERC20(address(0)));
+        }
+
+        uint256 balanceAfter = memberToClaim.userWallet.balance;
+
+        assertTrue(balanceAfter - balanceBefore == memberToClaim.claimAmount);
+    }
+
     }
 }
