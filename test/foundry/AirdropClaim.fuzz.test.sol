@@ -69,5 +69,15 @@ contract TestFuzz_AirdropClaim is AirdropSetup {
         assertTrue(balanceAfter - balanceBefore == memberToClaim.claimAmount);
     }
 
+    function _fuzzDefaultCaps(
+        AirdropMembership[] memory _data,
+        uint256 _leafIndex
+    ) internal pure {
+        vm.assume(_data.length > 1);
+        vm.assume(_leafIndex < _data.length);
+        vm.assume(_data[_leafIndex].userWallet != address(0));
+        vm.assume(_data[_leafIndex].claimAmount < type(uint256).max);
+    }
+
     }
 }
