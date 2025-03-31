@@ -79,5 +79,11 @@ contract TestFuzz_AirdropClaim is AirdropSetup {
         vm.assume(_data[_leafIndex].claimAmount < type(uint256).max);
     }
 
+    function _isAddressPayable(
+        address _input
+    ) internal returns (bool) {
+        deal(address(this), 1);
+        (bool ok,) = _input.call{ value: 1 }("");
+        return ok;
     }
 }
