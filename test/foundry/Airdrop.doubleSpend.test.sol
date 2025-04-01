@@ -44,5 +44,13 @@ contract Test_AirdropDoubleSpend is AirdropSetup {
 
         vm.prank(claimant);
         airdrop.claim(proof, member, token);
+
+        vm.expectRevert(
+            abi.encodeWithSelector(
+                IAirdropErrors.AlreadyClaimed.selector, claimant
+            )
+        );
+        vm.prank(claimant);
+        airdrop.claim(proof, member, token);
     }
 }
