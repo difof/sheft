@@ -83,7 +83,7 @@ contract Test_Airdrop_Generic is AirdropSetup {
     }
 
     /// @notice Validates that on-chain `getLeaf` reproduces the expected packed hash.
-    function test_GetLeaf() public {
+    function testDiff_GetLeaf() public {
         Airdrop airdrop = new Airdrop(owner);
         IERC20 token = IERC20(address(0x123));
 
