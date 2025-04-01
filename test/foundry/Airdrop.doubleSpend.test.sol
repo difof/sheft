@@ -11,5 +11,24 @@ import "../../src/contracts/Airdrop.sol";
 
 contract Test_AirdropDoubleSpend is AirdropSetup {
     function test_DoubleSpend_ERC20_HappyPath() public {
+        uint256 claimAmount = 1 ether;
+        (Airdrop airdrop, IERC20 token) = _setUpAirdrop();
+
+        bytes32 leaf = keccak256(
+            abi.encodePacked(
+                claimant, claimAmount, address(token), MOCK_CHAINID
+            )
+        );
+        bytes32 dummyLeaf = keccak256(
+            abi.encodePacked(
+                address(0xDEADBEEF), uint256(0), address(0xABCDEF), MOCK_CHAINID
+            )
+        );
+        bytes32[] memory leaves = new bytes32[](2);
+        leaves[0] = leaf;
+        leaves[1] = dummyLeaf;
+
+        bytes32[] memory tree = MerkleTreeLib.build(leaves);
+        bytes32 root = MerkleTreeLib.root(tree);
     }
 }
