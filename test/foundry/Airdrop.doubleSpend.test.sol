@@ -9,3 +9,7 @@ import { AirdropSetup } from "./Airdrop.setup.sol";
 
 import "../../src/contracts/Airdrop.sol";
 
+contract Test_AirdropDoubleSpend is AirdropSetup {
+    function test_DoubleSpend_ERC20_HappyPath() public {
+    }
+}
