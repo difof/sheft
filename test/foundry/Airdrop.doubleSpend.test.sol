@@ -30,5 +30,19 @@ contract Test_AirdropDoubleSpend is AirdropSetup {
 
         bytes32[] memory tree = MerkleTreeLib.build(leaves);
         bytes32 root = MerkleTreeLib.root(tree);
+
+        vm.startPrank(owner);
+        airdrop.updateMerkleRoot(root);
+        vm.stopPrank();
+
+        bytes32[] memory proof = MerkleTreeLib.leafProof(tree, 0);
+
+        AirdropMembership memory member = AirdropMembership({
+            userWallet: claimant,
+            claimAmount: claimAmount
+        });
+
+        vm.prank(claimant);
+        airdrop.claim(proof, member, token);
     }
 }
