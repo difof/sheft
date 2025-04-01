@@ -9,7 +9,12 @@ import { AirdropSetup } from "./Airdrop.setup.sol";
 
 import "../../src/contracts/Airdrop.sol";
 
+/// @title Airdrop claim fuzz tests
+/// @notice Fuzzes successful claim paths for ERC20 and native token flows.
 contract TestFuzz_AirdropClaim is AirdropSetup {
+    /// @notice Fuzz: any valid membership set should allow the indexed user to claim ERC20 tokens once.
+    /// @param _data Array of membership entries used to build the Merkle tree.
+    /// @param _leafIndex Index of the membership in `_data` that will claim.
     function testFuzz_Claim_ERC20_HappyPath(
         AirdropMembership[] memory _data,
         uint256 _leafIndex
@@ -38,6 +43,9 @@ contract TestFuzz_AirdropClaim is AirdropSetup {
         assertTrue(balanceAfter - balanceBefore == memberToClaim.claimAmount);
     }
 
+    /// @notice Fuzz: any valid membership set should allow the indexed user to claim native ETH once.
+    /// @param _data Array of membership entries used to build the Merkle tree.
+    /// @param _leafIndex Index of the membership in `_data` that will claim.
     function testFuzz_Claim_NativeToken_HappyPath(
         AirdropMembership[] memory _data,
         uint256 _leafIndex
@@ -69,6 +77,9 @@ contract TestFuzz_AirdropClaim is AirdropSetup {
         assertTrue(balanceAfter - balanceBefore == memberToClaim.claimAmount);
     }
 
+    /// @notice Applies fuzzing assumptions to bound array sizes, indices and values.
+    /// @param _data Membership data used to construct the tree.
+    /// @param _leafIndex The candidate index for the claiming member.
     function _fuzzDefaultCaps(
         AirdropMembership[] memory _data,
         uint256 _leafIndex
@@ -79,6 +90,9 @@ contract TestFuzz_AirdropClaim is AirdropSetup {
         vm.assume(_data[_leafIndex].claimAmount < type(uint256).max);
     }
 
+    /// @notice Helper that checks whether an address can receive native ETH via a plain call.
+    /// @param _input The address to test for payability.
+    /// @return True if the address can receive native ETH.
     function _isAddressPayable(
         address _input
     ) internal returns (bool) {
