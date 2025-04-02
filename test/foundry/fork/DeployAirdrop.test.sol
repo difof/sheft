@@ -16,4 +16,9 @@ contract TestFork_DeployAirdrop is Test {
         deployScript = new Deploy_Airdrop();
     }
 
+    function testFork_DeployAirdrop() public {
+        vm.expectEmit();
+        emit Ownable.OwnershipTransferred(address(0), address(owner));
+        deployScript.deploy(owner);
+    }
 }
