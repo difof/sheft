@@ -40,6 +40,13 @@ class MerkleWrapper<T extends DataItem> {
     getTree(): MerkleTree {
         return this.#tree
     }
+
+    getItem(indexOrItem: number | T): HexString {
+        if (typeof indexOrItem === "number") {
+            return this.#hashedData[indexOrItem]!
+        }
+        return this.#hashFunction(this.#mapperFunction(indexOrItem))
+    }
 }
 
 export default MerkleWrapper
