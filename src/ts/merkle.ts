@@ -12,6 +12,21 @@ class MerkleWrapper<T extends DataItem> {
     readonly #tree: MerkleTree
     readonly #hashedData: HexString[]
 
+    constructor(
+        dataset: T[],
+        mapperFunction: MapperFunction<T>,
+        hashFunction: HashFunction
+    ) {
+        this.#mapperFunction = mapperFunction
+        this.#hashFunction = hashFunction
+        this.#hashedData = dataset
+            .map(this.#mapperFunction)
+            .map(this.#hashFunction)
+
+        this.#tree = new MerkleTree(this.#hashedData, hashFunction, {
+            sortPairs: true,
+        })
+    }
 }
 
 export default MerkleWrapper
