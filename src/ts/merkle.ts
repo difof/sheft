@@ -27,6 +27,10 @@ class MerkleWrapper<T extends DataItem> {
             sortPairs: true,
         })
     }
+
+    getRoot(): HexString {
+        return "0x" + this.#tree.getRoot().toString("hex")
+    }
 }
 
 export default MerkleWrapper
