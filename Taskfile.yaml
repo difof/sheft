@@ -99,3 +99,21 @@ tasks:
             - forge compile {{.CLI_ARGS}}
             - bunx hardhat compile
 
+    flatten:hardhat:
+        desc: Flatten given Solidity source code(s) using Hardhat. Check `task --summary flatten:hardhat` for more info on the usage
+        summary: |
+            Flatten given Solidity source code(s) using `hardhat flatten`.
+            You must supply the input file(s) using task CLI args.
+
+            If no output option is passed, flattened file will be printed in STDOUT.
+            Use --output [file] to put contents into a file.
+
+            Example:
+                `task flatten:hardhat -- src/contracts/Airdrop.sol` - Prints the flattened contents in STDOUT
+                `task flatten:hh -- src/contracts/Airdrop.sol --output SC.sol` - Writes to SC.sol
+        aliases:
+            - flatten:hh
+        cmds:
+            - task deps
+            - bunx hardhat flatten {{.CLI_ARGS}}
+
