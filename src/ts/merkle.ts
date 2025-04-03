@@ -31,6 +31,11 @@ class MerkleWrapper<T extends DataItem> {
     getRoot(): HexString {
         return "0x" + this.#tree.getRoot().toString("hex")
     }
+
+    getProof(indexOrItem: number | T): HexString[] {
+        const item = this.getItem(indexOrItem)
+        return this.#tree.getHexProof(item)
+    }
 }
 
 export default MerkleWrapper
