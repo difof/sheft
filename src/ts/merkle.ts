@@ -36,6 +36,10 @@ class MerkleWrapper<T extends DataItem> {
         const item = this.getItem(indexOrItem)
         return this.#tree.getHexProof(item)
     }
+
+    getTree(): MerkleTree {
+        return this.#tree
+    }
 }
 
 export default MerkleWrapper
