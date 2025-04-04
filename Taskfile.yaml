@@ -212,3 +212,17 @@ tasks:
             NAME="$(basename "{{.FILEPATH}}" .sol)"
             cat "artifacts/hardhat/{{.FILEPATH}}/$NAME.json"
 
+    test:forge:
+        desc: Run Foundry unit tests. Accepts CLI args for `forge test`
+        summary: |
+            Run Foundry unit tests. Accepts CLI args for `forge test`
+
+            Example:
+                `task test -- --mc Airdrop` - Run tests only with "Airdrop" as their contract name
+        aliases:
+            - test
+            - test:f
+        cmds:
+            - task build:sol
+            - forge test --show-progress --summary --detailed --ffi {{ .CLI_ARGS }}
+
