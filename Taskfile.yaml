@@ -240,3 +240,12 @@ tasks:
             - task build:sol
             - bunx hardhat test mocha {{ .CLI_ARGS }}
 
+    test:bun:
+        desc: Run bun tests, without hardhat or foundry loaded. Make sure to limit path to `test/ts`. Accepts CLI args for `bun test`
+        deps:
+            - deps:ts
+        preconditions:
+            - sh: test -n "{{ .CLI_ARGS }}"
+              msg: "test:bun requires CLI args (e.g., 'test/ts' or a specific test file). Usage: task test:bun -- test/ts"
+        cmd: bun test {{ .CLI_ARGS }}
+
