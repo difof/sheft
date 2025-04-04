@@ -117,3 +117,22 @@ tasks:
             - task deps
             - bunx hardhat flatten {{.CLI_ARGS}}
 
+    flatten:forge:
+        desc: Flatten given Solidity source code using Foundry. Check `task --summary flatten:forge` for more info on the usage
+        summary: |
+            Flatten given Solidity source code(s) using `forge flatten`.
+            You must supply the input file(s) using task CLI args.
+
+            If no output option is passed, flattened file will be printed in STDOUT.
+            Use --output [file] to put contents into a file.
+
+            Examples:
+                `task flatten:forge -- src/contracts/Airdrop.sol` - Prints the flattened contents in STDOUT
+                `task flatten -- src/contracts/Airdrop.sol --output SC.sol` - Writes to SC.sol
+        aliases:
+            - flatten:f
+            - flatten
+        cmds:
+            - task build:sol
+            - forge flatten {{.CLI_ARGS}}
+
