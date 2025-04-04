@@ -249,3 +249,10 @@ tasks:
               msg: "test:bun requires CLI args (e.g., 'test/ts' or a specific test file). Usage: task test:bun -- test/ts"
         cmd: bun test {{ .CLI_ARGS }}
 
+    test:all:
+        desc: Run all unit tests (Solidity and TypeScript)
+        cmds:
+            - task test:forge
+            - task test:hardhat
+            - task test:bun -- test/ts
+
