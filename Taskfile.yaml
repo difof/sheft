@@ -256,3 +256,8 @@ tasks:
             - task test:hardhat
             - task test:bun -- test/ts
 
+
+    node:anvil:
+        desc: Run an Anvil node locally
+        cmd: anvil -b 13 --accounts 1 {{.CLI_ARGS}}
+
