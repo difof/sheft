@@ -168,3 +168,18 @@ tasks:
             - task build:sol
             - task get-foundry-artifact -- {{.CLI_ARGS}} | bunx node-jq -r '.bytecode.object'
 
+    abi:hardhat:
+        desc: Get contract ABI from Hardhat artifacts. Pass contract path as CLI arg relative to remappings
+        summary: |
+            Get contract ABI from Hardhat artifacts. Pass contract path as CLI arg relative to remappings
+
+            Examples:
+                `task abi:hardhat -- src/contracts/Airdrop.sol`
+                `task abi:hardhat -- openzeppelin/contracts/access/Ownable.sol`
+        silent: true
+        aliases:
+            - abi:hh
+        cmds:
+            - task build:sol
+            - task get-hardhat-artifact -- {{.CLI_ARGS}} | bunx node-jq -r '.abi'
+
