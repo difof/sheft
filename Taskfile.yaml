@@ -198,3 +198,17 @@ tasks:
             - task build:sol
             - task get-hardhat-artifact -- {{.CLI_ARGS}} | bunx node-jq -r '.bytecode'
 
+    get-foundry-artifact:
+        silent: true
+        vars:
+            NAME: "{{.CLI_ARGS_LIST | first}}"
+        cmd: cat "artifacts/foundry/{{.NAME}}.sol/{{.NAME}}.json"
+
+    get-hardhat-artifact:
+        silent: true
+        vars:
+            FILEPATH: "{{.CLI_ARGS_LIST | first}}"
+        cmd: |
+            NAME="$(basename "{{.FILEPATH}}" .sol)"
+            cat "artifacts/hardhat/{{.FILEPATH}}/$NAME.json"
+
