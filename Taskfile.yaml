@@ -136,3 +136,19 @@ tasks:
             - task build:sol
             - forge flatten {{.CLI_ARGS}}
 
+    abi:forge:
+        desc: Get contract ABI from Foundry artifacts. Pass contract name (without .sol or path) as CLI arg
+        summary: |
+            Get contract ABI from Foundry artifacts. Pass contract name (without .sol or path) as CLI arg
+
+            Examples:
+                `task abi -- Airdrop`
+                `task abi -- Ownable`
+        silent: true
+        aliases:
+            - abi:f
+            - abi
+        cmds:
+            - task build:sol
+            - task get-foundry-artifact -- {{.CLI_ARGS}} | bunx node-jq -r '.abi'
+
