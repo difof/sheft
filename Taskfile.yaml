@@ -152,3 +152,19 @@ tasks:
             - task build:sol
             - task get-foundry-artifact -- {{.CLI_ARGS}} | bunx node-jq -r '.abi'
 
+    bytecode:forge:
+        desc: Get contract bytecode from Foundry artifacts. Pass contract name (without .sol or path) as CLI arg
+        summary: |
+            Get contract bytecode from Foundry artifacts. Pass contract name (without .sol or path) as CLI arg
+
+            Examples:
+                `task bytecode:forge -- Airdrop`
+                `task bytecode -- Ownable`
+        silent: true
+        aliases:
+            - bytecode
+            - bytecode:f
+        cmds:
+            - task build:sol
+            - task get-foundry-artifact -- {{.CLI_ARGS}} | bunx node-jq -r '.bytecode.object'
+
