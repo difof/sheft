@@ -183,3 +183,18 @@ tasks:
             - task build:sol
             - task get-hardhat-artifact -- {{.CLI_ARGS}} | bunx node-jq -r '.abi'
 
+    bytecode:hardhat:
+        desc: Get contract bytecode from Hardhat artifacts. Pass contract path as CLI arg relative to remappings
+        summary: |
+            Get contract bytecode from Hardhat artifacts. Pass contract path as CLI arg relative to remappings
+
+            Examples:
+                `task bytecode:hardhat -- src/contracts/Airdrop.sol`
+                `task bytecode:hh -- openzeppelin/contracts/access/Ownable.sol`
+        silent: true
+        aliases:
+            - bytecode:hh
+        cmds:
+            - task build:sol
+            - task get-hardhat-artifact -- {{.CLI_ARGS}} | bunx node-jq -r '.bytecode'
+
