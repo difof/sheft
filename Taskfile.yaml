@@ -226,3 +226,17 @@ tasks:
             - task build:sol
             - forge test --show-progress --summary --detailed --ffi {{ .CLI_ARGS }}
 
+    test:hardhat:
+        desc: Run Hardhat tests. Accepts CLI args for `hardhat test`
+        summary: |
+            Run Hardhat tests. Accepts CLI args for `hardhat test`
+
+            Examples:
+                `task test:hardhat` - Run all hardhat tests at `test/hardhat`
+                `task test:hardhat -- test/hardhat/AirdropIntegration.test.ts` - Run only the test at given path
+        aliases:
+            - test:hh
+        cmds:
+            - task build:sol
+            - bunx hardhat test mocha {{ .CLI_ARGS }}
+
