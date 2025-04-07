@@ -314,6 +314,21 @@ tasks:
         cmds:
             - task build:sol
             - bunx hardhat run {{.CLI_ARGS}}
+    verify:forge:
+        desc: Verify contract source using Foundry (e.g. task verify -- <contract-address> [<path>:<contractname>])
+        # TODO: add summary with examples
+        aliases:
+            - verify
+        vars:
+            NETWORK:
+                sh: task ensure-var -- "network name" {{index .CLI_ARGS_LIST 0}}
+            SC_ADDR:
+                sh: task ensure-var -- "address" {{index .CLI_ARGS_LIST 1}}
+            EXT_ARGS: '{{slice .CLI_ARGS_LIST 2 | join " "}}'
+            RPC: "${{.NETWORK}}_RPC"
+            API_KEY: "${{.NETWORK}}_API_KEY"
+            CHAINID: "${{.NETWORK}}_CHAINID"
+        cmd: forge verify-contract -c {{.CHAINID}} -e {{.API_KEY}} -r {{.RPC}} --compiler-version {{.SOLC_VERSION}} --watch {{.SC_ADDR}} {{.EXT_ARGS}}
         deps:
             - build:sol
         cmd: bunx hardhat run {{.CLI_ARGS}}
