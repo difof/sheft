@@ -261,3 +261,8 @@ tasks:
         desc: Run an Anvil node locally
         cmd: anvil -b 13 --accounts 1 {{.CLI_ARGS}}
 
+
+    node:hardhat:
+        desc: Run a Hardhat node locally
+        cmd: bunx hardhat node {{.CLI_ARGS}}
+
