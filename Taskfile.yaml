@@ -273,3 +273,9 @@ tasks:
             - console
         cmd: bunx hardhat console {{.CLI_ARGS}}
 
+    repl:chisel:
+        desc: Run chisel
+        aliases:
+            - repl:sol
+        cmd: chisel {{.CLI_ARGS}}
+
