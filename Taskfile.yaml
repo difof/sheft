@@ -266,3 +266,10 @@ tasks:
         desc: Run a Hardhat node locally
         cmd: bunx hardhat node {{.CLI_ARGS}}
 
+    repl:hardhat:
+        desc: Run the Hardhat console
+        aliases:
+            - repl:ts
+            - console
+        cmd: bunx hardhat console {{.CLI_ARGS}}
+
