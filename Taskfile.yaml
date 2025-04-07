@@ -307,3 +307,14 @@ tasks:
             CHAINID: "${{.NETWORK}}_CHAINID"
         cmd: forge script --keystore .keystore/{{.WALLET_NAME}} --chain-id {{.CHAINID}} --rpc-url {{.RPC}} --broadcast -vvvv {{.ETHERSCAN_API_KEY}} {{.EXT_ARGS}} {{.SC_NAME}}
 
+    script:hardhat:
+        desc: Run a Hardhat script. Accepts CLI args
+        aliases:
+            - script
+        cmds:
+            - task build:sol
+            - bunx hardhat run {{.CLI_ARGS}}
+        deps:
+            - build:sol
+        cmd: bunx hardhat run {{.CLI_ARGS}}
+
