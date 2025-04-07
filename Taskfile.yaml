@@ -279,3 +279,31 @@ tasks:
             - repl:sol
         cmd: chisel {{.CLI_ARGS}}
 
+    deploy:
+        desc: Run Foundry deploy script. Check `task --summary deploy` for full explanation and examples.
+        summary: |
+            To use this, you must sacrifice your soul
+
+            Add deploy script to `script/foundry/`
+
+            It will run forge script broadcast with given env var file
+
+            Make sure your env file is up to date ok?
+
+            Examples:
+                `task deploy -- ANVIL local Deploy_Airdrop`
+                `task deploy -- ETHEREUM_MAINNET mainnet Deploy_Airdrop --verify`
+        vars:
+            NETWORK:
+                sh: task ensure-var -- "network name" {{index .CLI_ARGS_LIST 0}}
+            WALLET_NAME:
+                sh: task ensure-var -- "wallet name" {{index .CLI_ARGS_LIST 1}}
+            SC_NAME:
+                sh: task ensure-var -- "contract name" {{index .CLI_ARGS_LIST 2}}
+            EXT_ARGS: '{{slice .CLI_ARGS_LIST 3 | join " "}}'
+            RPC: "${{.NETWORK}}_RPC"
+            API_KEY: "${{.NETWORK}}_API_KEY"
+            ETHERSCAN_API_KEY: '{{if (.CLI_ARGS_LIST | has "--verify")}}--etherscan-api-key {{.API_KEY}}{{end}}'
+            CHAINID: "${{.NETWORK}}_CHAINID"
+        cmd: forge script --keystore .keystore/{{.WALLET_NAME}} --chain-id {{.CHAINID}} --rpc-url {{.RPC}} --broadcast -vvvv {{.ETHERSCAN_API_KEY}} {{.EXT_ARGS}} {{.SC_NAME}}
+
