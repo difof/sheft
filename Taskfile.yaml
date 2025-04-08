@@ -334,6 +334,17 @@ tasks:
         silent: true
         internal: true
         cmd: mkdir -p .keystore
+
+    wallet:new:
+        desc: Create a new local private key in .keystore
+        silent: true
+        deps:
+            - ensure-local-keystore
+        vars:
+            WALLET_NAME:
+                sh: task ensure-var -- "wallet name" {{index .CLI_ARGS_LIST 0}}
+        cmd: cast wallet new .keystore {{.WALLET_NAME}}
+
         deps:
             - build:sol
         cmd: bunx hardhat run {{.CLI_ARGS}}
