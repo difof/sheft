@@ -329,6 +329,11 @@ tasks:
             API_KEY: "${{.NETWORK}}_API_KEY"
             CHAINID: "${{.NETWORK}}_CHAINID"
         cmd: forge verify-contract -c {{.CHAINID}} -e {{.API_KEY}} -r {{.RPC}} --compiler-version {{.SOLC_VERSION}} --watch {{.SC_ADDR}} {{.EXT_ARGS}}
+
+    ensure-local-keystore:
+        silent: true
+        internal: true
+        cmd: mkdir -p .keystore
         deps:
             - build:sol
         cmd: bunx hardhat run {{.CLI_ARGS}}
