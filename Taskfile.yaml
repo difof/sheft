@@ -345,6 +345,14 @@ tasks:
                 sh: task ensure-var -- "wallet name" {{index .CLI_ARGS_LIST 0}}
         cmd: cast wallet new .keystore {{.WALLET_NAME}}
 
+    wallet:new:dry:
+        desc: Generate a new private key and and address without storing
+        silent: true
+        aliases:
+            - wallet:dry
+        deps:
+            - ensure-local-keystore
+        cmd: cast wallet new
         deps:
             - build:sol
         cmd: bunx hardhat run {{.CLI_ARGS}}
