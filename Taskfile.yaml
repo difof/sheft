@@ -360,6 +360,18 @@ tasks:
             - wallet:mn
         silent: true
         cmd: cast wallet new-mnemonic
+
+    wallet:import:pk:
+        desc: Import a private key into local keystore
+        silent: true
+        aliases:
+            - wallet:ipk
+        deps:
+            - ensure-local-keystore
+        vars:
+            WALLET_NAME:
+                sh: task ensure-var -- "wallet name" {{index .CLI_ARGS_LIST 0}}
+        cmd: cast wallet import -k .keystore -i {{.WALLET_NAME}}
         deps:
             - build:sol
         cmd: bunx hardhat run {{.CLI_ARGS}}
