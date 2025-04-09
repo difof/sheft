@@ -410,6 +410,18 @@ tasks:
             WALLET_NAME:
                 sh: task ensure-var -- "wallet name" {{index .CLI_ARGS_LIST 0}}
         cmd: cast wallet address --keystore ".keystore/{{.WALLET_NAME}}"
+
+    wallet:changepass:
+        desc: Change a local wallet's password
+        silent: true
+        deps:
+            - ensure-local-keystore
+        aliases:
+            - wallet:cp
+        vars:
+            WALLET_NAME:
+                sh: task ensure-var -- "wallet name" {{index .CLI_ARGS_LIST 0}}
+        cmd: cast wallet cp -k .keystore {{.WALLET_NAME}}
         deps:
             - build:sol
         cmd: bunx hardhat run {{.CLI_ARGS}}
