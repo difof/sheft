@@ -398,6 +398,18 @@ tasks:
         deps:
             - ensure-local-keystore
         cmd: cast wallet ls --dir .keystore
+
+    wallet:address:
+        desc: Get the address of a local private key from keystore
+        silent: true
+        deps:
+            - ensure-local-keystore
+        aliases:
+            - wallet:addr
+        vars:
+            WALLET_NAME:
+                sh: task ensure-var -- "wallet name" {{index .CLI_ARGS_LIST 0}}
+        cmd: cast wallet address --keystore ".keystore/{{.WALLET_NAME}}"
         deps:
             - build:sol
         cmd: bunx hardhat run {{.CLI_ARGS}}
