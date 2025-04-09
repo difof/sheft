@@ -353,6 +353,13 @@ tasks:
         deps:
             - ensure-local-keystore
         cmd: cast wallet new
+
+    wallet:mnemonic:
+        desc: Generate a random BIP39 mnemonic phrase without storing the accounts
+        aliases:
+            - wallet:mn
+        silent: true
+        cmd: cast wallet new-mnemonic
         deps:
             - build:sol
         cmd: bunx hardhat run {{.CLI_ARGS}}
