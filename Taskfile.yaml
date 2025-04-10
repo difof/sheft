@@ -459,6 +459,13 @@ tasks:
         cmds:
             - forge coverage --report lcov --report summary --report debug --ffi --report-file coverage/lcov.info {{.CLI_ARGS}}
             - genhtml coverage/lcov.info --output-dir coverage
+
+    host:cover:
+        desc: Host coverage report via npm package `http-server`. Accepts CLI args for `http-server`
+        cmds:
+            - task cover:sol
+            - bunx http-server coverage {{.CLI_ARGS}}
+
         deps:
             - build:sol
         cmd: bunx hardhat run {{.CLI_ARGS}}
