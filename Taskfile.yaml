@@ -444,6 +444,21 @@ tasks:
             - sh: command -v genhtml >/dev/null 2>&1
               msg: genhtml is not installed
         cmd: mkdir -p coverage
+
+    cover:sol:
+        desc: Generate coverage report. Accepts CLI args for `forge coverage`
+        aliases:
+            - cover
+        sources:
+            - src/contracts/**/*.sol
+            - test/foundry/**/*.sol
+        generates:
+            - coverage/**/*
+        deps:
+            - ensure-cov-tools
+        cmds:
+            - forge coverage --report lcov --report summary --report debug --ffi --report-file coverage/lcov.info {{.CLI_ARGS}}
+            - genhtml coverage/lcov.info --output-dir coverage
         deps:
             - build:sol
         cmd: bunx hardhat run {{.CLI_ARGS}}
