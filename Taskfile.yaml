@@ -434,6 +434,16 @@ tasks:
             WALLET_NAME:
                 sh: task ensure-var -- "wallet name" {{index .CLI_ARGS_LIST 0}}
         cmd: cast wallet dk -k .keystore {{.WALLET_NAME}}
+
+    ensure-cov-tools:
+        internal: true
+        silent: true
+        preconditions:
+            - sh: command -v lcov >/dev/null 2>&1
+              msg: lcov is not installed
+            - sh: command -v genhtml >/dev/null 2>&1
+              msg: genhtml is not installed
+        cmd: mkdir -p coverage
         deps:
             - build:sol
         cmd: bunx hardhat run {{.CLI_ARGS}}
