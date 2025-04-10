@@ -476,3 +476,7 @@ tasks:
             - build:sol
         cmd: task docs -- -s --open
 
+    sort-package.json:
+        desc: Sorts root package.json
+        cmd: bunx sort-package-json package.json
+
