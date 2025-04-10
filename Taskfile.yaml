@@ -466,7 +466,13 @@ tasks:
             - task cover:sol
             - bunx http-server coverage {{.CLI_ARGS}}
 
+    docs:
+        desc: Generate Solidity docs from natspec comments in source codes
+        cmd: forge doc -o docs -b -j 0 {{.CLI_ARGS}}
+
+    host:docs:
+        desc: Host docs
         deps:
             - build:sol
-        cmd: bunx hardhat run {{.CLI_ARGS}}
+        cmd: task docs -- -s --open
 
