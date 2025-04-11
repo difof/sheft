@@ -480,3 +480,8 @@ tasks:
         desc: Sorts root package.json
         cmd: bunx sort-package-json package.json
 
+
+    clean:wallets:
+        desc: Remove local ./keystore
+        prompt: This action will remove your wallets in ./keystore. Are you sure?
+        cmd: rm -fr .keystore
