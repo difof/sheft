@@ -485,3 +485,8 @@ tasks:
         desc: Remove local ./keystore
         prompt: This action will remove your wallets in ./keystore. Are you sure?
         cmd: rm -fr .keystore
+
+    clean:build:
+        desc: Remove all Solidity cache and artifacts
+        cmd: rm -fr artifacts cache
+
