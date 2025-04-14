@@ -490,3 +490,7 @@ tasks:
         desc: Remove all Solidity cache and artifacts
         cmd: rm -fr artifacts cache
 
+    clean:coverage:
+        desc: Remove Foundry generated ./coverage
+        cmd: rm -fr coverage
+
