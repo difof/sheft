@@ -502,3 +502,7 @@ tasks:
         desc: Remove ./node_modules and ./package/node_modules
         cmd: rm -fr node_modules package/node_modules
 
+    clean:typechain:
+        desc: Remove ./typechain
+        cmd: rm -fr typechain
+
