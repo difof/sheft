@@ -506,3 +506,14 @@ tasks:
         desc: Remove ./typechain
         cmd: rm -fr typechain
 
+    clean:all:
+        desc: Clears all cache and artifacts and docs and everything in general
+        silent: true
+        aliases:
+            - clean
+        cmds:
+            - task clean:build
+            - task clean:coverage
+            - task clean:docs
+            - task clean:npm
+            - task clean:typechain
