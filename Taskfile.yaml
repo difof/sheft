@@ -494,3 +494,7 @@ tasks:
         desc: Remove Foundry generated ./coverage
         cmd: rm -fr coverage
 
+    clean:docs:
+        desc: Remove Foundry generated ./docs
+        cmd: rm -fr docs
+
