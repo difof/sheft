@@ -498,3 +498,7 @@ tasks:
         desc: Remove Foundry generated ./docs
         cmd: rm -fr docs
 
+    clean:npm:
+        desc: Remove ./node_modules and ./package/node_modules
+        cmd: rm -fr node_modules package/node_modules
+
