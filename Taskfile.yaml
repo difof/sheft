@@ -14,6 +14,10 @@ tasks:
             PVAL: "{{index .CLI_ARGS_LIST 1}}"
         cmd: '{{if eq (len .PVAL) 0}}echo ''Required arg "{{.PNAME}}" is not set'';exit 1{{else}}echo {{.PVAL}}{{end}}'
 
+    #######################################################
+    # Dependency Installation
+    #######################################################
+
     deps:ts:
         desc: Install TypeScript dependencies
         aliases:
@@ -40,6 +44,10 @@ tasks:
         deps:
             - deps:ts
             - deps:sol
+
+    #######################################################
+    # Formatting and Linting
+    #######################################################
 
     format:ts:
         desc: Run prettier formatter for TypeScript
@@ -82,6 +90,10 @@ tasks:
         deps:
             - lint:ts
             - lint:sol
+
+    #######################################################
+    # Solidity Compilation
+    #######################################################
 
     build:sol:
         desc: Compile smart contracts using both Foundry and Hardhat. Accepts CLI args for `forge compile`
@@ -212,6 +224,10 @@ tasks:
             NAME="$(basename "{{.FILEPATH}}" .sol)"
             cat "artifacts/hardhat/{{.FILEPATH}}/$NAME.json"
 
+    #######################################################
+    # Unit Test
+    #######################################################
+
     test:forge:
         desc: Run Foundry unit tests. Accepts CLI args for `forge test`
         summary: |
@@ -256,6 +272,9 @@ tasks:
             - task test:hardhat
             - task test:bun -- test/ts
 
+    #######################################################
+    # Node and REPL
+    #######################################################
 
     node:anvil:
         desc: Run an Anvil node locally
@@ -278,6 +297,10 @@ tasks:
         aliases:
             - repl:sol
         cmd: chisel {{.CLI_ARGS}}
+
+    #######################################################
+    # Scripts
+    #######################################################
 
     deploy:
         desc: Run Foundry deploy script. Check `task --summary deploy` for full explanation and examples.
@@ -314,6 +337,11 @@ tasks:
         cmds:
             - task build:sol
             - bunx hardhat run {{.CLI_ARGS}}
+
+    #######################################################
+    # Verification
+    #######################################################
+
     verify:forge:
         desc: Verify contract source using Foundry (e.g. task verify -- <contract-address> [<path>:<contractname>])
         # TODO: add summary with examples
@@ -329,6 +357,11 @@ tasks:
             API_KEY: "${{.NETWORK}}_API_KEY"
             CHAINID: "${{.NETWORK}}_CHAINID"
         cmd: forge verify-contract -c {{.CHAINID}} -e {{.API_KEY}} -r {{.RPC}} --compiler-version {{.SOLC_VERSION}} --watch {{.SC_ADDR}} {{.EXT_ARGS}}
+
+
+    #######################################################
+    # Wallet
+    #######################################################
 
     ensure-local-keystore:
         silent: true
@@ -435,6 +468,10 @@ tasks:
                 sh: task ensure-var -- "wallet name" {{index .CLI_ARGS_LIST 0}}
         cmd: cast wallet dk -k .keystore {{.WALLET_NAME}}
 
+    #######################################################
+    # Coverage Report
+    #######################################################
+
     ensure-cov-tools:
         internal: true
         silent: true
@@ -466,6 +503,10 @@ tasks:
             - task cover:sol
             - bunx http-server coverage {{.CLI_ARGS}}
 
+    #######################################################
+    # Utility
+    #######################################################
+
     docs:
         desc: Generate Solidity docs from natspec comments in source codes
         cmd: forge doc -o docs -b -j 0 {{.CLI_ARGS}}
@@ -480,6 +521,9 @@ tasks:
         desc: Sorts root package.json
         cmd: bunx sort-package-json package.json
 
+    #######################################################
+    # Clean
+    #######################################################
 
     clean:wallets:
         desc: Remove local ./keystore
