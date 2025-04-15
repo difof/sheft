@@ -1,8 +1,6 @@
 {
     "compilerOptions": {
-        "lib": [
-            "es2023"
-        ],
+        "lib": ["es2023"],
         "target": "es2022",
         "module": "node16",
         "moduleResolution": "node16",
@@ -17,9 +15,13 @@
         "noUncheckedIndexedAccess": true,
         "noImplicitOverride": true,
         "resolveJsonModule": true,
-        "types": [
-            "bun",
-            "node"
-        ]
-    }
+        "types": ["bun", "node"]
+    },
+    "include": [
+        "./script",
+        "./test",
+        "./typechain",
+        "src/ts/",
+        "hardhat.config.ts"
+    ]
 }
