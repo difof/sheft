@@ -12,6 +12,13 @@ import { type AirdropMembershipStruct } from "../../typechain/Airdrop.sol/Airdro
 
 const { ethers } = await network.connect()
 
+async function getSigner(): Promise<HardhatEthersSigner> {
+    const [owner] = await ethers.getSigners()
+    if (!owner) throw new Error("No signers available")
+
+    return owner
+}
+
 async function loadContracts(
     owner: HardhatEthersSigner
 ): Promise<{ airdrop: Airdrop; token: FooToken }> {
