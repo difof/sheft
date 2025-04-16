@@ -54,3 +54,16 @@ async function loadContracts(
     )
     return { airdrop: await airdrop, token: await token }
 }
+
+function generateTestWhitelist(): AirdropMembershipStruct[] {
+    return Array.from({ length: 10 }, () => {
+        // generate random amount between 0.1 and 10 ETH
+        const randomEth = Math.random() * 9.9 + 0.1
+        const claimAmount = ethers.parseEther(randomEth.toString()).toString()
+
+        return {
+            userWallet: ethers.Wallet.createRandom().address,
+            claimAmount: claimAmount,
+        }
+    })
+}
