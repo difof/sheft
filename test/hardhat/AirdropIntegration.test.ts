@@ -12,6 +12,17 @@ import { type AirdropMembershipStruct } from "../../typechain/Airdrop.sol/Airdro
 
 const { ethers } = await network.connect()
 
+async function makeMerkleTree(
+    token: FooToken,
+    whitelist: AirdropMembershipStruct[]
+): Promise<Merkle<AirdropMembershipStruct>> {
+    return new Merkle(
+        whitelist,
+        await buildMapperFunction(token),
+        ethers.keccak256
+    )
+}
+
 async function buildMapperFunction(
     token: FooToken
 ): Promise<(item: AirdropMembershipStruct) => string> {
