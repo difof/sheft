@@ -12,6 +12,20 @@ import { type AirdropMembershipStruct } from "../../typechain/Airdrop.sol/Airdro
 
 const { ethers } = await network.connect()
 
+async function buildMapperFunction(
+    token: FooToken
+): Promise<(item: AirdropMembershipStruct) => string> {
+    const chainId = (await ethers.provider.getNetwork()).chainId
+    const tokenAddress = await token.getAddress()
+
+    return (item: AirdropMembershipStruct): string => {
+        return ethers.solidityPacked(
+            ["address", "uint256", "address", "uint256"],
+            [item.userWallet, item.claimAmount, tokenAddress, chainId]
+        )
+    }
+}
+
 async function getSigner(): Promise<HardhatEthersSigner> {
     const [owner] = await ethers.getSigners()
     if (!owner) throw new Error("No signers available")
