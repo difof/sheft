@@ -11,3 +11,14 @@ import {
 import { type AirdropMembershipStruct } from "../../typechain/Airdrop.sol/Airdrop.ts"
 
 const { ethers } = await network.connect()
+
+async function loadContracts(
+    owner: HardhatEthersSigner
+): Promise<{ airdrop: Airdrop; token: FooToken }> {
+    const airdrop = new Airdrop__factory(owner).deploy(owner)
+    const token = new FooToken__factory(owner).deploy(
+        ethers.parseEther("1000"),
+        owner
+    )
+    return { airdrop: await airdrop, token: await token }
+}
