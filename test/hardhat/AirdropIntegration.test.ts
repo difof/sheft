@@ -34,6 +34,12 @@ describe("Airdrop contract", () => {
 
         await fundAirdropWithTotalAllocation(whitelist, airdrop, token)
     })
+
+    it("Should update merkle root", async () => {
+        const root = merkle.getRoot()
+        const updatedRoot = await updateMerkleRoot(airdrop, root)
+        expect(updatedRoot).to.eq(root)
+    })
 })
 
 async function makeMerkleTree(
