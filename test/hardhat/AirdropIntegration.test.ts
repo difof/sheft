@@ -59,6 +59,29 @@ describe("Airdrop contract", () => {
         const result = merkle.getTree().verify(proof, leaf, root)
         expect(result).to.be.true
     })
+
+    it("Should airdrop", async () => {
+        await updateMerkleRoot(airdrop, merkle.getRoot())
+
+        const index = 0
+        const proof = merkle.getProof(index)
+        const userWallet = whitelist[index]!.userWallet
+        const expectedAmount = BigInt(whitelist[index]!.claimAmount)
+
+        const balanceBefore = await token.balanceOf(userWallet)
+
+        // shortcut for block confirmation
+        await (
+            await airdrop.claim(
+                proof,
+                whitelist[index]!,
+                await token.getAddress()
+            )
+        ).wait()
+
+        const balanceAfter = await token.balanceOf(userWallet)
+        expect(balanceAfter - balanceBefore).to.eq(expectedAmount)
+    })
 })
 
 async function makeMerkleTree(
