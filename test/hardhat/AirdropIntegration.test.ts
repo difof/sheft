@@ -40,6 +40,16 @@ describe("Airdrop contract", () => {
         const updatedRoot = await updateMerkleRoot(airdrop, root)
         expect(updatedRoot).to.eq(root)
     })
+
+    it("Merkle leaf at index 0 should equal to mapped allocation", async () => {
+        const mapper = await buildMapperFunction(token)
+
+        const index = 0
+        const allocation = whitelist[index]!
+        const hashedAllocation = ethers.keccak256(mapper(allocation))
+        const leaf = "0x" + merkle.getTree().getLeaf(index).toString("hex")
+        expect(leaf).to.eq(hashedAllocation)
+    })
 })
 
 async function makeMerkleTree(
