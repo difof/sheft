@@ -82,6 +82,30 @@ describe("Airdrop contract", () => {
         const balanceAfter = await token.balanceOf(userWallet)
         expect(balanceAfter - balanceBefore).to.eq(expectedAmount)
     })
+
+    it("Should fail airdrop", async () => {
+        await updateMerkleRoot(airdrop, merkle.getRoot())
+
+        const index = 0
+        whitelist[index]!.claimAmount += "1"
+        merkle = await makeMerkleTree(token, whitelist)
+        const proof = merkle.getProof(index)
+
+        let failed = false
+        try {
+            await (
+                await airdrop.claim(
+                    proof,
+                    whitelist[index]!,
+                    await token.getAddress()
+                )
+            ).wait()
+        } catch {
+            failed = true
+        }
+
+        expect(failed).to.be.true
+    })
 })
 
 async function makeMerkleTree(
