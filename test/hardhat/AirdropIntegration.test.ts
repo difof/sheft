@@ -1,7 +1,10 @@
 import { expect } from "chai"
 import { describe, it, beforeEach } from "mocha"
 import { network } from "hardhat"
+import { type HardhatEthersSigner } from "@nomicfoundation/hardhat-ethers/types"
+
 import Merkle from "../../src/ts/merkle.ts"
+
 import {
     type FooToken,
     FooToken__factory,
@@ -11,6 +14,15 @@ import {
 import { type AirdropMembershipStruct } from "../../typechain/Airdrop.sol/Airdrop.ts"
 
 const { ethers } = await network.connect()
+
+describe("Airdrop contract", () => {
+    let token: FooToken
+    let airdrop: Airdrop
+    let owner: HardhatEthersSigner
+    let whitelist: AirdropMembershipStruct[]
+    let merkle: Merkle<AirdropMembershipStruct>
+
+})
 
 async function makeMerkleTree(
     token: FooToken,
