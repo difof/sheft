@@ -67,3 +67,13 @@ function generateTestWhitelist(): AirdropMembershipStruct[] {
         }
     })
 }
+
+async function updateMerkleRoot(
+    airdrop: Airdrop,
+    root: string
+): Promise<string> {
+    const tx = await airdrop.updateMerkleRoot(root)
+    await tx.wait()
+
+    return await airdrop.merkleRoot()
+}
