@@ -22,6 +22,18 @@ describe("Airdrop contract", () => {
     let whitelist: AirdropMembershipStruct[]
     let merkle: Merkle<AirdropMembershipStruct>
 
+    beforeEach(async () => {
+        owner = await getSigner()
+
+        const contracts = await loadContracts(owner)
+        airdrop = contracts.airdrop
+        token = contracts.token
+
+        whitelist = generateTestWhitelist()
+        merkle = await makeMerkleTree(token, whitelist)
+
+        await fundAirdropWithTotalAllocation(whitelist, airdrop, token)
+    })
 })
 
 async function makeMerkleTree(
