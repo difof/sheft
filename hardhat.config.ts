@@ -23,6 +23,7 @@ const config: HardhatUserConfig = {
     typechain: {
         outDir: "typechain",
         alwaysGenerateOverloads: true,
+        tsNocheck: true,
     },
     solidity: {
         profiles: {
