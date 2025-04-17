@@ -50,6 +50,15 @@ describe("Airdrop contract", () => {
         const leaf = "0x" + merkle.getTree().getLeaf(index).toString("hex")
         expect(leaf).to.eq(hashedAllocation)
     })
+
+    it("Should locally verify whitelist", () => {
+        const index = 0
+        const leaf = merkle.getItem(index)
+        const proof = merkle.getProof(index)
+        const root = merkle.getRoot().substring(2)
+        const result = merkle.getTree().verify(proof, leaf, root)
+        expect(result).to.be.true
+    })
 })
 
 async function makeMerkleTree(
