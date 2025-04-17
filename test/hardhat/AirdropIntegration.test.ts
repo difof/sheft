@@ -68,6 +68,22 @@ function generateTestWhitelist(): AirdropMembershipStruct[] {
     })
 }
 
+async function fundAirdropWithTotalAllocation(
+    whitelist: AirdropMembershipStruct[],
+    airdrop: Airdrop,
+    token: FooToken
+) {
+    const totalClaimAmount = whitelist.reduce((sum, user) => {
+        return sum + BigInt(user.claimAmount)
+    }, 0n)
+
+    const tx = await token.transfer(
+        await airdrop.getAddress(),
+        totalClaimAmount
+    )
+    await tx.wait()
+}
+
 async function updateMerkleRoot(
     airdrop: Airdrop,
     root: string
