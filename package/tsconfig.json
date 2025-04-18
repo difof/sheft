@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist",
+        "target": "ESNext",
+        "lib": ["esnext"],
+        "strict": false,
+        "allowJs": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+        "noFallthroughCasesInSwitch": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": false,
+        "declaration": true,
+        "declarationDir": "./dist",
+        "incremental": true,
+        "types": ["bun", "node"]
+    },
+    "include": ["./index.ts", "../typechain", "../src/ts"],
+    "exclude": ["node_modules", "dist", "../node_modules/bun-types"]
+}
