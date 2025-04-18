@@ -1,0 +1,6 @@
+{
+    "name": "@foo/typechain",
+    "version": "1.0.0",
+    "description": "Foo project typechain types and utilities",
+    "license": "MIT",
+}
