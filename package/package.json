@@ -9,6 +9,10 @@
     "files": [
         "dist/**/*"
     ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/foo/foo.git"
+    },
     "devDependencies": {
         "esbuild": "^0.25.10",
         "esbuild-plugins-node-modules-polyfill": "^1.7.1",
