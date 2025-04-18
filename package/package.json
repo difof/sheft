@@ -3,4 +3,10 @@
     "version": "1.0.0",
     "description": "Foo project typechain types and utilities",
     "license": "MIT",
+    "module": "dist/index.js",
+    "types": "dist/package/index.d.ts",
+    "source": "index.ts",
+    "files": [
+        "dist/**/*"
+    ],
 }
