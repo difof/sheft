@@ -1,2 +1,6 @@
 version: "3.44"
 
+tasks:
+    clean:
+        desc: Rmove ./dist directory
+        cmd: rm -fr dist
