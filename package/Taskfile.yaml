@@ -25,6 +25,12 @@ tasks:
         cmds:
             - bun run esbuild.js
 
+    build:
+        desc: "Build all formats (ESM, CJS, d.ts) for browser"
+        deps:
+            - build:def
+            - build:esm
+
     clean:
         desc: Rmove ./dist directory
         cmd: rm -fr dist
