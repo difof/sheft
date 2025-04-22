@@ -6,6 +6,12 @@ dotenv:
 vars:
     SOLC_VERSION: v0.8.23
 
+includes:
+    package:
+        taskfile: ./package
+        dir: ./package
+        internal: true
+
 tasks:
     ensure-var:
         silent: true
