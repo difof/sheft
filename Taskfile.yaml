@@ -379,7 +379,8 @@ tasks:
 
     clean:package:
         desc: Clean package library builds
-        cmd: task package:clean
+        cmds:
+            - task: package:clean
 
     #######################################################
     # Wallet
