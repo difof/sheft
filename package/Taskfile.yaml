@@ -9,6 +9,15 @@ tasks:
             - bun.lock
         cmd: bun install {{.CLI_ARGS}}
 
+    build:def:
+        desc: "Emit TypeScript declaration files"
+        sources:
+            - index.ts
+        generates:
+            - dist/package/index.d.ts
+        cmds:
+            - bunx tsc --emitDeclarationOnly --declaration --outDir dist
+
     clean:
         desc: Rmove ./dist directory
         cmd: rm -fr dist
