@@ -30,6 +30,7 @@ tasks:
             - install:ts
         sources:
             - package.json
+        generates:
             - bun.lock
         cmd: bun install {{.CLI_ARGS}}
 
@@ -40,7 +41,7 @@ tasks:
         sources:
             - .gitmodules
         generates:
-            - lib/*/**/*
+            - foundry.lock
         cmd: forge install --shallow {{.CLI_ARGS}}
 
     deps:
