@@ -18,6 +18,13 @@ tasks:
         cmds:
             - bunx tsc --emitDeclarationOnly --declaration --outDir dist
 
+    build:esm:
+        desc: "Build ESM bundle for browser"
+        deps:
+            - deps
+        cmds:
+            - bun run esbuild.js
+
     clean:
         desc: Rmove ./dist directory
         cmd: rm -fr dist
