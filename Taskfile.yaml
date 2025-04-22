@@ -376,6 +376,10 @@ tasks:
             - task: build:sol
             - task: package:build
 
+    clean:package:
+        desc: Clean package library builds
+        cmd: task package:clean
+
     #######################################################
     # Wallet
     #######################################################
@@ -562,10 +566,6 @@ tasks:
     clean:npm:
         desc: Remove ./node_modules and ./package/node_modules
         cmd: rm -fr node_modules package/node_modules
-
-    clean:package:
-        desc: Clean package SDK build
-        cmd: rm -fr package/dist
 
     clean:all:
         desc: Clears all cache and artifacts and docs and everything in general
