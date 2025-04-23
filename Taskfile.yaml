@@ -287,6 +287,9 @@ tasks:
         desc: Run an Anvil node locally
         cmd: anvil -b 13 --accounts 1 {{.CLI_ARGS}}
 
+    node:anvil:state:
+        desc: Run an Anvil node forking another network with persistent storage
+        cmd: task node:anvil --  --state cache/anvil/state.json --preserve-historical-states -s 13 {{.CLI_ARGS}}
 
     node:hardhat:
         desc: Run a Hardhat node locally
