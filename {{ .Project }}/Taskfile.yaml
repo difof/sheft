@@ -402,7 +402,9 @@ tasks:
         vars:
             WALLET_NAME:
                 sh: task ensure-var -- "wallet name" {{index .CLI_ARGS_LIST 0}}
-        cmd: cast wallet new .keystore {{.WALLET_NAME}}
+            SHEFT_NEW_WALLET_PW_RAW: '{{.SHEFT_NEW_WALLET_PW_RAW | default ""}}'
+            PW_RAW: "{{if gt (len .SHEFT_NEW_WALLET_PW_RAW) 0}}--unsafe-password {{.SHEFT_NEW_WALLET_PW_RAW}}{{end}}"
+        cmd: cast wallet new {{.PW_RAW}} .keystore {{.WALLET_NAME}}
 
     wallet:new:dry:
         desc: Generate a new private key and and address without storing
