@@ -3,3 +3,8 @@ messages:
     # SHEFT Stack generator
   post: |
     # Your SHEFT project has been buidlth!
+questions:
+  - name: description
+    required: true
+    prompt:
+      message: Description of the project
