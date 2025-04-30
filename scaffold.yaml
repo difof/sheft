@@ -1,0 +1,5 @@
+messages:
+  pre: |
+    # SHEFT Stack generator
+  post: |
+    # Your SHEFT project has been buidlth!
