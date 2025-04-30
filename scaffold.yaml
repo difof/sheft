@@ -12,3 +12,10 @@ questions:
     prompt:
       message: Solidity version
       default: "0.8.24"
+  - name: license
+    prompt:
+      message: License of the project
+      default: "MIT"
+      options:
+        - "MIT"
+        - "Apache-2.0"
