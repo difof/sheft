@@ -19,3 +19,8 @@ questions:
       options:
         - "MIT"
         - "Apache-2.0"
+computed:
+  gitignore: .gitignore
+  gitmodules: .gitmodules
+  vscode: .vscode
+  prettierrc: .prettierrc
