@@ -24,3 +24,8 @@ computed:
   gitmodules: .gitmodules
   vscode: .vscode
   prettierrc: .prettierrc
+
+delimiters:
+  - glob: "Taskfile.yaml"
+    left: "[["
+    right: "]]"
