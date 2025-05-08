@@ -29,3 +29,10 @@ delimiters:
   - glob: "Taskfile.yaml"
     left: "[["
     right: "]]"
+
+presets:
+  sandbox:
+    Project: ".sandbox"
+    description: "next pump is here"
+    solc_version: 0.8.24
+    license: MIT
