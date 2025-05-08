@@ -12,6 +12,10 @@ questions:
     prompt:
       message: Solidity version
       default: "0.8.24"
+  - name: use_husky_commitlint
+    prompt:
+      confirm: Use Husky and Commitlint?
+      default: true
   - name: license
     prompt:
       message: License of the project
