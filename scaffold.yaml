@@ -12,6 +12,19 @@ questions:
     prompt:
       message: Solidity version
       default: "0.8.24"
+  - name: evm_version
+    prompt:
+      message: EVM version
+      default: prague
+      options:
+        - prague # 2025
+        - cancun # 2024
+        - shanghai # 2023
+        - paris # 2022
+        - london # 2021
+        - berlin # 2021
+        - istanbul # 2019
+        - petersburg # 2019
   - name: should_package
     prompt:
       confirm: Use sub-npm-package for exporting typechain and other TS sources?
