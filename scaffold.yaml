@@ -12,6 +12,10 @@ questions:
     prompt:
       message: Solidity version
       default: "0.8.24"
+  - name: should_package
+    prompt:
+      confirm: Use sub-npm-package for exporting typechain and other TS sources?
+      default: true
   - name: use_husky_commitlint
     prompt:
       confirm: Use Husky and Commitlint?
