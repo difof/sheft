@@ -35,6 +35,9 @@ questions:
     prompt:
       confirm: Use sub-npm-package for exporting typechain and other TS sources?
       default: true
+      description: |
+        Yes – ./package subdirectory as npm package, re-exporting typechain and default TS sources  
+        No  – No ./package subdirectory
   - name: use_husky_commitlint
     prompt:
       confirm: Use Husky and Commitlint?
