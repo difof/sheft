@@ -8,6 +8,8 @@ questions:
     required: true
     prompt:
       message: Description of the project
+      description: This will be the next trend!
+      multi: true
   - name: solc_version
     prompt:
       message: Solidity version
