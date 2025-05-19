@@ -14,3 +14,11 @@ ok()    { echo -e "${GREEN}${BOLD}✔${RESET}${BOLD} $* ${RESET}"; }
 info_input()    { echo -e "${RESET}${BOLD}${YELLOW} $* ${RESET}"; }
 fail()  { echo -e "${RED}${BOLD}❌${RESET}${BOLD} $* ${RESET}"; exit 1; }
 
+check_bin() {
+  if ! command -v "$1" &>/dev/null; then
+    fail "Missing required tool: ${BOLD}$1${RESET}\n   Please install it before continuing."
+  else
+    ok "Found ${BOLD}$1${RESET}"
+  fi
+}
+
