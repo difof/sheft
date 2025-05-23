@@ -22,3 +22,11 @@ check_bin() {
   fi
 }
 
+check_bin git
+check_bin bun
+check_bin forge
+check_bin cast
+check_bin task
+
+cd "{{ .Project }}"
+info "Post-scaffold hook running in $(pwd)"
