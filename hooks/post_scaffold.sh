@@ -38,3 +38,5 @@ fi
 if [ "{{ .Scaffold.use_husky_commitlint }}" != "true" ]; then
   rm -rf .husky commitlint.config.js
 fi
+
+task fmt
