@@ -40,3 +40,9 @@ if [ "{{ .Scaffold.use_husky_commitlint }}" != "true" ]; then
 fi
 
 task fmt
+
+info "Initializing git repo"
+git init
+git add .gitignore
+git commit -m "chore: initialized"
+ok "Git repo initialized"
