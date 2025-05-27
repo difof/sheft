@@ -46,3 +46,6 @@ git init
 git add .gitignore
 git commit -m "chore: initialized"
 ok "Git repo initialized"
+
+info "Installing TypeScript deps"
+task deps:ts
