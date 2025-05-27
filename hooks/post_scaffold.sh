@@ -49,3 +49,10 @@ ok "Git repo initialized"
 
 info "Installing TypeScript deps"
 task deps:ts
+
+info "Adding Solidity dependencies"
+task deps:sol -- foundry-rs/forge-std lib/forge-std
+task deps:sol -- OpenZeppelin/openzeppelin-contracts lib/openzeppelin-contracts
+task deps:sol -- vectorized/solady lib/solady
+git commit -m "chore: added solidity dependencies"
+ok "Solidity deps added"
