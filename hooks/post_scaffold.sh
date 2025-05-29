@@ -56,3 +56,6 @@ task deps:sol -- OpenZeppelin/openzeppelin-contracts lib/openzeppelin-contracts
 task deps:sol -- vectorized/solady lib/solady
 git commit -m "chore: added solidity dependencies"
 ok "Solidity deps added"
+
+info_input "Creating new dev wallet"
+task wallet:new -- dev
