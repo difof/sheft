@@ -1,8 +1,34 @@
 messages:
   pre: |
     # SHEFT Stack generator
+
+    > **S**olidity **H**ardhat **E**thers **F**oundry **T**askfile
+
+    ## CLI tool which generates and prepares a new Solidity project using the following tools:
+    - Foundry
+    - Hardhat and ethers
+    - Taskfile
+    - Local keychain using foundry cast
+
+    ---
+
+    **NOTE:** You will be prompted for dev wallet password at project initialization. If you want to skip the prompt, provide the password as SHEFT_NEW_WALLET_PW_RAW env var for scaffold.
+
+    **NOTE:** You need the following dependencies installed:
+    - [bun](https://bun.com/docs/installation)
+    - [foundry](https://getfoundry.sh/introduction/installation)
+    - [taskfile](https://taskfile.dev/installation/)
   post: |
     # Your SHEFT project has been buidlth!
+
+    You can now run the following commands:
+
+    - `task test` - Runs both Foundry and Hardhat tests.
+    - `task test -- --mc Token` - Only run the Foundry test for the `Token` contract.
+    - `task wallet:import:pk -- myseed` - Import your own private key to local keychain.
+
+    Make sure to take a look at the `Taskfile.yaml` for furter insight into available tasks.
+
 questions:
   - name: description
     required: true
@@ -42,6 +68,24 @@ questions:
     prompt:
       confirm: Use Husky and Commitlint?
       default: true
+  - name: readme_sections
+    prompt:
+      message: Which parts of README sections do you want included?
+      multi: true
+      default:
+        - "SHEFT general"
+        - "Stack stats"
+        - "Quickstart"
+        - "Directory structure"
+        - "Tasks cheatsheet"
+        - "Wallet management"
+      options:
+        - "SHEFT general"
+        - "Stack stats"
+        - "Quickstart"
+        - "Directory structure"
+        - "Tasks cheatsheet"
+        - "Wallet management"
   - name: license
     prompt:
       message: License of the project
@@ -97,4 +141,11 @@ presets:
     solc_version: 0.8.24
     evm_version: prague
     should_package: true
+    readme_sections:
+      - "SHEFT general"
+      - "Stack stats"
+      - "Quickstart"
+      - "Directory structure"
+      - "Tasks cheatsheet"
+      - "Wallet management"
     license: MIT

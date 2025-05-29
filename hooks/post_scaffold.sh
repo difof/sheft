@@ -62,3 +62,7 @@ task wallet:new -- dev
 
 info "Copying .env.example → .env"
 cp .env.example .env
+
+info "Running all tests"
+task test:all
+ok "All tests passed successfully"
