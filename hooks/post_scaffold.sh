@@ -59,3 +59,6 @@ ok "Solidity deps added"
 
 info_input "Creating new dev wallet"
 task wallet:new -- dev
+
+info "Copying .env.example → .env"
+cp .env.example .env
