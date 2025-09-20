@@ -32,11 +32,12 @@ cd "{{ .Project }}"
 info "Post-scaffold hook running in $(pwd)"
 
 if [ "{{ .Scaffold.should_package }}" != "true" ]; then
-  rm -rf package
+  [ -d package ] && rm -rf package
 fi
 
 if [ "{{ .Scaffold.use_husky_commitlint }}" != "true" ]; then
-  rm -rf .husky commitlint.config.js
+  [ -d .husky ] && rm -rf .husky
+  [ -f commitlint.config.js ] && rm -f commitlint.config.js
 fi
 
 task fmt
