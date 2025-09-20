@@ -40,8 +40,6 @@ if [ "{{ .Scaffold.use_husky_commitlint }}" != "true" ]; then
   [ -f commitlint.config.js ] && rm -f commitlint.config.js
 fi
 
-task fmt
-
 info "Initializing git repo"
 git init
 git add .gitignore
@@ -57,6 +55,8 @@ task deps:sol -- OpenZeppelin/openzeppelin-contracts lib/openzeppelin-contracts
 task deps:sol -- vectorized/solady lib/solady
 git commit -m "chore: added solidity dependencies"
 ok "Solidity deps added"
+
+task fmt
 
 info_input "Creating new dev wallet"
 task wallet:new -- dev
