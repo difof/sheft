@@ -5,4 +5,4 @@ tasks:
   sandbox:prompt: scaffold new --preset sandbox --run-hooks always --output-dir . ./
   clean:sandbox:
     aliases: [clean]
-    cmd: rm -fr .sandbox
+    cmd: rm -fr sandbox
