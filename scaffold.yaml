@@ -140,7 +140,8 @@ presets:
     description: "next pump is here"
     solc_version: 0.8.24
     evm_version: prague
-    should_package: true
+    should_package: false
+    use_husky_commitlint: false
     readme_sections:
       - "SHEFT general"
       - "Stack stats"
