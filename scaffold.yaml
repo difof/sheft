@@ -136,7 +136,7 @@ delimiters:
 
 presets:
   sandbox:
-    Project: ".sandbox"
+    Project: sandbox
     description: "next pump is here"
     solc_version: 0.8.24
     evm_version: prague
