@@ -1,5 +1,5 @@
 {
-    "name": "sheft-foo",
+    "name": "{{.ProjectKebab}}",
     "type": "module",
     "dependencies": {
         "keccak": "^3.0.4",
