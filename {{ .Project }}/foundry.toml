@@ -7,9 +7,9 @@ cache_path = "cache/foundry"
 out = "artifacts/foundry"
 broadcast = "tx_broadcast"
 
-solc = "0.8.23"
-solc_version = "0.8.23"
-evm_version = "paris"
+solc = "{{.Scaffold.solc_version}}"
+solc_version = "{{.Scaffold.solc_version}}"
+evm_version = "{{.Scaffold.evm_version}}"
 via_ir = false
 optimizer_runs = 200
 
@@ -53,7 +53,7 @@ wrap_comments = false
 
 [doc]
 out = "docs/solidity"
-title = "Foo Docs"
+title = "{{ .Project }} Docs"
 ignore = [
     "node_modules",
     "test"
