@@ -28,7 +28,7 @@ const config: HardhatUserConfig = {
     solidity: {
         profiles: {
             default: {
-                version: "0.8.23",
+                version: "{{.Scaffold.solc_version}}",
                 settings: {
                     optimizer: {
                         enabled: true,
