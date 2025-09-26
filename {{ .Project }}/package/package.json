@@ -1,5 +1,5 @@
 {
-    "name": "@foo/typechain",
+    "name": "@{{.ProjectKebab}}/sdk",
     "version": "1.0.0",
     "description": "Foo project typechain types and utilities",
     "license": "MIT",
