@@ -1,6 +1,6 @@
-// SPDX-License-Identifier: UNLICENCED
+// SPDX-License-Identifier: {{.Scaffold.license}}
 
-pragma solidity 0.8.23;
+pragma solidity {{.Scaffold.solc_version}};
 
 import { Script } from "forge-std/Script.sol";
 
