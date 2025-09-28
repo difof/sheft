@@ -1,6 +1,6 @@
-// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: {{.Scaffold.license}}
 
-pragma solidity 0.8.23;
+pragma solidity {{.Scaffold.solc_version}};
 
 import { Test } from "forge-std/Test.sol";
 
