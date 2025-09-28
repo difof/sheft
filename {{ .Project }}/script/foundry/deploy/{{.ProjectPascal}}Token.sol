@@ -1,12 +1,12 @@
-// SPDX-License-Identifier: UNLICENCED
+// SPDX-License-Identifier: {{.Scaffold.license}}
 
-pragma solidity 0.8.23;
+pragma solidity {{.Scaffold.solc_version}};
 
 import { Script } from "forge-std/Script.sol";
 
-import "../../../src/contracts/FooToken.sol";
+import "../../../src/contracts/{{.ProjectPascal}}Token.sol";
 
-contract Deploy_FooToken is Script {
+contract Deploy_{{.ProjectPascal}}Token is Script {
     function run() public {
         address owner = vm.getWallets()[0];
         uint256 totalSupply = 777 ether;
@@ -20,6 +20,6 @@ contract Deploy_FooToken is Script {
         uint256 _totalSupply,
         address _owner
     ) public returns (address token) {
-        return address(new FooToken(_totalSupply, _owner));
+        return address(new {{.ProjectPascal}}Token(_totalSupply, _owner));
     }
 }
