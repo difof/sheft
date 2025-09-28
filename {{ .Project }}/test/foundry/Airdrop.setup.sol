@@ -7,7 +7,7 @@ import { Test } from "forge-std/Test.sol";
 import { IERC20 } from "openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { MerkleTreeLib } from "solady/utils/MerkleTreeLib.sol";
 
-import "../../src/contracts/FooToken.sol";
+import "../../src/contracts/{{.ProjectPascal}}Token.sol";
 import "../../src/contracts/Airdrop.sol";
 
 /// @title Airdrop test setup helpers
@@ -35,7 +35,7 @@ contract AirdropSetup is Test {
         returns (Airdrop _airdrop, IERC20 _token)
     {
         _airdrop = new Airdrop(owner);
-        _token = new FooToken(type(uint256).max, address(_airdrop));
+        _token = new {{.ProjectPascal}}Token(type(uint256).max, address(_airdrop));
         deal(address(_airdrop), type(uint256).max);
     }
 
