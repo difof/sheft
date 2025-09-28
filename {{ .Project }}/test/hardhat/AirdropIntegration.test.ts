@@ -6,8 +6,8 @@ import { type HardhatEthersSigner } from "@nomicfoundation/hardhat-ethers/types"
 import Merkle from "../../src/ts/merkle.ts"
 
 import {
-    type FooToken,
-    FooToken__factory,
+    type {{.ProjectPascal}}Token,
+    {{.ProjectPascal}}Token__factory,
     type Airdrop,
     Airdrop__factory,
 } from "../../typechain/index.ts"
@@ -16,7 +16,7 @@ import { type AirdropMembershipStruct } from "../../typechain/Airdrop.sol/Airdro
 const { ethers } = await network.connect()
 
 describe("Airdrop contract", () => {
-    let token: FooToken
+    let token: {{.ProjectPascal}}Token
     let airdrop: Airdrop
     let owner: HardhatEthersSigner
     let whitelist: AirdropMembershipStruct[]
@@ -109,7 +109,7 @@ describe("Airdrop contract", () => {
 })
 
 async function makeMerkleTree(
-    token: FooToken,
+    token: {{.ProjectPascal}}Token,
     whitelist: AirdropMembershipStruct[]
 ): Promise<Merkle<AirdropMembershipStruct>> {
     return new Merkle(
@@ -120,7 +120,7 @@ async function makeMerkleTree(
 }
 
 async function buildMapperFunction(
-    token: FooToken
+    token: {{.ProjectPascal}}Token
 ): Promise<(item: AirdropMembershipStruct) => string> {
     const chainId = (await ethers.provider.getNetwork()).chainId
     const tokenAddress = await token.getAddress()
@@ -142,9 +142,9 @@ async function getSigner(): Promise<HardhatEthersSigner> {
 
 async function loadContracts(
     owner: HardhatEthersSigner
-): Promise<{ airdrop: Airdrop; token: FooToken }> {
+): Promise<{ airdrop: Airdrop; token: {{.ProjectPascal}}Token }> {
     const airdrop = new Airdrop__factory(owner).deploy(owner)
-    const token = new FooToken__factory(owner).deploy(
+    const token = new {{.ProjectPascal}}Token__factory(owner).deploy(
         ethers.parseEther("1000"),
         owner
     )
@@ -167,7 +167,7 @@ function generateTestWhitelist(): AirdropMembershipStruct[] {
 async function fundAirdropWithTotalAllocation(
     whitelist: AirdropMembershipStruct[],
     airdrop: Airdrop,
-    token: FooToken
+    token: {{.ProjectPascal}}Token
 ) {
     const totalClaimAmount = whitelist.reduce((sum, user) => {
         return sum + BigInt(user.claimAmount)
