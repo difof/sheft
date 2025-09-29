@@ -24,3 +24,20 @@ Key files and tools you’ll touch:
 - `hardhat.config.ts` (Hardhat configuration)
 - `Taskfile.yaml` (your shortcuts)
 {{ end }}
+
+{{ if (.Scaffold.readme_sections | has "Quickstart") }}
+## Quickstart
+1) Install system deps (once):
+- Bun: see `https://bun.com/docs/installation`
+- Foundry (forge/cast): `https://getfoundry.sh/introduction/installation`
+- Task: `https://taskfile.dev/installation/`
+
+2) Install project deps:
+```bash
+task deps           # installs TS and Solidity deps
+# or individually
+task deps:ts
+task deps:sol
+```
+
+{{ end }}
