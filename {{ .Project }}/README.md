@@ -1,3 +1,3 @@
-# Foo
+# {{ .Project }}
 
-Template Foo project used in SHEFT scaffold.
+{{ .Scaffold.description }}
