@@ -54,5 +54,39 @@ task bytecode -- Airdrop
 task abi:hardhat -- src/contracts/Airdrop.sol
 task bytecode:hardhat -- src/contracts/Airdrop.sol
 ```
+{{ end }}
+
+{{ if (.Scaffold.readme_sections | has "Directory structure") }}
+## Directory structure (TL;DR)
+```text
+.
+├─ .vscode/
+├─ .gitignore
+├─ bun.lock
+├─ commitlint.config.js                # present if Husky/Commitlint enabled
+├─ eslint.config.js
+├─ foundry.toml
+├─ hardhat.config.ts
+├─ lib/                                # forge deps (submodules)
+├─ package/                            # SDK build + re-exports ({{ .Scaffold.should_package }})
+│  ├─ index.ts
+│  └─ package.json
+├─ script/                             # automation scripts
+│  └─ foundry/
+│     └─ deploy/                       # deploy scripts (forge script)
+├─ src/
+│  ├─ contracts/                       # Solidity sources
+│  └─ ts/                              # shared TS utils (e.g., merkle, hashes)
+├─ test/
+│  ├─ foundry/                         # forge tests (Solidity)
+│  ├─ hardhat/                         # integration tests (TS)
+│  └─ ts/                              # pure bun tests (no hardhat)
+├─ Taskfile.yaml                       # your command palette
+└─ README.md
+```
+
+Notes:
+- `lib/` gets populated by `task deps:sol` as git submodules (forge install). Don’t edit libraries there.
+- Hardhat artifacts land in `artifacts/hardhat/...`; Foundry in `artifacts/foundry/...`.
 
 {{ end }}
