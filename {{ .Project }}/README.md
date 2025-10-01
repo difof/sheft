@@ -118,4 +118,17 @@ Nodes/REPLs:
 - `task repl:sol` — chisel
 - `task repl:ts` — hardhat console
 
+Coverage/Docs:
+- `task cover` — Foundry coverage (lcov + html)
+- `task docs` — generate natspec docs (Foundry)
+- `task host:docs` — open docs locally
+- `task host:cover` - open coverage locally
+
+Deploy/Verify (you’ll need envs set; see deploy section in `Taskfile.yaml`):
+- `task deploy -- <NETWORK> <WALLET> <ScriptName> [--verify] ...`
+- `task verify -- <NETWORK> <contract-address> [path:ContractName]`
+
+Cleaning:
+- `task clean` — removes artifacts, coverage, docs, node_modules
+
 {{ end }}
