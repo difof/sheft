@@ -102,4 +102,10 @@ Core dev:
 - `task test:bun -- test/ts` — run pure bun tests
 - `task test:all` - run all tests
 
+ABI/Bytecode helpers:
+- `task abi -- <ContractName>` — ABI from Foundry
+- `task bytecode -- <ContractName>` — bytecode from Foundry
+- `task abi:hardhat -- <path/to/Contract.sol>` — ABI from Hardhat
+- `task bytecode:hardhat -- <path/to/Contract.sol>` — bytecode from Hardhat
+
 {{ end }}
