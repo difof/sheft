@@ -40,4 +40,11 @@ task deps:ts
 task deps:sol
 ```
 
+3) Format + compile + test:
+```bash
+task fmt            # prettier + forge fmt
+task build          # forge compile + hardhat compile
+task test:all       # foundry + hardhat + bun tests (ts)
+```
+
 {{ end }}
