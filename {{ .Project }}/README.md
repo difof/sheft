@@ -108,4 +108,14 @@ ABI/Bytecode helpers:
 - `task abi:hardhat -- <path/to/Contract.sol>` — ABI from Hardhat
 - `task bytecode:hardhat -- <path/to/Contract.sol>` — bytecode from Hardhat
 
+Flattening (when explorers demand one-file):
+- `task flatten -- src/contracts/Airdrop.sol` — via Foundry
+- `task flatten:hardhat -- src/contracts/Airdrop.sol` — via Hardhat
+
+Nodes/REPLs:
+- `task node:anvil` — local chain (Foundry)
+- `task node:hardhat` — local chain (Hardhat)
+- `task repl:sol` — chisel
+- `task repl:ts` — hardhat console
+
 {{ end }}
