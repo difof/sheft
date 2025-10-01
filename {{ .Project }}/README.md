@@ -47,4 +47,12 @@ task build          # forge compile + hardhat compile
 task test:all       # foundry + hardhat + bun tests (ts)
 ```
 
+6) ABIs and bytecode on demand:
+```bash
+task abi -- Airdrop                 # from Foundry artifacts
+task bytecode -- Airdrop
+task abi:hardhat -- src/contracts/Airdrop.sol
+task bytecode:hardhat -- src/contracts/Airdrop.sol
+```
+
 {{ end }}
