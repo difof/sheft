@@ -88,5 +88,18 @@ task bytecode:hardhat -- src/contracts/Airdrop.sol
 Notes:
 - `lib/` gets populated by `task deps:sol` as git submodules (forge install). Don’t edit libraries there.
 - Hardhat artifacts land in `artifacts/hardhat/...`; Foundry in `artifacts/foundry/...`.
+{{ end }}
+
+{{ if (.Scaffold.readme_sections | has "Tasks cheatsheet") }}
+## Tasks cheatsheet (zero memorization energy)
+
+Core dev:
+- `task deps` — install deps (TS + Foundry)
+- `task fmt` — run prettier + forge fmt
+- `task build` — compile with Foundry and Hardhat
+- `task test` — Foundry tests (alias)
+- `task test:hardhat` — Hardhat tests
+- `task test:bun -- test/ts` — run pure bun tests
+- `task test:all` - run all tests
 
 {{ end }}
