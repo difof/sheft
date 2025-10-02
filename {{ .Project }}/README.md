@@ -2,7 +2,6 @@
 
 {{ .Scaffold.description }}
 
-{{ if (.Scaffold.readme_sections | has "SHEFT general") }}
 ## What is SHEFT stack?
 Quick rundown: this repo is a comfy starter for shipping smart contracts with a modern toolbelt.
 
@@ -11,9 +10,6 @@ Quick rundown: this repo is a comfy starter for shipping smart contracts with a 
 - Bun for fast JS/TS tooling
 - Taskfile as your humane command palette
 
-{{ end }}
-
-{{ if (.Scaffold.readme_sections | has "Stack stats") }}
 ## Project stats
 - Solidity compiler: `{{ .Scaffold.solc_version }}`
 - Target EVM: `{{ .Scaffold.evm_version }}`
@@ -23,40 +19,21 @@ Key files and tools you’ll touch:
 - `remappings.txt`, `lib/README.md` (Solidity libs)
 - `hardhat.config.ts` (Hardhat configuration)
 - `Taskfile.yaml` (your shortcuts)
-{{ end }}
 
-{{ if (.Scaffold.readme_sections | has "Quickstart") }}
 ## Quickstart
 1) Install system deps (once):
 - Bun: see `https://bun.com/docs/installation`
 - Foundry (forge/cast): `https://getfoundry.sh/introduction/installation`
 - Task: `https://taskfile.dev/installation/`
 
-2) Install project deps:
-```bash
-task deps           # installs TS and Solidity deps
-# or individually
-task deps:ts
-task deps:sol
-```
-
-3) Format + compile + test:
+2) Format + compile + test:
 ```bash
 task fmt            # prettier + forge fmt
 task build          # forge compile + hardhat compile
 task test:all       # foundry + hardhat + bun tests (ts)
 ```
 
-6) ABIs and bytecode on demand:
-```bash
-task abi -- Airdrop                 # from Foundry artifacts
-task bytecode -- Airdrop
-task abi:hardhat -- src/contracts/Airdrop.sol
-task bytecode:hardhat -- src/contracts/Airdrop.sol
-```
-{{ end }}
 
-{{ if (.Scaffold.readme_sections | has "Directory structure") }}
 ## Directory structure (TL;DR)
 ```text
 .
@@ -88,9 +65,7 @@ task bytecode:hardhat -- src/contracts/Airdrop.sol
 Notes:
 - `lib/` gets populated by `task deps:sol` as git submodules (forge install). Don’t edit libraries there.
 - Hardhat artifacts land in `artifacts/hardhat/...`; Foundry in `artifacts/foundry/...`.
-{{ end }}
 
-{{ if (.Scaffold.readme_sections | has "Tasks cheatsheet") }}
 ## Tasks cheatsheet (zero memorization energy)
 
 Core dev:
@@ -130,9 +105,7 @@ Deploy/Verify (you’ll need envs set; see deploy section in `Taskfile.yaml`):
 
 Cleaning:
 - `task clean` — removes artifacts, coverage, docs, node_modules
-{{ end }}
 
-{{ if (.Scaffold.readme_sections | has "Wallet management") }}
 ## Wallet management (local keystore)
 
 We keep a local keystore under `.keystore/` and use Foundry’s `cast` under the hood. Commands are thin wrappers so you don’t have to remember flags.
@@ -156,8 +129,6 @@ task wallet:cp -- dev                  # change password for a key
 Pro tip: keep `.keystore/` out of git (it already is). Treat anything printed to your terminal as sensitive.
 
 **NOTE**: Never use plaintext secrets, devs usually put private keys in `.env` and that's exactly how you compromise millions of dollars.
-
-{{ end }}
 
 ---
 
