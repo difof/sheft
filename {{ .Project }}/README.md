@@ -130,5 +130,31 @@ Deploy/Verify (you’ll need envs set; see deploy section in `Taskfile.yaml`):
 
 Cleaning:
 - `task clean` — removes artifacts, coverage, docs, node_modules
+{{ end }}
+
+{{ if (.Scaffold.readme_sections | has "Wallet management") }}
+## Wallet management (local keystore)
+
+We keep a local keystore under `.keystore/` and use Foundry’s `cast` under the hood. Commands are thin wrappers so you don’t have to remember flags.
+
+Create or import:
+```bash
+task wallet:new -- dev                 # create a new key named "dev"
+task wallet:dry                        # generate a keypair (don’t store)
+task wallet:ipk -- mykey               # import private key into keystore
+task wallet:imn -- mykey               # import from mnemonic (prompts for phrase + index)
+```
+
+Inspect:
+```bash
+task wallet:ls                         # list local keys
+task wallet:addr -- dev                # show address for a key
+task wallet:pk -- dev                  # print private key (careful!)
+task wallet:cp -- dev                  # change password for a key
+```
+
+Pro tip: keep `.keystore/` out of git (it already is). Treat anything printed to your terminal as sensitive.
+
+**NOTE**: Never use plaintext secrets, devs usually put private keys in `.env` and that's exactly how you compromise millions of dollars.
 
 {{ end }}
