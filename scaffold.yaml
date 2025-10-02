@@ -68,24 +68,6 @@ questions:
     prompt:
       confirm: Use Husky and Commitlint?
       default: true
-  - name: readme_sections
-    prompt:
-      message: Which parts of README sections do you want included?
-      multi: true
-      default:
-        - "SHEFT general"
-        - "Stack stats"
-        - "Quickstart"
-        - "Directory structure"
-        - "Tasks cheatsheet"
-        - "Wallet management"
-      options:
-        - "SHEFT general"
-        - "Stack stats"
-        - "Quickstart"
-        - "Directory structure"
-        - "Tasks cheatsheet"
-        - "Wallet management"
   - name: license
     prompt:
       message: License of the project
@@ -142,11 +124,4 @@ presets:
     evm_version: prague
     should_package: false
     use_husky_commitlint: false
-    readme_sections:
-      - "SHEFT general"
-      - "Stack stats"
-      - "Quickstart"
-      - "Directory structure"
-      - "Tasks cheatsheet"
-      - "Wallet management"
     license: MIT
