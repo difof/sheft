@@ -1,8 +1,8 @@
 {
-    "name": "@{{.ProjectKebab}}/sdk",
+    "name": "{{.Scaffold.package_name}}",
     "version": "1.0.0",
     "description": "{{.Project}} typechain types and utilities",
-    "license": "{{.Scaffold.license}}",
+    "license": "{{.Scaffold.package_license}}",
     "module": "dist/index.js",
     "types": "dist/package/index.d.ts",
     "source": "index.ts",
@@ -11,7 +11,7 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/foo/foo.git"
+        "url": "{{.Scaffold.package_repo}}"
     },
     "devDependencies": {
         "esbuild": "^0.25.10",
