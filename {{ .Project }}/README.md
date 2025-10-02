@@ -158,3 +158,8 @@ Pro tip: keep `.keystore/` out of git (it already is). Treat anything printed to
 **NOTE**: Never use plaintext secrets, devs usually put private keys in `.env` and that's exactly how you compromise millions of dollars.
 
 {{ end }}
+
+---
+
+### License
+{{ .Scaffold.license }}
