@@ -1,3 +1,13 @@
+# YAML anchors for reusable values
+license-options: &license-options
+  - "MIT"
+  - "Apache-2.0"
+  - "BSD-3-Clause"
+  - "BSD-2-Clause"
+  - "ISC"
+  - "Unlicense"
+  - "CC0-1.0"
+
 messages:
   pre: |
     # SHEFT Stack generator
@@ -57,6 +67,11 @@ questions:
         - berlin # 2021
         - istanbul # 2019
         - petersburg # 2019
+  - name: license
+    prompt:
+      message: License of the project
+      default: "MIT"
+      options: *license-options
   - name: should_package
     prompt:
       confirm: Use sub-npm-package for exporting typechain and other TS sources?
