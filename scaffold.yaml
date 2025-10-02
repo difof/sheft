@@ -72,6 +72,10 @@ questions:
       message: License of the project
       default: "MIT"
       options: *license-options
+  - name: use_husky_commitlint
+    prompt:
+      confirm: Use Husky and Commitlint?
+      default: true
   - name: should_package
     prompt:
       confirm: Use sub-npm-package for exporting typechain and other TS sources?
@@ -79,46 +83,24 @@ questions:
       description: |
         Yes – ./package subdirectory as npm package, re-exporting typechain and default TS sources  
         No  – No ./package subdirectory
-  - name: use_husky_commitlint
+  - name: package_name
+    when: "{{.should_package}}"
     prompt:
-      confirm: Use Husky and Commitlint?
-      default: true
-  - name: license
+      message: Package name for the SDK
+      default: "package-sdk"
+      description: Name of the npm package
+  - name: package_repo
+    when: "{{.should_package}}"
     prompt:
-      message: License of the project
-      default: "MIT"
-      options:
-        - "MIT"
-        - "Apache-2.0"
-        - "BSD-3-Clause"
-        - "BSD-2-Clause"
-        - "ISC"
-        - "Zlib"
-        - "Boost-1.0"
-        - "Unlicense"
-        - "OFL-1.1"
-        - "Artistic-2.0"
-        - "MPL-2.0"
-        - "LGPL-2.1-only"
-        - "LGPL-2.1-or-later"
-        - "LGPL-3.0-only"
-        - "LGPL-3.0-or-later"
-        - "GPL-2.0-only"
-        - "GPL-2.0-or-later"
-        - "GPL-3.0-only"
-        - "GPL-3.0-or-later"
-        - "AGPL-3.0-only"
-        - "AGPL-3.0-or-later"
-        - "EPL-2.0"
-        - "CDDL-1.0"
-        - "CDDL-1.1"
-        - "CC0-1.0"
-        - "WTFPL"
-        - "BSL-1.1"
-        - "SSPL-1.0"
-        - "Elastic-2.0"
-        - "Fair-Source-0.9"
-        - "Proprietary"
+      message: Package repository URL
+      default: "none"
+      description: Repository URL for the package
+  - name: package_license
+    when: "{{.should_package}}"
+    prompt:
+      message: License of the package SDK
+      default: "Unlicense"
+      options: *license-options
 
 computed:
   gitignore: .gitignore
@@ -137,6 +119,9 @@ presets:
     description: "next pump is here"
     solc_version: 0.8.24
     evm_version: prague
-    should_package: false
     use_husky_commitlint: false
     license: MIT
+    should_package: false
+    package_name: none
+    package_repo: none
+    package_license: MIT
