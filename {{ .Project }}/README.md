@@ -13,7 +13,6 @@ Quick rundown: this repo is a comfy starter for shipping smart contracts with a 
 ## Project stats
 - Solidity compiler: `{{ .Scaffold.solc_version }}`
 - Target EVM: `{{ .Scaffold.evm_version }}`
-- Has package subfolder (SDK exports): `{{ .Scaffold.should_package }}`
 
 Key files and tools you’ll touch:
 - `remappings.txt`, `lib/README.md` (Solidity libs)
