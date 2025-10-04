@@ -145,6 +145,27 @@ chore: updated hardhat config
 refactor: moved airdrop to new dir
 ```
 {{end}}
+### Solidity Test Conventions (Foundry)
+
+**File naming**: `<ContractName>.<aspect>.test.sol`
+- `Airdrop.doubleSpend.test.sol`
+- `Airdrop.setup.sol` (setup files)
+
+**Test contract naming**: `Test_<ContractName>_<Aspect>`
+- `Test_Airdrop_Generic`
+- `Test_Airdrop_DoubleSpend`
+
+**Test function naming**:
+- `test_<Behavior>` — standard tests
+- `testFuzz_<Behavior>` — fuzz tests  
+- `testFork_<Behavior>` — fork tests
+- `testDiff_<Behavior>` — differential/property tests
+
+**Setup files** (`<ContractName>.setup.sol`):
+- Purpose: shared fixtures, constants, helpers
+- When to use: multiple test files for same contract
+- Convention: `<ContractName>Setup` contract with internal helpers prefixed with `_`
+
 
 ---
 
