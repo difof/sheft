@@ -129,6 +129,23 @@ Pro tip: keep `.keystore/` out of git (it already is). Treat anything printed to
 
 **NOTE**: Never use plaintext secrets, devs usually put private keys in `.env` and that's exactly how you compromise millions of dollars.
 
+## Coding Style & Conventions
+
+{{- if .Scaffold.use_husky_commitlint}}
+### Conventional Commits
+
+Use conventional commits for all changes. The project enforces this via `commitlint.config.js`:
+
+```bash
+feat: add new airdrop functionality
+fix: resolve merkle tree verification bug
+test: add integration tests for claim flow
+docs: update deployment instructions
+chore: updated hardhat config
+refactor: moved airdrop to new dir
+```
+{{end}}
+
 ---
 
 ### License
