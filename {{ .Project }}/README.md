@@ -166,6 +166,40 @@ refactor: moved airdrop to new dir
 - When to use: multiple test files for same contract
 - Convention: `<ContractName>Setup` contract with internal helpers prefixed with `_`
 
+### Hardhat Test Conventions (TypeScript)
+
+**File naming**: `<ContractName>Integration.test.ts`
+- `AirdropIntegration.test.ts`
+
+**Structure**: Mocha `describe` blocks with contract name, `beforeEach` setup, `it` test cases
+
+**Helper functions**: Place after tests, descriptive names
+- `makeMerkleTree`, `buildMapperFunction`, `loadContracts`
+
+### Bun Test Conventions
+
+**File naming**: `<functionality>.test.ts` (lowercase with camelCase)
+- `simpleMerkle.test.ts`
+
+**Location**: `test/ts/` for pure TypeScript logic (no blockchain interaction)
+
+**Structure**: Simple describe/it blocks, focused on utility functions
+
+### Deploy Script Conventions
+
+**Location**: `script/foundry/deploy/`
+**File naming**: `<ContractName>.s.sol`
+**Class naming**: `Deploy_<ContractName>` in PascalCase with underscore
+
+**Structure**:
+- `run()` function: handles wallet selection and broadcast
+- `deploy()` function: pure deployment logic (reusable, testable)
+- Always separate concerns: `run()` calls `deploy()`
+
+**Fork tests**: Create `test/foundry/fork/Deploy<ContractName>.test.sol`
+- Naming: `TestFork_Deploy<ContractName>`
+- Tests the `deploy()` function directly (not `run()`)
+
 
 ---
 
