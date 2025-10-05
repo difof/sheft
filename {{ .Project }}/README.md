@@ -200,6 +200,29 @@ refactor: moved airdrop to new dir
 - Naming: `TestFork_Deploy<ContractName>`
 - Tests the `deploy()` function directly (not `run()`)
 
+### Wallet Separation
+
+- **Local dev**: Use `.keystore/dev` or similar named keys
+- **Testnet**: Separate key (e.g., `.keystore/testnet`)
+- **Mainnet**: Dedicated key, never reuse testnet keys
+- Never share keys across environments
+
+### Solidity Code Organization
+
+**Contract location**: `src/contracts/` for all Solidity sources
+
+**File structure**: One main contract per file, with related interfaces and structs
+
+**Interfaces**: Define in same file as implementation, prefixed with `I`
+- `IAirdrop`, `IAirdropErrors`
+
+**Structs**: Place at top of file if used by interface
+- `AirdropMembership`
+
+**Import organization**: Group by source (openzeppelin, solady, local), alphabetize within groups
+
+**Naming**: PascalCase for contracts, interfaces, structs; camelCase for functions/variables
+
 
 ---
 
