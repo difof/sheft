@@ -121,7 +121,7 @@ presets:
     evm_version: prague
     use_husky_commitlint: false
     license: MIT
-    should_package: false
+    should_package: true
     package_name: none
     package_repo: none
     package_license: MIT

@@ -130,7 +130,7 @@ Pro tip: keep `.keystore/` out of git (it already is). Treat anything printed to
 
 ## Coding Style & Conventions
 
-{{- if .Scaffold.use_husky_commitlint}}
+{{if .Scaffold.use_husky_commitlint -}}
 ### Conventional Commits
 
 Use conventional commits for all changes. The project enforces this via `commitlint.config.js`:
@@ -143,7 +143,8 @@ docs: update deployment instructions
 chore: updated hardhat config
 refactor: moved airdrop to new dir
 ```
-{{end}}
+{{- end}}
+
 ### Solidity Test Conventions (Foundry)
 
 **File naming**: `<ContractName>.<aspect>.test.sol`
