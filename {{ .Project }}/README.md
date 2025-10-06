@@ -223,6 +223,18 @@ refactor: moved airdrop to new dir
 
 **Naming**: PascalCase for contracts, interfaces, structs; camelCase for functions/variables
 
+### TypeScript Code Organization
+
+**Utilities location**: `src/ts/` for shared utilities
+- `merkle.ts`, `keccak.ts`
+
+**Hardhat scripts**: `script/hardhat/` for deployment/automation scripts
+
+**SDK exports**: Use `package/index.ts` to re-export from `typechain` and `src/ts/`
+- Export typechain factories and types
+- Export utilities with renamed types (e.g., `MerkleDataItem`)
+- Keep exports clean and intentional
+
 
 ---
 
