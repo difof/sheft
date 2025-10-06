@@ -32,7 +32,6 @@ task build          # forge compile + hardhat compile
 task test:all       # foundry + hardhat + bun tests (ts)
 ```
 
-
 ## Directory structure (TL;DR)
 ```text
 .
