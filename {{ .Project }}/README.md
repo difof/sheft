@@ -235,6 +235,19 @@ refactor: moved airdrop to new dir
 - Export utilities with renamed types (e.g., `MerkleDataItem`)
 - Keep exports clean and intentional
 
+### Environment Configuration
+
+**Location**: `.env` file in project root
+
+**Networks**: Define RPC URLs for both Foundry and Hardhat
+```bash
+# Networks
+ETHEREUM_MAINNET_RPC= # RPC endpoint (websocket not supported)
+ETHEREUM_MAINNET_API_KEY= # etherscan API key
+ETHEREUM_MAINNET_CHAINID=1
+```
+
+**Required vars**: Document network RPC URLs, API keys (Etherscan, etc.)
 
 ---
 
