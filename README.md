@@ -72,12 +72,12 @@ We follow Conventional Commits style. Note that commitlint is NOT used in this t
 Since this is a template project, apply changes directly to the templates under `{{ .Project }}` and validate them by generating a sandbox project.
 
 1) Edit templates in `{{ .Project }}/...`.
-2) From repo root, generate the default sandbox project under `.sandbox/`:
+2) From repo root, generate the default sandbox project under `sandbox/`:
 
 ```sh
 task clean:sandbox   
-task sandbox         # generates .sandbox/
-cd .sandbox
+task sandbox         # generates sandbox/
+cd sandbox
 ```
 
 3) Run checks inside the sandbox (the generated project):
@@ -86,22 +86,21 @@ cd .sandbox
 task fmt && task lint && task test:all
 ```
 
-Iterate: adjust files in `{{ .Project }}`, re-run `task sandbox`, and repeat checks in `.sandbox/`.
+Iterate: adjust files in `{{ .Project }}`, re-run `task sandbox`, and repeat checks in `sandbox/`.
 
 Tips:
 - Use `task sandbox:prompt` to run the scaffold with prompts when you need non-default answers.
-- Use `task clean:sandbox` to remove the `.sandbox/` directory.
+- Use `task clean:sandbox` to remove the `sandbox/` directory.
 
-### Best practices for authoring template projects
+### Template best practices
 
 - Keep templates DRY: avoid duplicating large snippets across files; prefer central helpers where possible.
 - Validate output early and often: regenerate the sandbox frequently after small edits.
-- Rely on the sandbox for IDE support: use IntelliSense, lint, and format in `.sandbox/`, not in the template files.
+- Rely on the sandbox for IDE support: use IntelliSense, lint, and format in `sandbox/`, not in the template files.
 - Prefer simple, explicit placeholders over clever generation logic; favor readability of the produced code.
 - Make changes composable and incremental; avoid sweeping refactors without a sandbox build in between.
 - Add and run tests in the generated project (`test/`) to guard template changes.
 - Keep formatting consistent by letting the generated project’s linters/formatters rewrite files.
-- Document non-obvious template variables/placeholders near their first usage.
 
 ## TODO
 
