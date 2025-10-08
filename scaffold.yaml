@@ -31,13 +31,15 @@ messages:
   post: |
     # Your SHEFT project has been buidlth!
 
+    > `cd "{{.Project}}"`
+
     You can now run the following commands:
 
-    - `task test` - Runs both Foundry and Hardhat tests.
+    - `task test:all` - Runs both Foundry and Hardhat tests.
     - `task test -- --mc Token` - Only run the Foundry test for the `Token` contract.
     - `task wallet:import:pk -- myseed` - Import your own private key to local keychain.
 
-    Make sure to take a look at the `Taskfile.yaml` for furter insight into available tasks.
+    Make sure to take a look at the `Taskfile.yaml` for further insight into available tasks.
 
 questions:
   - name: description
