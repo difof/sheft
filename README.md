@@ -17,7 +17,7 @@ Make sure you have the following installed:
 Scaffold a new project (you will be prompted):
 
 ```sh
-scaffold new https://github.com/difof/sheft
+scaffold new --run-hooks always https://github.com/difof/sheft
 ```
 
 And you will have your new project ready to work with.
