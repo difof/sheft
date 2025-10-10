@@ -6,7 +6,7 @@
 
 This is a [scaffold](https://hay-kot.github.io/scaffold/introduction/quick-start.html) template for initializing a **SHEFT** ([Solidity](https://docs.soliditylang.org/en/v0.8.30/) + [Hardhat](https://hardhat.org/hardhat-runner/docs/getting-started) + [Ethers v6](https://docs.ethers.org/v6/) + [Foundry](https://getfoundry.sh/introduction/installation) + [Taskfile](https://taskfile.dev/)) stack.
 
-There is an article on [SHEFT stack here](https://difof.medium.com/) which explains the why's and what's.
+There is an article on [SHEFT stack here](https://medium.com/@difof/introducing-sheft-stack-405f863071c9) which explains the why's and what's.
 
 ## Quickstart
 
