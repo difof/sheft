@@ -109,6 +109,7 @@ Tips:
 - [ ] Start empty without airdrop and token
 - [ ] Smart contract and test templates
 - [ ] Custom cursor rules and commands
+- [ ] Support Optimism (In Hardhat) and other EVM variants
 
 ## License 
 
