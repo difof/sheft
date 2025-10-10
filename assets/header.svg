@@ -1,0 +1,26 @@
+<svg width="600" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="purpleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A0B3D;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#0F0F23;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1A0B3D;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#66FFFF;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FFFFFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#66FFFF;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#purpleGradient)"/>
+  <text x="300" y="100" font-family="Arial, sans-serif" font-size="72" font-weight="bold" text-anchor="middle" fill="url(#neonGradient)" filter="url(#glow)">SHEFT</text>
+  <text x="300" y="160" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="rgba(255,255,255,0.8)">
+    <tspan font-weight="bold" fill="white">S</tspan>olidity • <tspan font-weight="bold" fill="white">H</tspan>ardhat • <tspan font-weight="bold" fill="white">E</tspan>thers • <tspan font-weight="bold" fill="white">F</tspan>oundry • <tspan font-weight="bold" fill="white">T</tspan>askfile
+  </text>
+</svg>
