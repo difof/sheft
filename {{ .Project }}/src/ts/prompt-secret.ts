@@ -1,63 +1,52 @@
 import { password, number } from "@inquirer/prompts"
 import { writeFileSync } from "fs"
 
-interface PromptConfig {
-    required: boolean
-    theme: {
-        prefix: string
-    }
-}
-
 interface KeystoreData {
     mnemonic: string
     accountIndex: number
 }
 
-async function promptForKeystoreData(): Promise<KeystoreData> {
-    const promptConfig: PromptConfig = {
+async function promptForKeystoreDataAsync(): Promise<KeystoreData> {
+    const promptConfig = {
         required: true,
         theme: {
-            prefix: ""
-        }
+            prefix: "",
+        },
     }
 
     const mnemonic = await password({
         message: "Enter 12 word mnemonic:",
-        ...promptConfig
+        ...promptConfig,
     })
 
     const accountIndex = await number({
         message: "Account index:",
         default: 0,
-        ...promptConfig
+        ...promptConfig,
     })
+
+    if (accountIndex === undefined) {
+        throw new Error("Account index is required")
+    }
 
     return {
         mnemonic,
-        accountIndex
+        accountIndex,
     }
 }
 
-async function saveKeystoreData(data: KeystoreData): Promise<void> {
+function saveKeystoreData(data: KeystoreData) {
     const basePath = ".keystore/.tmp"
 
-    writeFileSync(
-        `${basePath}.mn`,
-        data.mnemonic,
-        "utf8"
-    )
+    writeFileSync(`${basePath}.mn`, data.mnemonic, "utf8")
 
-    writeFileSync(
-        `${basePath}.mni`,
-        data.accountIndex.toString(),
-        "utf8"
-    )
+    writeFileSync(`${basePath}.mni`, data.accountIndex.toString(), "utf8")
 }
 
 async function main(): Promise<void> {
     try {
-        const keystoreData = await promptForKeystoreData()
-        await saveKeystoreData(keystoreData)
+        const keystoreData = await promptForKeystoreDataAsync()
+        saveKeystoreData(keystoreData)
     } catch (error) {
         if (error instanceof Error && error.name === "ExitPromptError") {
             process.exit(1)
