@@ -109,6 +109,7 @@ Tips:
 ## TODO
 
 - [x] `src/ts` docs
+- [x] move inline JS from taskfile:wallet:import:mnemonic to dedicated file in `src/ts`
 - [ ] FIX: .env with RPC_URL, passed to commands
 - [ ] move inline JS from taskfile:wallet:import:mnemonic to dedicated file in `src/ts`
 - [ ] Allow usage of either node/npm or bun, instead of just bun
