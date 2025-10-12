@@ -62,3 +62,30 @@ const proof2 = merkleWrapper.getProof(whitelist[0]) // by item
 ```
 
 The wrapper handles the complexity of Merkle tree construction while providing type safety and a clean API for common operations like proof generation and root hash extraction.
+
+## Prompt Secret
+
+The `prompt-secret.ts` module is a utility script used by the `wallet:import:mnemonic` task in the Taskfile to securely prompt users for mnemonic phrases and account indices when importing wallets from BIP39 mnemonic seeds.
+
+### Usage
+
+This script is automatically executed by the task system:
+
+```bash
+task wallet:import:mnemonic -- mywallet
+```
+
+The script will:
+1. Prompt for a 12-word mnemonic phrase
+2. Prompt for an account index (defaults to 0)
+3. Save the mnemonic to `.keystore/.tmp.mn`
+4. Save the account index to `.keystore/.tmp.mni`
+5. The task then uses these temporary files with `cast wallet import` to create the keystore
+
+### Features
+
+- **Secure prompting**: Uses the `@inquirer/prompts` library for secure password input
+- **Error handling**: Graceful handling of user cancellation and other errors
+- **Temporary storage**: Saves sensitive data to temporary files for use by the cast command
+- **Task integration**: Automatically cleaned up after use by the task system
+
