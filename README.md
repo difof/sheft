@@ -111,15 +111,16 @@ Tips:
 - [x] `src/ts` docs
 - [x] move inline JS from taskfile:wallet:import:mnemonic to dedicated file in `src/ts`
 - [ ] FIX: .env with RPC_URL, passed to commands
-- [ ] move inline JS from taskfile:wallet:import:mnemonic to dedicated file in `src/ts`
 - [ ] Allow usage of either node/npm or bun, instead of just bun
 - [ ] Add viem
 - [ ] Start empty without airdrop and token
-- [ ] Smart contract and test templates
+- [ ] Use proper `internal` tasks and `sh` execution for `{{.Project}}/Taskfile.yaml`
+- [ ] Document the utility tasks such as `ensure-var`
 - [ ] Custom cursor rules and commands
 - [ ] Support Optimism (In Hardhat) and other EVM variants
 - [ ] Github actions
 - [ ] Dedicated project contribution guideline file
+- [ ] Smart contract and test templates
 
 ## License 
 
