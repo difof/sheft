@@ -1,8 +1,12 @@
 version: "3.44"
 
 tasks:
-  sandbox: scaffold new --preset sandbox --no-prompt --run-hooks always --output-dir . ./
-  sandbox:prompt: scaffold new --preset sandbox --run-hooks always --output-dir . ./
+  sandbox: 
+    deps: [clean]
+    cmd: scaffold new --preset sandbox --no-prompt --run-hooks always --output-dir . ./
+  sandbox:prompt:
+    deps: [clean]
+    cmd: scaffold new --preset sandbox --run-hooks always --output-dir . ./
   clean:sandbox:
     aliases: [clean]
     cmd: rm -fr sandbox
