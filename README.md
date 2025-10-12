@@ -110,6 +110,7 @@ Tips:
 
 - [x] `src/ts` docs
 - [ ] FIX: .env with RPC_URL, passed to commands
+- [ ] move inline JS from taskfile:wallet:import:mnemonic to dedicated file in `src/ts`
 - [ ] Allow usage of either node/npm or bun, instead of just bun
 - [ ] Add viem
 - [ ] Start empty without airdrop and token
