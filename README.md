@@ -108,7 +108,7 @@ Tips:
 
 ## TODO
 
-- [ ] `src/ts` docs
+- [x] `src/ts` docs
 - [ ] FIX: .env with RPC_URL, passed to commands
 - [ ] Allow usage of either node/npm or bun, instead of just bun
 - [ ] Add viem
