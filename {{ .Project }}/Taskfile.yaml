@@ -447,8 +447,7 @@ tasks:
         cmds:
             - task deps:ts
             - defer: rm -fr .keystore/.tmp.mn .keystore/.tmp.mni
-            # Hell yeah! Minified JS! It only reads input securely! Trust me!
-            - bun -e 'import{password as p,number as n}from"@inquirer/prompts";import{writeFileSync as w}from"fs";(async()=>{try{await(async()=>{let r={required:!0,theme:{prefix:""}};let f =".keystore/.tmp";w(f+".mn",await p({message:"Enter 12 word mnemonic:",...r}),"utf8"),w(f+".mni",(await n({message:"Account index:",default:0,...r})).toString(),"utf8")})()}catch(r){if(!(r instanceof Error&&"ExitPromptError"===r.name))throw r;process.exit(1)}})();'
+            - bun src/ts/prompt-secret.ts
             - cast wallet import -k .keystore --mnemonic .keystore/.tmp.mn --mnemonic-index $(cat .keystore/.tmp.mni) {{.WALLET_NAME}}
 
     wallet:list:
