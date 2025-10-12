@@ -58,6 +58,8 @@ ok "Solidity deps added"
 
 task fmt
 
+git commit -m "chore: post SHEFT setup"
+
 info_input "Creating new dev wallet"
 task wallet:new -- dev
 
