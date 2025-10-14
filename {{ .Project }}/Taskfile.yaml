@@ -353,7 +353,7 @@ tasks:
     #######################################################
 
     verify:forge:
-        desc: Verify contract source using Foundry (e.g. task verify -- <contract-address> [<path>:<contractname>])
+        desc: Verify contract source using Foundry (e.g. task verify -- <network name> <contract-address> [<path>:<contractname>])
         # TODO: add summary with examples
         aliases:
             - verify
