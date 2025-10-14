@@ -111,6 +111,7 @@ Tips:
 - [x] `src/ts` docs
 - [x] move inline JS from taskfile:wallet:import:mnemonic to dedicated file in `src/ts`
 - [x] FIX: .env with RPC_URL, passed to commands
+- [ ] add `0x` prefix to keccak hash of `src/ts/keccak.ts`
 - [ ] Allow usage of either node/npm or bun, instead of just bun
 - [ ] Add viem
 - [ ] Start empty without airdrop and token
