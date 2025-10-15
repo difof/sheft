@@ -5,8 +5,12 @@ function withHash(): createHash.Keccak {
 }
 
 export default function (input: string): string {
-    if (input.startsWith("0x")) {
-        return withHash().update(input.slice(2), "hex").digest("hex")
+    let hash = () => {
+        if (input.startsWith("0x")) {
+            return withHash().update(input.slice(2), "hex").digest("hex")
+        }
+        return withHash().update(input).digest("hex")
     }
-    return withHash().update(input).digest("hex")
+
+    return "0x" + hash()
 }
