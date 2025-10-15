@@ -20,7 +20,7 @@ const hash1 = keccak("Hello, World!")
 const hash2 = keccak("0x742d35cc6b8B4C0532C15f9AD3E8b8c8bB8c9e3f")
 ```
 
-The function is designed to be compatible with ethers.js keccak256 implementation, except that it doesn't add the '0x' prefix, ensuring consistent hashing across different libraries. This is particularly important when working with smart contracts that expect specific hash formats.
+The function is designed to be compatible with ethers.js keccak256 implementation, ensuring consistent hashing across different libraries. This is particularly important when working with smart contracts that expect specific hash formats.
 
 ## Merkle Wrapper
 
@@ -49,7 +49,7 @@ const whitelist = [
 const merkleWrapper = new MerkleWrapper(
     whitelist,
     (entry) => `${entry.address}-${entry.amount}`, // mapper function
-    (input) => "0x" + keccak(input) // hash function
+    (input) => keccak(input) // hash function
 )
 
 // Get the root hash for storage in your smart contract
