@@ -9,7 +9,7 @@ describe("Diff keccak lib and ethers", () => {
         const valueToHash = "Hello, World!"
         const encoded = ethers.solidityPacked(["string"], [valueToHash])
         const ethersKeccakHash = ethers.keccak256(encoded)
-        const keccakHash = "0x" + keccak(encoded)
+        const keccakHash = keccak(encoded)
         expect(keccakHash).to.eq(ethersKeccakHash)
     })
 })
