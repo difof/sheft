@@ -56,8 +56,10 @@ task deps:sol -- vectorized/solady lib/solady
 git commit -m "chore: added solidity dependencies"
 ok "Solidity deps added"
 
+info "Formatting files"
 task fmt
 
+info "Commiting all changes"
 git add .
 git commit -m "chore: post SHEFT setup"
 
