@@ -136,6 +136,7 @@ presets:
     solc_version: 0.8.24
     evm_version: prague
     use_husky_commitlint: false
+    js_package_manager: bun
     license: MIT
     should_package: true
     package_name: none
