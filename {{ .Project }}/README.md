@@ -13,6 +13,7 @@ Quick rundown: this repo is a comfy starter for shipping smart contracts with a 
 ## Project stats
 - Solidity compiler: `{{ .Scaffold.solc_version }}`
 - Target EVM: `{{ .Scaffold.evm_version }}`
+- JS/TS package manager: `{{ .Scaffold.js_package_manager }}`
 
 Key files and tools you’ll touch:
 - `remappings.txt`, `lib/README.md` (Solidity libs)
@@ -72,7 +73,7 @@ Core dev:
 - `task build` — compile with Foundry and Hardhat
 - `task test` — Foundry tests (alias)
 - `task test:hardhat` — Hardhat tests
-- `task test:bun -- test/ts` — run pure bun tests
+- `task test:ts -- [[.Computed.jpm_test_files]]` — run pure ts tests
 - `task test:all` - run all tests
 
 ABI/Bytecode helpers:
@@ -251,5 +252,5 @@ ETHEREUM_MAINNET_CHAINID=1
 
 ---
 
-### License
+## License
 {{ .Scaffold.license }}
