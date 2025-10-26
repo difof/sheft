@@ -112,16 +112,19 @@ Tips:
 - [x] move inline JS from taskfile:wallet:import:mnemonic to dedicated file in `src/ts`
 - [x] FIX: .env with RPC_URL, passed to commands
 - [x] add `0x` prefix to keccak hash of `src/ts/keccak.ts`
-- [ ] Allow usage of either node/npm or bun, instead of just bun
-- [ ] Add viem
+- [x] Allow usage of either node/npm or bun, instead of just bun
 - [ ] Start empty without airdrop and token
+- [ ] Add ABI JSON export to package, using yaml list in taskfile
+- [ ] Add viem
 - [ ] Use proper `internal` tasks and `sh` execution for `{{.Project}}/Taskfile.yaml`
+- [ ] Organize internal tasks by putting them in another taskfile, and isolate templating in that file
 - [ ] Document the utility tasks such as `ensure-var`
 - [ ] Proper empty string defaults for internal utility tasks such as `ensure-var`
 - [ ] Required vars for `ensure-var`
 - [ ] Custom cursor rules and commands
 - [ ] Support Optimism (In Hardhat) and other EVM variants
 - [ ] Github actions
+- [ ] Dedicated merkle and keccak npm package
 - [ ] Dedicated project contribution guideline file
 - [ ] Smart contract and test templates
 
