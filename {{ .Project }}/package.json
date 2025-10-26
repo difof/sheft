@@ -34,6 +34,7 @@
         "mocha": "^11.7.1",
         "node-jq": "^6.0.1",
         "prettier": "^3.6.2",
+        {{- .Computed.tsnode_name }}
         "typescript": "~5.8.0"
     }{{if .use_husky_commitlint}},
     "scripts": {
