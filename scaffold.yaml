@@ -116,6 +116,13 @@ computed:
   gitmodules: .gitmodules
   vscode: .vscode
   prettierrc: .prettierrc
+  jpm_x: "{{ if eq .Scaffold.js_package_manager \"bun\" }}bunx{{ else }}npx{{ end }}"
+  jpm_install: "{{ if eq .Scaffold.js_package_manager \"bun\" }}bun install{{ else }}npm install{{ end }}"
+  jpm_run: "{{ if eq .Scaffold.js_package_manager \"bun\" }}bun{{ else }}npx ts-node{{ end }}"
+  jpm_test: "{{ if eq .Scaffold.js_package_manager \"bun\" }}bun test{{ else }}npx mocha{{ end }}"
+  jpm_test_files: "{{ if eq .Scaffold.js_package_manager \"bun\" }}test/ts{{ else }}test/ts/**/*.ts{{ end }}"
+  jpm_lock: "{{ if eq .Scaffold.js_package_manager \"bun\" }}bun.lock{{ else }}package-lock.json{{ end }}"
+  tsnode_name: " {{ if eq .Scaffold.js_package_manager \"node/npm\" }}\"ts-node\": \"^10.9.2\",{{ else }}{{ end }}"
 
 delimiters:
   - glob: "Taskfile.yaml"
