@@ -31,8 +31,8 @@ tasks:
         sources:
             - package.json
         generates:
-            - bun.lock
-        cmd: bun install {{.CLI_ARGS}}
+            - [[.Computed.jpm_lock]]
+        cmd: [[.Computed.jpm_install]] {{.CLI_ARGS}}
 
     deps:sol:
         desc: Install Solidity dependencies
@@ -60,7 +60,7 @@ tasks:
         desc: Run prettier formatter for TypeScript
         aliases:
             - fmt:ts
-        cmd: bunx prettier --write .
+        cmd: [[.Computed.jpm_x]] prettier --write .
 
     format:sol:
         desc: Run foundry formatter for Solidity
@@ -78,15 +78,15 @@ tasks:
 
     lint:ts:
         desc: Lint TypeScript files
-        cmd: bunx eslint .
+        cmd: [[.Computed.jpm_x]] eslint .
 
     lint:ts:fix:
         desc: Lint and fix TypeScript files
-        cmd: bunx eslint . --fix
+        cmd: [[.Computed.jpm_x]] eslint . --fix
 
     lint:ts:check:
         desc: Lint check only
-        cmd: bunx prettier --check .
+        cmd: [[.Computed.jpm_x]] prettier --check .
 
     lint:sol:
         desc: Lint Solidity files
@@ -116,7 +116,7 @@ tasks:
         cmds:
             - task deps
             - forge compile {{.CLI_ARGS}}
-            - bunx hardhat compile
+            - [[.Computed.jpm_x]] hardhat compile
 
     flatten:hardhat:
         desc: Flatten given Solidity source code(s) using Hardhat. Check `task --summary flatten:hardhat` for more info on the usage
@@ -134,7 +134,7 @@ tasks:
             - flatten:hh
         cmds:
             - task deps
-            - bunx hardhat flatten {{.CLI_ARGS}}
+            - [[.Computed.jpm_x]] hardhat flatten {{.CLI_ARGS}}
 
     flatten:forge:
         desc: Flatten given Solidity source code using Foundry. Check `task --summary flatten:forge` for more info on the usage
@@ -261,23 +261,23 @@ tasks:
             - test:hh
         cmds:
             - task build:sol
-            - bunx hardhat test mocha {{ .CLI_ARGS }}
+            - [[.Computed.jpm_x]] hardhat test mocha {{ .CLI_ARGS }}
 
-    test:bun:
+    test:ts:
         desc: Run bun tests, without hardhat or foundry loaded. Make sure to limit path to `test/ts`. Accepts CLI args for `bun test`
-        deps:
-            - deps:ts
         preconditions:
             - sh: test -n "{{ .CLI_ARGS }}"
-              msg: "test:bun requires CLI args (e.g., 'test/ts' or a specific test file). Usage: task test:bun -- test/ts"
-        cmd: bun test {{ .CLI_ARGS }}
+              msg: "test:ts requires CLI args (e.g., '[[.Computed.jpm_test_files]]' or a specific test file). Usage: task test:ts -- [[.Computed.jpm_test_files]]"
+        cmds: 
+            - task deps:ts
+            - [[.Computed.jpm_test]] {{ .CLI_ARGS }}
 
     test:all:
         desc: Run all unit tests (Solidity and TypeScript)
         cmds:
             - task test:forge
             - task test:hardhat
-            - task test:bun -- test/ts
+            - task test:ts -- [[.Computed.jpm_test_files]]
 
     #######################################################
     # Node and REPL
@@ -293,14 +293,14 @@ tasks:
 
     node:hardhat:
         desc: Run a Hardhat node locally
-        cmd: bunx hardhat node {{.CLI_ARGS}}
+        cmd: [[.Computed.jpm_x]] hardhat node {{.CLI_ARGS}}
 
     repl:hardhat:
         desc: Run the Hardhat console
         aliases:
             - repl:ts
             - console
-        cmd: bunx hardhat console {{.CLI_ARGS}}
+        cmd: [[.Computed.jpm_x]] hardhat console {{.CLI_ARGS}}
 
     repl:chisel:
         desc: Run chisel
@@ -346,7 +346,7 @@ tasks:
             - script
         cmds:
             - task build:sol
-            - bunx hardhat run {{.CLI_ARGS}}
+            - [[.Computed.jpm_x]] hardhat run {{.CLI_ARGS}}
 
     #######################################################
     # Verification
@@ -447,7 +447,7 @@ tasks:
         cmds:
             - task deps:ts
             - defer: rm -fr .keystore/.tmp.mn .keystore/.tmp.mni
-            - bun src/ts/prompt-secret.ts
+            - [[.Computed.jpm_run]] src/ts/prompt-secret.ts
             - cast wallet import -k .keystore --mnemonic .keystore/.tmp.mn --mnemonic-index $(cat .keystore/.tmp.mni) {{.WALLET_NAME}}
 
     wallet:list:
@@ -528,7 +528,7 @@ tasks:
         desc: Host coverage report via npm package `http-server`. Accepts CLI args for `http-server`
         cmds:
             - task cover:sol
-            - bunx http-server coverage {{.CLI_ARGS}}
+            - [[.Computed.jpm_x]] http-server coverage {{.CLI_ARGS}}
 
     #######################################################
     # Utility
@@ -546,7 +546,7 @@ tasks:
 
     sort-package.json:
         desc: Sorts root package.json
-        cmd: bunx sort-package-json package.json
+        cmd: [[.Computed.jpm_x]] sort-package-json package.json
 
     #######################################################
     # Clean
