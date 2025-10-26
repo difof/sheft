@@ -4,6 +4,9 @@ tasks:
   sandbox: 
     deps: [clean]
     cmd: scaffold new --preset sandbox --no-prompt --run-hooks always --output-dir . ./
+  sandbox:nohook: 
+    deps: [clean]
+    cmd: scaffold new --preset sandbox --no-prompt --run-hooks never --output-dir . ./
   sandbox:prompt:
     deps: [clean]
     cmd: scaffold new --preset sandbox --run-hooks always --output-dir . ./
