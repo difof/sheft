@@ -125,7 +125,7 @@ computed:
   tsnode_name: " {{ if eq .Scaffold.js_package_manager \"node/npm\" }}\"ts-node\": \"^10.9.2\",{{ else }}{{ end }}"
 
 delimiters:
-  - glob: "Taskfile.yaml"
+  - glob: "**/*.yaml"
     left: "[["
     right: "]]"
 
@@ -135,7 +135,7 @@ presets:
     description: "next pump is here"
     solc_version: 0.8.24
     evm_version: prague
-    use_husky_commitlint: false
+    use_husky_commitlint: true
     js_package_manager: bun
     license: MIT
     should_package: true
