@@ -7,3 +7,19 @@ tasks:
             PNAME: "{{index .CLI_ARGS_LIST 0}}"
             PVAL: "{{index .CLI_ARGS_LIST 1}}"
         cmd: '{{if eq (len .PVAL) 0}}echo ''Required arg "{{.PNAME}}" is not set'';exit 1{{else}}echo {{.PVAL}}{{end}}'
+
+    ensure-local-keystore:
+        silent: true
+        internal: true
+        cmd: mkdir -p .keystore
+
+    ensure-cov-tools:
+        internal: true
+        silent: true
+        preconditions:
+            - sh: command -v lcov >/dev/null 2>&1
+              msg: lcov is not installed
+            - sh: command -v genhtml >/dev/null 2>&1
+              msg: genhtml is not installed
+        cmd: mkdir -p coverage
+
