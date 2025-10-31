@@ -392,7 +392,7 @@ tasks:
         desc: Create a new local private key in .keystore
         silent: true
         deps:
-            - ensure-local-keystore
+            - internal:ensure-local-keystore
         vars:
             WALLET_NAME:
                 sh: task internal:ensure-arg -- "wallet name" {{index .CLI_ARGS_LIST 0}}
@@ -406,7 +406,7 @@ tasks:
         aliases:
             - wallet:dry
         deps:
-            - ensure-local-keystore
+            - internal:ensure-local-keystore
         cmd: cast wallet new
 
     wallet:mnemonic:
@@ -422,10 +422,10 @@ tasks:
         aliases:
             - wallet:ipk
         deps:
-            - ensure-local-keystore
+            - internal:ensure-local-keystore
         vars:
             WALLET_NAME:
-                sh: task ensure-arg -- "wallet name" {{index .CLI_ARGS_LIST 0}}
+                sh: task internal:ensure-arg -- "wallet name" {{index .CLI_ARGS_LIST 0}}
         cmd: cast wallet import -k .keystore -i {{.WALLET_NAME}}
 
     wallet:import:mnemonic:
@@ -434,7 +434,7 @@ tasks:
         aliases:
             - wallet:imn
         deps:
-            - ensure-local-keystore
+            - internal:ensure-local-keystore
         vars:
             WALLET_NAME:
                 sh: task internal:ensure-arg -- "wallet name" {{index .CLI_ARGS_LIST 0}}
@@ -450,14 +450,14 @@ tasks:
         aliases:
             - wallet:ls
         deps:
-            - ensure-local-keystore
+            - internal:ensure-local-keystore
         cmd: cast wallet ls --dir .keystore
 
     wallet:address:
         desc: Get the address of a local private key from keystore
         silent: true
         deps:
-            - ensure-local-keystore
+            - internal:ensure-local-keystore
         aliases:
             - wallet:addr
         vars:
@@ -469,7 +469,7 @@ tasks:
         desc: Change a local wallet's password
         silent: true
         deps:
-            - ensure-local-keystore
+            - internal:ensure-local-keystore
         aliases:
             - wallet:cp
         vars:
@@ -481,7 +481,7 @@ tasks:
         desc: Show a local wallet's private key
         silent: true
         deps:
-            - ensure-local-keystore
+            - internal:ensure-local-keystore
         aliases:
             - wallet:pk
         vars:
