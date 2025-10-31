@@ -328,11 +328,11 @@ tasks:
                 `task deploy -- ETHEREUM_MAINNET mainnet Deploy_Airdrop --verify`
         vars:
             NETWORK:
-                sh: task ensure-var -- "network name" {{index .CLI_ARGS_LIST 0}}
+                sh: task internal:ensure-arg -- "network name" {{index .CLI_ARGS_LIST 0}}
             WALLET_NAME:
-                sh: task ensure-var -- "wallet name" {{index .CLI_ARGS_LIST 1}}
+                sh: task internal:ensure-arg -- "wallet name" {{index .CLI_ARGS_LIST 1}}
             SC_NAME:
-                sh: task ensure-var -- "contract name" {{index .CLI_ARGS_LIST 2}}
+                sh: task internal:ensure-arg -- "contract name" {{index .CLI_ARGS_LIST 2}}
             EXT_ARGS: '{{slice .CLI_ARGS_LIST 3 | join " "}}'
             RPC: "${{.NETWORK}}_RPC"
             API_KEY: "${{.NETWORK}}_API_KEY"
@@ -359,9 +359,9 @@ tasks:
             - verify
         vars:
             NETWORK:
-                sh: task ensure-var -- "network name" {{index .CLI_ARGS_LIST 0}}
+                sh: task internal:ensure-arg -- "network name" {{index .CLI_ARGS_LIST 0}}
             SC_ADDR:
-                sh: task ensure-var -- "address" {{index .CLI_ARGS_LIST 1}}
+                sh: task internal:ensure-arg -- "address" {{index .CLI_ARGS_LIST 1}}
             EXT_ARGS: '{{slice .CLI_ARGS_LIST 2 | join " "}}'
             RPC: "${{.NETWORK}}_RPC"
             API_KEY: "${{.NETWORK}}_API_KEY"
@@ -401,7 +401,7 @@ tasks:
             - ensure-local-keystore
         vars:
             WALLET_NAME:
-                sh: task ensure-var -- "wallet name" {{index .CLI_ARGS_LIST 0}}
+                sh: task internal:ensure-arg -- "wallet name" {{index .CLI_ARGS_LIST 0}}
             SHEFT_NEW_WALLET_PW_RAW: '{{.SHEFT_NEW_WALLET_PW_RAW | default ""}}'
             PW_RAW: "{{if gt (len .SHEFT_NEW_WALLET_PW_RAW) 0}}--unsafe-password {{.SHEFT_NEW_WALLET_PW_RAW}}{{end}}"
         cmd: cast wallet new {{.PW_RAW}} .keystore {{.WALLET_NAME}}
@@ -431,7 +431,7 @@ tasks:
             - ensure-local-keystore
         vars:
             WALLET_NAME:
-                sh: task ensure-var -- "wallet name" {{index .CLI_ARGS_LIST 0}}
+                sh: task ensure-arg -- "wallet name" {{index .CLI_ARGS_LIST 0}}
         cmd: cast wallet import -k .keystore -i {{.WALLET_NAME}}
 
     wallet:import:mnemonic:
@@ -443,7 +443,7 @@ tasks:
             - ensure-local-keystore
         vars:
             WALLET_NAME:
-                sh: task ensure-var -- "wallet name" {{index .CLI_ARGS_LIST 0}}
+                sh: task internal:ensure-arg -- "wallet name" {{index .CLI_ARGS_LIST 0}}
         cmds:
             - task deps:ts
             - defer: rm -fr .keystore/.tmp.mn .keystore/.tmp.mni
@@ -468,7 +468,7 @@ tasks:
             - wallet:addr
         vars:
             WALLET_NAME:
-                sh: task ensure-var -- "wallet name" {{index .CLI_ARGS_LIST 0}}
+                sh: task internal:ensure-arg -- "wallet name" {{index .CLI_ARGS_LIST 0}}
         cmd: cast wallet address --keystore ".keystore/{{.WALLET_NAME}}"
 
     wallet:changepass:
@@ -480,7 +480,7 @@ tasks:
             - wallet:cp
         vars:
             WALLET_NAME:
-                sh: task ensure-var -- "wallet name" {{index .CLI_ARGS_LIST 0}}
+                sh: task internal:ensure-arg -- "wallet name" {{index .CLI_ARGS_LIST 0}}
         cmd: cast wallet cp -k .keystore {{.WALLET_NAME}}
 
     wallet:privatekey:
@@ -492,7 +492,7 @@ tasks:
             - wallet:pk
         vars:
             WALLET_NAME:
-                sh: task ensure-var -- "wallet name" {{index .CLI_ARGS_LIST 0}}
+                sh: task internal:ensure-arg -- "wallet name" {{index .CLI_ARGS_LIST 0}}
         cmd: cast wallet dk -k .keystore {{.WALLET_NAME}}
 
     #######################################################
