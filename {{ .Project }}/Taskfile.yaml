@@ -4,14 +4,8 @@ dotenv:
     - .env
 
 vars:
-    SOLC_VERSION: v0.8.23
-[[ if .Scaffold.should_package ]]
-includes:
-    package:
-        taskfile: ./package
-        dir: ./package
-        internal: true
-[[ end ]]
+    SOLC_VERSION: "{{.Scaffold.solc_version}}"
+
 tasks:
     ensure-var:
         silent: true
@@ -583,3 +577,15 @@ tasks:
             - task clean:coverage
             - task clean:docs
             - task clean:npm
+
+includes:
+    internal:
+        taskfile: tasks/internal.yaml
+        dir: .
+
+[[ if .Scaffold.should_package ]]
+    package:
+        taskfile: ./package
+        dir: ./package
+        internal: true
+[[ end ]]
