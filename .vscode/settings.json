@@ -1,3 +1,9 @@
 {
-    "editor.formatOnSave": false
+    "editor.formatOnSave": false,
+    "yaml.schemas": {
+        "https://taskfile.dev/schema.json": [
+            "file:///Users/lemon/Devel/sheft/sandbox/tasks/contracts.yaml",
+            "file:///Users/lemon/Devel/sheft/%7B%7B%20.Project%20%7D%7D/tasks/internal.yaml"
+        ]
+    }
 }
