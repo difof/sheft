@@ -87,3 +87,18 @@ tasks:
               msg: "Solidity file \"{{.FILEPATH}}\" not found. Run 'task build' first."
         cmd: cat "{{.FILEPATH}}" | [[.Computed.jpm_x]] node-jq -r "{{.JQ_PATH}}"
 
+    get-hardhat-artifact:
+        internal: true
+        silent: true
+        requires:
+            vars:
+                - SC_FILEPATH
+                - JQ_PATH
+        vars:
+            FILEPATH:
+                sh: "basename \"{{.SC_FILEPATH}}\" .sol"
+        preconditions:
+            - sh: test -f "{{.FILEPATH}}"
+              msg: "Solidity file \"{{.FILEPATH}}\" not found. Run 'task build' first."
+        cmd: cat "artifacts/hardhat/{{.FILEPATH}}/{{.FILEPATH}}.json" | [[.Computed.jpm_x]] node-jq -r "{{.JQ_PATH}}"
+
