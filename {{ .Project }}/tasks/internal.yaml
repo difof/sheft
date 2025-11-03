@@ -23,3 +23,11 @@ tasks:
               msg: genhtml is not installed
         cmd: mkdir -p coverage
 
+    install:deps:ts:
+        internal: true
+        sources:
+            - package.json
+        generates:
+            - [[.Computed.jpm_lock]]
+        cmd: [[.Computed.jpm_install]] {{.PACKAGE_NAMES}}
+
