@@ -39,3 +39,13 @@ tasks:
             - foundry.lock
         cmd: forge install --shallow {{.PACKAGE_NAMES}}
 
+    run:ts:
+        internal: true
+        requires:
+            vars:
+                - TS_FILE
+        preconditions:
+          - sh: test -f "{{.TS_FILE}}"
+            msg: "TypeScript file not found."
+        cmd: [[.Computed.jpm_run]] {{.TS_FILE}}
+
