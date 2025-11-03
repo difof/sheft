@@ -49,3 +49,10 @@ tasks:
             msg: "TypeScript file not found."
         cmd: [[.Computed.jpm_run]] {{.TS_FILE}}
 
+    jpmx:
+        internal: true
+        requires:
+          vars:
+            - X_ARGS
+        cmd: [[.Computed.jpm_x]] {{.X_ARGS}}
+
