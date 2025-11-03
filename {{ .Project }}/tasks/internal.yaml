@@ -102,3 +102,15 @@ tasks:
               msg: "Solidity file \"{{.FILEPATH}}\" not found. Run 'task build' first."
         cmd: cat "artifacts/hardhat/{{.FILEPATH}}/{{.FILEPATH}}.json" | [[.Computed.jpm_x]] node-jq -r "{{.JQ_PATH}}"
 
+    test:ts:
+        internal: true
+        requires:
+            vars:
+                - TEST_PATHS
+        preconditions:
+            - sh: test -n "{{.TEST_PATHS}}"
+              msg: "test:ts requires test files args (e.g., '[[.Computed.jpm_test_files]]' or a specific test file). Usage: task test:ts -- [[.Computed.jpm_test_files]]"
+        deps:
+            - install:deps:ts
+        cmds:
+            - [[.Computed.jpm_test]] {{.TEST_PATHS}}
