@@ -73,3 +73,17 @@ tasks:
               vars:
                 X_ARGS: "hardhat compile"
 
+    get-foundry-artifact:
+        internal: true
+        silent: true
+        requires:
+            vars:
+                - SC_NAME
+                - JQ_PATH
+        vars:
+            FILEPATH: "artifacts/foundry/{{.SC_NAME}}.sol/{{.SC_NAME}}.json"
+        preconditions:
+            - sh: test -f "{{.FILEPATH}}"
+              msg: "Solidity file \"{{.FILEPATH}}\" not found. Run 'task build' first."
+        cmd: cat "{{.FILEPATH}}" | [[.Computed.jpm_x]] node-jq -r "{{.JQ_PATH}}"
+
