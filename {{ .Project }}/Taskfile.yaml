@@ -513,7 +513,7 @@ tasks:
         generates:
             - coverage/**/*
         deps:
-            - ensure-cov-tools
+            - internal:ensure-cov-tools
         cmds:
             - forge coverage --report lcov --report summary --report debug --ffi --report-file coverage/lcov.info {{.CLI_ARGS}}
             - genhtml coverage/lcov.info --output-dir coverage
