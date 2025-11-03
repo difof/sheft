@@ -56,3 +56,20 @@ tasks:
             - X_ARGS
         cmd: [[.Computed.jpm_x]] {{.X_ARGS}}
 
+    build:sol:
+        internal: true
+        sources:
+            - src/contracts/**/*.sol
+            - test/foundry/**/*.sol
+        generates:
+            - cache/**/*
+            - artifacts/**/*
+        deps:
+            - install:deps:ts
+            - install:deps:sol
+        cmds:
+            - forge compile {{.FORGE_ARGS}}
+            - task: jpmx
+              vars:
+                X_ARGS: "hardhat compile"
+
