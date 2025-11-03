@@ -31,3 +31,11 @@ tasks:
             - [[.Computed.jpm_lock]]
         cmd: [[.Computed.jpm_install]] {{.PACKAGE_NAMES}}
 
+    install:deps:sol:
+        internal: true
+        sources:
+            - .gitmodules
+        generates:
+            - foundry.lock
+        cmd: forge install --shallow {{.PACKAGE_NAMES}}
+
