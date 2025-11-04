@@ -105,16 +105,10 @@ tasks:
         aliases:
             - build
             - compile
-        sources:
-            - src/contracts/**/*.sol
-            - test/foundry/**/*.sol
-        generates:
-            - cache/**/*
-            - artifacts/**/*
         cmds:
-            - task deps
-            - forge compile {{.CLI_ARGS}}
-            - [[.Computed.jpm_x]] hardhat compile
+            - task: internal:build:sol
+              vars:
+                FORGS_ARGS: "{{.CLI_ARGS}}"
 
     flatten:hardhat:
         desc: Flatten given Solidity source code(s) using Hardhat. Check `task --summary flatten:hardhat` for more info on the usage
