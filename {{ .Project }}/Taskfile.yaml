@@ -122,11 +122,15 @@ tasks:
             Example:
                 `task flatten:hardhat -- src/contracts/Airdrop.sol` - Prints the flattened contents in STDOUT
                 `task flatten:hh -- src/contracts/Airdrop.sol --output SC.sol` - Writes to SC.sol
+        silent: true
         aliases:
             - flatten:hh
+        deps:
+            - deps:all
         cmds:
-            - task deps
-            - [[.Computed.jpm_x]] hardhat flatten {{.CLI_ARGS}}
+            - task: internal:jpmx
+              vars:
+                X_ARGS: "hardhat flatten {{.CLI_ARGS}}"
 
     flatten:forge:
         desc: Flatten given Solidity source code using Foundry. Check `task --summary flatten:forge` for more info on the usage
