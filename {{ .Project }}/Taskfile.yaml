@@ -46,7 +46,10 @@ tasks:
         desc: Run prettier formatter for TypeScript
         aliases:
             - fmt:ts
-        cmd: [[.Computed.jpm_x]] prettier --write .
+        cmds:
+            - task: internal:jpmx
+              vars:
+                X_ARGS: "prettier --write ."
 
     format:sol:
         desc: Run foundry formatter for Solidity
@@ -64,15 +67,24 @@ tasks:
 
     lint:ts:
         desc: Lint TypeScript files
-        cmd: [[.Computed.jpm_x]] eslint .
-
+        cmds:
+            - task: internal:jpmx
+              vars:
+                X_ARGS: "eslint ."
+                
     lint:ts:fix:
         desc: Lint and fix TypeScript files
-        cmd: [[.Computed.jpm_x]] eslint . --fix
-
+        cmds:
+            - task: internal:jpmx
+              vars:
+                X_ARGS: "eslint . --fix"
+                
     lint:ts:check:
         desc: Lint check only
-        cmd: [[.Computed.jpm_x]] prettier --check .
+        cmds:
+            - task: internal:jpmx
+              vars:
+                X_ARGS: "prettier --check ."
 
     lint:sol:
         desc: Lint Solidity files
