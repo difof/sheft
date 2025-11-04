@@ -15,29 +15,28 @@ tasks:
         desc: Install TypeScript dependencies
         aliases:
             - install:ts
-        sources:
-            - package.json
-        generates:
-            - [[.Computed.jpm_lock]]
-        cmd: [[.Computed.jpm_install]] {{.CLI_ARGS}}
+        cmds:
+            - task: internal:install:deps:ts
+              vars:
+                PACKAGE_NAMES: "{{.CLI_ARGS}}"
 
     deps:sol:
         desc: Install Solidity dependencies
         aliases:
             - install:sol
-        sources:
-            - .gitmodules
-        generates:
-            - foundry.lock
-        cmd: forge install --shallow {{.CLI_ARGS}}
+        cmds:
+            - task: internal:install:deps:sol
+              vars:
+                PACKAGE_NAMES: "{{.CLI_ARGS}}"
 
-    deps:
+    deps:all:
         desc: Install all (Foundry/TS) dependencies
         aliases:
             - install
+            - deps
         deps:
-            - deps:ts
-            - deps:sol
+            - internal:install:deps:ts
+            - internal:install:deps:sol
 
     #######################################################
     # Formatting and Linting
