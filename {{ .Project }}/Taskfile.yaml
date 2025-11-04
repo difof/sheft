@@ -7,13 +7,6 @@ vars:
     SOLC_VERSION: "{{.Scaffold.solc_version}}"
 
 tasks:
-    ensure-var:
-        silent: true
-        vars:
-            PNAME: "{{index .CLI_ARGS_LIST 0}}"
-            PVAL: "{{index .CLI_ARGS_LIST 1}}"
-        cmd: '{{if eq (len .PVAL) 0}}echo ''Required arg "{{.PNAME}}" is not set'';exit 1{{else}}echo {{.PVAL}}{{end}}'
-
     #######################################################
     # Dependency Installation
     #######################################################
