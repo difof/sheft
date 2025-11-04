@@ -144,11 +144,13 @@ tasks:
             Examples:
                 `task flatten:forge -- src/contracts/Airdrop.sol` - Prints the flattened contents in STDOUT
                 `task flatten -- src/contracts/Airdrop.sol --output SC.sol` - Writes to SC.sol
+        silent: true
         aliases:
             - flatten:f
             - flatten
+        deps:
+            - internal:build:sol
         cmds:
-            - task build:sol
             - forge flatten {{.CLI_ARGS}}
 
     abi:forge:
