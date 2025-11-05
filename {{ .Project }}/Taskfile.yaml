@@ -185,9 +185,13 @@ tasks:
         aliases:
             - bytecode
             - bytecode:f
+        deps:
+            - internal:build:sol
         cmds:
-            - task build:sol
-            - task get-foundry-artifact -- {{.CLI_ARGS}} | bunx node-jq -r '.bytecode.object'
+            - task: internal:get-foundry-artifact
+              vars:
+                SC_NAME: "{{.CLI_ARGS}}"
+                JQ_PATH: ".bytecode.object"
 
     abi:hardhat:
         desc: Get contract ABI from Hardhat artifacts. Pass contract path as CLI arg relative to remappings
