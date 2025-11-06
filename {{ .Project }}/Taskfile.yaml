@@ -277,9 +277,11 @@ tasks:
     test:all:
         desc: Run all unit tests (Solidity and TypeScript)
         cmds:
-            - task test:forge
-            - task test:hardhat
-            - task test:ts -- [[.Computed.jpm_test_files]]
+            - task: test:forge
+            - task: test:hardhat
+            - task: internal:test:ts
+              vars:
+                TEST_PATHS: "[[.Computed.jpm_test_files]]"
 
     #######################################################
     # Node and REPL
