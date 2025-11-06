@@ -269,12 +269,10 @@ tasks:
 
     test:ts:
         desc: Run bun tests, without hardhat or foundry loaded. Make sure to limit path to `test/ts`. Accepts CLI args for `bun test`
-        preconditions:
-            - sh: test -n "{{ .CLI_ARGS }}"
-              msg: "test:ts requires CLI args (e.g., '[[.Computed.jpm_test_files]]' or a specific test file). Usage: task test:ts -- [[.Computed.jpm_test_files]]"
         cmds: 
-            - task deps:ts
-            - [[.Computed.jpm_test]] {{ .CLI_ARGS }}
+            - task: internal:test:ts
+              vars:
+                TEST_PATHS: "{{.CLI_ARGS}}"
 
     test:all:
         desc: Run all unit tests (Solidity and TypeScript)
