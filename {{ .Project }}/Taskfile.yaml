@@ -260,9 +260,12 @@ tasks:
                 `task test:hardhat -- test/hardhat/AirdropIntegration.test.ts` - Run only the test at given path
         aliases:
             - test:hh
+        deps:
+            - internal:build:sol
         cmds:
-            - task build:sol
-            - [[.Computed.jpm_x]] hardhat test mocha {{ .CLI_ARGS }}
+            - task: internal:jpmx
+              vars:
+                X_ARGS: "hardhat test mocha {{.CLI_ARGS}}"
 
     test:ts:
         desc: Run bun tests, without hardhat or foundry loaded. Make sure to limit path to `test/ts`. Accepts CLI args for `bun test`
