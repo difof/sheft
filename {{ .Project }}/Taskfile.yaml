@@ -245,9 +245,10 @@ tasks:
         aliases:
             - test
             - test:f
+        deps:
+            - internal:build:sol
         cmds:
-            - task build:sol
-            - forge test --show-progress --summary --detailed --ffi {{ .CLI_ARGS }}
+            - forge test --show-progress --summary --detailed --ffi {{.CLI_ARGS}}
 
     test:hardhat:
         desc: Run Hardhat tests. Accepts CLI args for `hardhat test`
