@@ -385,24 +385,7 @@ tasks:
             API_KEY: "${{.NETWORK}}_API_KEY"
             CHAINID: "${{.NETWORK}}_CHAINID"
         cmd: forge verify-contract -c {{.CHAINID}} -e {{.API_KEY}} -r {{.RPC}} --compiler-version {{.SOLC_VERSION}} --watch {{.SC_ADDR}} {{.EXT_ARGS}}
-[[ if .Scaffold.should_package ]]
-    #######################################################
-    # Package SDK tasks
-    #######################################################
 
-    build:package:
-        desc: Build package library
-        aliases:
-            - package
-        cmds:
-            - task: build:sol
-            - task: package:build
-
-    clean:package:
-        desc: Clean package library builds
-        cmds:
-            - task: package:clean
-[[end]]
     #######################################################
     # Wallet
     #######################################################
