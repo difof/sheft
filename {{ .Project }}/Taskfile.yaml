@@ -359,9 +359,12 @@ tasks:
         desc: Run a Hardhat script. Accepts CLI args
         aliases:
             - script
+        deps:
+            - internal:build:sol
         cmds:
-            - task build:sol
-            - [[.Computed.jpm_x]] hardhat run {{.CLI_ARGS}}
+            - task: internal:jpmx
+              vars:
+                X_ARGS: "hardhat run {{.CLI_ARGS}}"
 
     #######################################################
     # Verification
