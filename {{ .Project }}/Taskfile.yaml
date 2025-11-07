@@ -441,9 +441,11 @@ tasks:
             WALLET_NAME:
                 sh: task internal:ensure-arg -- "wallet name" {{index .CLI_ARGS_LIST 0}}
         cmds:
-            - task deps:ts
             - defer: rm -fr .keystore/.tmp.mn .keystore/.tmp.mni
-            - [[.Computed.jpm_run]] src/ts/prompt-secret.ts
+            - task: internal:install:deps:ts
+            - task: internal:run:ts
+              vars:
+                TS_FILE: src/ts/prompt-secret.ts
             - cast wallet import -k .keystore --mnemonic .keystore/.tmp.mn --mnemonic-index $(cat .keystore/.tmp.mni) {{.WALLET_NAME}}
 
     wallet:list:
