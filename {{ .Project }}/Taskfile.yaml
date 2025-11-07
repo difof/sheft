@@ -297,14 +297,25 @@ tasks:
 
     node:hardhat:
         desc: Run a Hardhat node locally
-        cmd: [[.Computed.jpm_x]] hardhat node {{.CLI_ARGS}}
+        deps:
+            - internal:install:deps:ts
+        cmds: 
+            - task: internal:jpmx
+              vars:
+                X_ARGS: "hardhat node {{.CLI_ARGS}}"
 
     repl:hardhat:
         desc: Run the Hardhat console
         aliases:
             - repl:ts
             - console
-        cmd: [[.Computed.jpm_x]] hardhat console {{.CLI_ARGS}}
+        deps:
+            - internal:install:deps:ts
+            - internal:install:deps:sol
+        cmds:
+            - task: internal:jpmx
+              vars:
+                X_ARGS: "hardhat node {{.CLI_ARGS}}"
 
     repl:chisel:
         desc: Run chisel
