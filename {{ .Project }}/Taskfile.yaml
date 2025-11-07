@@ -390,11 +390,6 @@ tasks:
     # Wallet
     #######################################################
 
-    ensure-local-keystore:
-        silent: true
-        internal: true
-        cmd: mkdir -p .keystore
-
     wallet:new:
         desc: Create a new local private key in .keystore
         silent: true
