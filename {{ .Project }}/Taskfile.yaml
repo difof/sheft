@@ -578,6 +578,25 @@ tasks:
             - task clean:docs
             - task clean:npm
 
+[[ if .Scaffold.should_package ]]
+    #######################################################
+    # Package SDK tasks
+    #######################################################
+
+    build:package:
+        desc: Build package library
+        aliases:
+            - package
+        cmds:
+            - task: build:sol
+            - task: package:build
+
+    clean:package:
+        desc: Clean package library builds
+        cmds:
+            - task: package:clean
+[[end]]
+
 includes:
     internal:
         taskfile: tasks/internal.yaml
