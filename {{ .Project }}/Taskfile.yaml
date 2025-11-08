@@ -497,16 +497,6 @@ tasks:
     # Coverage Report
     #######################################################
 
-    ensure-cov-tools:
-        internal: true
-        silent: true
-        preconditions:
-            - sh: command -v lcov >/dev/null 2>&1
-              msg: lcov is not installed
-            - sh: command -v genhtml >/dev/null 2>&1
-              msg: genhtml is not installed
-        cmd: mkdir -p coverage
-
     cover:sol:
         desc: Generate coverage report. Accepts CLI args for `forge coverage`
         aliases:
