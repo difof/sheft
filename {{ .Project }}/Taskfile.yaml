@@ -514,9 +514,12 @@ tasks:
 
     host:cover:
         desc: Host coverage report via npm package `http-server`. Accepts CLI args for `http-server`
+        deps:
+            - cover:sol
         cmds:
-            - task cover:sol
-            - [[.Computed.jpm_x]] http-server coverage {{.CLI_ARGS}}
+            - task: internal:jpmx
+              vars:
+                X_ARGS: http-server coverage {{.CLI_ARGS}}
 
     #######################################################
     # Utility
