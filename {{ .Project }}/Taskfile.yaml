@@ -537,7 +537,10 @@ tasks:
 
     sort-package.json:
         desc: Sorts root package.json
-        cmd: [[.Computed.jpm_x]] sort-package-json package.json
+        cmds: 
+            - task: internal:jpmx
+              vars:
+                X_ARGS: sort-package-json package.json
 
     #######################################################
     # Clean
