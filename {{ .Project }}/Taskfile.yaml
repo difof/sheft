@@ -532,7 +532,7 @@ tasks:
     host:docs:
         desc: Host docs
         deps:
-            - build:sol
+            - internal:build:sol
         cmd: task docs -- -s --open
 
     sort-package.json:
