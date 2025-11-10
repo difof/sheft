@@ -114,3 +114,16 @@ tasks:
             - install:deps:ts
         cmds:
             - [[.Computed.jpm_test]] {{.TEST_PATHS}}
+
+[[ if .Scaffold.export_abi ]]
+    export:abi:nodeps:
+        silent: true
+        vars:
+            SC_NAME: "{{index .CLI_ARGS_LIST 0}}"
+            JQ_PATH: "{{index .CLI_ARGS_LIST 1}}"
+        cmds:
+            - task: get-foundry-artifact
+              vars:
+                SC_NAME: "{{.SC_NAME}}"
+                JQ_PATH: "{{.JQ_PATH}}"
+[[end]]
