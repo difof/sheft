@@ -585,8 +585,7 @@ tasks:
     #######################################################
     # Package SDK tasks
     #######################################################
-
-[[ if .Scaffold.export_abi ]]
+[[- if .Scaffold.export_abi ]]
     export:abi:
         desc: Export foundry ABI and bytecodes
         silent: true
@@ -602,7 +601,7 @@ tasks:
             - task: internal:export:abi:ts
               vars:
                 CONTRACTS: "{{.CONTRACTS}}"
-[[end]]
+[[- end ]]
 
     build:package:
         desc: Build package library
@@ -611,9 +610,9 @@ tasks:
         deps:
 [[ if .Scaffold.export_abi ]]
             - export:abi
-[[else]]
+[[ else ]]
             - internal:build:sol
-[[end]]
+[[- end ]]
         cmds:
             - task: package:build
 
@@ -621,7 +620,7 @@ tasks:
         desc: Clean package library builds
         cmds:
             - task: package:clean
-[[end]]
+[[- end ]]
 
 includes:
     internal:
@@ -633,11 +632,11 @@ includes:
         taskfile: ./package
         dir: ./package
         internal: true
-[[ end ]]
+[[- end ]]
 
 [[ if .Scaffold.export_abi ]]
     contracts:
         taskfile: tasks/contracts.yaml
         dir: .
         internal: true
-[[end]]
+[[- end ]]
