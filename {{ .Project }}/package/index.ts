@@ -17,3 +17,15 @@ export {
     HexString as MerkleHexString,
     MapperFunction as MerkleMapperFunction,
 }
+
+{{ if .Scaffold.export_abi }}
+import abi from './abi/abi'
+export {
+    abi as ABI
+}
+
+import bytecode from './bytecode/bytecode'
+export {
+    bytecode as Bytecode
+}
+{{ end }}
