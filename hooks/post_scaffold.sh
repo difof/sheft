@@ -40,6 +40,10 @@ if [ "{{ .Scaffold.use_husky_commitlint }}" != "true" ]; then
   [ -f commitlint.config.js ] && rm -f commitlint.config.js
 fi
 
+if [ "{{ .Scaffold.export_abi }}" != "true" ]; then
+  [ -d tasks/contracts.yaml ] && rm -rf tasks/contracts.yaml
+fi
+
 info "Initializing git repo"
 git init
 git add .gitignore
