@@ -144,4 +144,38 @@ tasks:
         cmds:
             - echo '{{.ABI_JSON}}' > package/abi/foundry/{{.SC_NAME}}.json
             - echo '{{.BC_JSON}}' > package/bytecode/foundry/{{.SC_NAME}}.json
+
+    export:abi:ts:
+        silent: true
+        internal: true
+        requires:
+            vars:
+                - CONTRACTS
+        cmds:
+            - |
+              cat > package/abi/abi.ts <<EOF
+              {{- $contracts := splitList " " (trimAll "[]," .CONTRACTS) -}}
+              {{- range $i, $sc := $contracts }}
+              import {{$sc}} from "./foundry/{{$sc}}.json"
+              {{- end }}
+
+              export default {
+              {{- range $i, $sc := $contracts }}
+                  {{$sc}},
+              {{- end }}
+              }
+              EOF
+            - |
+              cat > package/bytecode/bytecode.ts <<EOF
+              {{- $contracts := splitList " " (trimAll "[]," .CONTRACTS) -}}
+              {{- range $i, $sc := $contracts }}
+              import {{$sc}} from "./foundry/{{$sc}}.json"
+              {{- end }}
+
+              export default {
+              {{- range $i, $sc := $contracts }}
+                  {{$sc}},
+              {{- end }}
+              }
+              EOF
 [[end]]
