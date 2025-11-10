@@ -113,11 +113,10 @@ Tips:
 - [x] FIX: .env with RPC_URL, passed to commands
 - [x] add `0x` prefix to keccak hash of `src/ts/keccak.ts`
 - [x] Allow usage of either node/npm or bun, instead of just bun
-- [ ] Start empty without airdrop and token
+- [x] Use proper `internal` tasks and `sh` execution for `{{.Project}}/Taskfile.yaml`
 - [ ] Add ABI JSON export to package, using yaml list in taskfile
+- [ ] Start empty without airdrop and token
 - [ ] Add viem
-- [ ] Use proper `internal` tasks and `sh` execution for `{{.Project}}/Taskfile.yaml`
-- [ ] Organize internal tasks by putting them in another taskfile, and isolate templating in that file
 - [ ] Document the utility tasks such as `ensure-var`
 - [ ] Proper empty string defaults for internal utility tasks such as `ensure-var`
 - [ ] Required vars for `ensure-var`
