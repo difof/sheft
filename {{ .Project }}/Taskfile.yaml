@@ -586,6 +586,24 @@ tasks:
     # Package SDK tasks
     #######################################################
 
+[[ if .Scaffold.export_abi ]]
+    export:abi:
+        desc: Export foundry ABI and bytecodes
+        silent: true
+        deps:
+            - internal:build:sol
+        cmds:
+            - mkdir -p package/abi/foundry package/bytecode/foundry
+            - for:
+                var: CONTRACTS
+              task: internal:export:abi
+              vars:
+                SC_NAME: "{{.ITEM}}"
+            - task: internal:export:abi:ts
+              vars:
+                CONTRACTS: "{{.CONTRACTS}}"
+[[end]]
+
     build:package:
         desc: Build package library
         aliases:
