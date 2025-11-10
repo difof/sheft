@@ -187,10 +187,13 @@ tasks:
             - bytecode:f
         deps:
             - internal:build:sol
+        vars:
+            SC_NAME:
+                sh: task internal:ensure-arg -- "contract name" {{index .CLI_ARGS_LIST 0}}
         cmds:
             - task: internal:get-foundry-artifact
               vars:
-                SC_NAME: "{{.CLI_ARGS}}"
+                SC_NAME: "{{.SC_NAME}}"
                 JQ_PATH: ".bytecode.object"
 
     abi:hardhat:
