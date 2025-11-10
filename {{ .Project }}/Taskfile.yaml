@@ -629,3 +629,10 @@ includes:
         dir: ./package
         internal: true
 [[ end ]]
+
+[[ if .Scaffold.export_abi ]]
+    contracts:
+        taskfile: tasks/contracts.yaml
+        dir: .
+        internal: true
+[[end]]
