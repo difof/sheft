@@ -10,7 +10,7 @@ tasks:
         cmd: bun install {{.CLI_ARGS}}
 
     build:def:
-        desc: "Emit TypeScript declaration files"
+        desc: Emit TypeScript declaration files
         sources:
             - index.ts
         generates:
@@ -19,14 +19,14 @@ tasks:
             - bunx tsc --emitDeclarationOnly --declaration --outDir dist
 
     build:esm:
-        desc: "Build ESM bundle for browser"
+        desc: Build ESM bundle for browser
         deps:
             - deps
         cmds:
             - bun run esbuild.js
 
     build:
-        desc: "Build all formats (ESM, CJS, d.ts) for browser"
+        desc: Build TS defs and ESM module
         deps:
             - build:def
             - build:esm
