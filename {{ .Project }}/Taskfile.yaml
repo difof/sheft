@@ -608,8 +608,13 @@ tasks:
         desc: Build package library
         aliases:
             - package
+        deps:
+[[ if .Scaffold.export_abi ]]
+            - export:abi
+[[else]]
+            - internal:build:sol
+[[end]]
         cmds:
-            - task: build:sol
             - task: package:build
 
     clean:package:
