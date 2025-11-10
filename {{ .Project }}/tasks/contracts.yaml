@@ -1,0 +1,6 @@
+version: "3.44"
+
+vars:
+    CONTRACTS:
+        - Airdrop
+        - [[.ProjectPascal]]Token
