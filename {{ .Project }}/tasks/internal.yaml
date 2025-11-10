@@ -126,4 +126,22 @@ tasks:
               vars:
                 SC_NAME: "{{.SC_NAME}}"
                 JQ_PATH: "{{.JQ_PATH}}"
+
+    export:abi:
+        silent: true
+        internal: true
+        requires:
+            vars:
+                - SC_NAME
+        vars:
+            ABI_JSON:
+                sh: task internal:export:abi:nodeps -- {{.SC_NAME}} '.abi'
+            BC_DATA:
+                sh: task internal:export:abi:nodeps -- {{.SC_NAME}} '.bytecode.object'
+            BC_JSON:
+                sh: |
+                    printf '{\n\t"bytecode": "%s"\n}\n' "{{.BC_DATA}}"
+        cmds:
+            - echo '{{.ABI_JSON}}' > package/abi/foundry/{{.SC_NAME}}.json
+            - echo '{{.BC_JSON}}' > package/bytecode/foundry/{{.SC_NAME}}.json
 [[end]]
