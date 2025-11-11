@@ -79,7 +79,7 @@ Since this is a template project, apply changes directly to the templates under 
 2) From repo root, generate the default sandbox project under `sandbox/`:
 
 ```sh
-task clean:sandbox   
+task clean:sandbox
 task sandbox         # generates sandbox/
 cd sandbox
 ```
@@ -115,7 +115,7 @@ Tips:
 - [x] Allow usage of either node/npm or bun, instead of just bun
 - [x] Use proper `internal` tasks and `sh` execution for `{{.Project}}/Taskfile.yaml`
 - [x] Add ABI JSON export to package, using yaml list in taskfile
-- [ ] Start empty without airdrop and token
+- [x] Start empty without airdrop and token
 - [ ] Add viem
 - [ ] Smart contract and test templates
 - [ ] Custom cursor rules and commands
@@ -124,6 +124,6 @@ Tips:
 - [ ] Dedicated merkle and keccak npm package
 - [ ] Support Optimism (In Hardhat) and other EVM variants
 
-## License 
+## License
 
 MIT
