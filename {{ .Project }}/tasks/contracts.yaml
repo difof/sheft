@@ -1,6 +1,7 @@
 version: "3.44"
 
 vars:
-    CONTRACTS:
+    CONTRACTS: [[ if .Scaffold.empty_start ]][][[ else ]]
         - Airdrop
         - [[.ProjectPascal]]Token
+[[ end ]]
