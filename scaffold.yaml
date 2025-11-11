@@ -81,6 +81,10 @@ questions:
       message: License of the project
       default: "MIT"
       options: *license-options
+  - name: empty_start
+    prompt:
+      confirm: Start with demo contracts? (recommended)
+      default: false
   - name: use_husky_commitlint
     prompt:
       confirm: Use Husky and Commitlint?
@@ -144,8 +148,9 @@ presets:
     use_husky_commitlint: true
     js_package_manager: bun
     license: MIT
+    empty_start: false
     should_package: true
-    export_abi: false
+    export_abi: true
     package_name: none
     package_repo: none
     package_license: MIT
