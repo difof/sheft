@@ -23,26 +23,33 @@ check_bin() {
 }
 
 check_bin git
-check_bin bun
 check_bin forge
 check_bin cast
 check_bin task
+{{ if eq .Scaffold.js_package_manager "bun" }}check_bin bun{{ else }}check_bin npm{{ end }}
 
 cd "{{ .Project }}"
 info "Post-scaffold hook running in $(pwd)"
 
-if [ "{{ .Scaffold.should_package }}" != "true" ]; then
-  [ -d package ] && rm -rf package
-fi
+{{ if not .Scaffold.should_package }}
+[ -d package ] && rm -rf package
+{{ end }}
 
-if [ "{{ .Scaffold.use_husky_commitlint }}" != "true" ]; then
-  [ -d .husky ] && rm -rf .husky
-  [ -f commitlint.config.js ] && rm -f commitlint.config.js
-fi
+{{ if not .Scaffold.use_husky_commitlint }}
+[ -d .husky ] && rm -rf .husky
+[ -f commitlint.config.js ] && rm -f commitlint.config.js
+{{ end }}
 
-if [ "{{ .Scaffold.export_abi }}" != "true" ]; then
-  [ -d tasks/contracts.yaml ] && rm -rf tasks/contracts.yaml
-fi
+{{ if not .Scaffold.export_abi }}
+[ -d tasks/contracts.yaml ] && rm -rf tasks/contracts.yaml
+{{ end }}
+
+{{ if .Scaffold.empty_start }}
+rm -rf src/contracts/*.sol
+find test/foundry -type f -name '*.sol' -delete
+find script/foundry -type f -name '*.sol' -delete
+rm -rf test/hardhat/*.ts
+{{ end }}
 
 info "Initializing git repo"
 git init
@@ -73,6 +80,8 @@ task wallet:new -- dev
 info "Copying .env.example → .env"
 cp .env.example .env
 
+{{ if not .Scaffold.empty_start }}
 info "Running all tests"
 task test:all
 ok "All tests passed successfully"
+{{ end }}
