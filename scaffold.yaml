@@ -48,6 +48,14 @@ questions:
       message: Description of the project
       description: This will be the next trend!
       multi: true
+  - name: web3lib
+    prompt:
+      message: Which web3 library to use
+      default: Ethers v6
+      options:
+        - Ethers v6
+        - Viem
+        - Both
   - name: solc_version
     validate:
       match:
