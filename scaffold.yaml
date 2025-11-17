@@ -153,6 +153,7 @@ presets:
   sandbox:
     Project: sandbox
     description: "next pump is here"
+    web3lib: Both
     solc_version: 0.8.24
     evm_version: prague
     use_husky_commitlint: true
