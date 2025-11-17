@@ -49,6 +49,13 @@ rm -rf src/contracts/*.sol
 find test/foundry -type f -name '*.sol' -delete
 find script/foundry -type f -name '*.sol' -delete
 rm -rf test/hardhat/*.ts
+{{ else }}
+  {{ if not .Computed.use_viem }}
+  rm -fr test/hardhat/AirdropIntegration.viem.test.ts
+  {{ end }}
+  {{ if not .Computed.use_ethers }}
+  rm -rf test/hardhat/AirdropIntegration.test.ts test/hardhat/KeccakEthersDiff.test.ts
+  {{ end }}
 {{ end }}
 
 info "Initializing git repo"
