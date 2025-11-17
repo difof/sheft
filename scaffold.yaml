@@ -140,7 +140,9 @@ computed:
   jpm_test: '{{ if eq .Scaffold.js_package_manager "bun" }}bun test{{ else }}npx mocha{{ end }}'
   jpm_test_files: '{{ if eq .Scaffold.js_package_manager "bun" }}test/ts{{ else }}test/ts/**/*.ts{{ end }}'
   jpm_lock: '{{ if eq .Scaffold.js_package_manager "bun" }}bun.lock{{ else }}package-lock.json{{ end }}'
-  tsnode_name: ' {{ if eq .Scaffold.js_package_manager "node/npm" }}"ts-node": "^10.9.2",{{ else }}{{ end }}'
+  tsnode_name: '{{ if eq .Scaffold.js_package_manager "node/npm" }}"ts-node": "^10.9.2",{{ else }}{{ end }}'
+  use_ethers: '{{ if ne .Scaffold.web3lib "Viem" }}true{{ else }}false{{ end }}'
+  use_viem: '{{ if ne .Scaffold.web3lib "Ethers v6" }}true{{ else }}false{{ end }}'
 
 delimiters:
   - glob: "**/*.yaml"
