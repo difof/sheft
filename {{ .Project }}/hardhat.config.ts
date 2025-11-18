@@ -3,6 +3,11 @@ dotenv.config({ quiet: true })
 
 import type { HardhatUserConfig } from "hardhat/config"
 import hardhatToolboxMochaEthersPlugin from "@nomicfoundation/hardhat-toolbox-mocha-ethers"
+import hardhatNetworkHelpers from "@nomicfoundation/hardhat-network-helpers";
+{{- if .Computed.use_viem}}
+import hardhatViem from "@nomicfoundation/hardhat-viem";
+import hardhatViemAssertions from "@nomicfoundation/hardhat-viem-assertions";
+{{- end}}
 
 const config: HardhatUserConfig = {
     plugins: [hardhatToolboxMochaEthersPlugin],
