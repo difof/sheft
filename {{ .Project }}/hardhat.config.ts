@@ -10,7 +10,12 @@ import hardhatViemAssertions from "@nomicfoundation/hardhat-viem-assertions";
 {{- end}}
 
 const config: HardhatUserConfig = {
-    plugins: [hardhatToolboxMochaEthersPlugin],
+    plugins: [
+        hardhatToolboxMochaEthersPlugin,
+        hardhatNetworkHelpers,
+        {{if .Computed.use_viem}}hardhatViem,
+        hardhatViemAssertions,{{end}}
+    ],
     networks: {
         hardhat: {
             type: "edr-simulated",
