@@ -8,12 +8,18 @@
     "devDependencies": {
         {{- if .use_husky_commitlint}}"@commitlint/cli": "^19.5.0",{{end}}
         {{- if .use_husky_commitlint}}"@commitlint/config-conventional": "^19.5.0",{{end}}
+        {{- if .use_husky_commitlint}}"husky": "^9.1.7",{{end}}
         "@eslint/eslintrc": "^3.3.1",
         "@eslint/js": "^9.33.0",
         "@inquirer/prompts": "^7.8.3",
-        "@nomicfoundation/hardhat-ethers": "^4.0.0",
-        "@nomicfoundation/hardhat-toolbox-mocha-ethers": "^3.0.0",
-        "@typechain/ethers-v6": "^0.5.1",
+        "@nomicfoundation/hardhat-network-helpers": "^3.0.3",
+        {{- if .Computed.use_ethers}}"@nomicfoundation/hardhat-ethers": "^4.0.0",{{end}}
+        {{- if .Computed.use_ethers}}"@nomicfoundation/hardhat-toolbox-mocha-ethers": "^3.0.1",{{end}}
+        {{- if .Computed.use_ethers}}"@typechain/ethers-v6": "^0.5.1",{{end}}
+        {{- if .Computed.use_ethers}}"ethers": "^6.15.0",{{end}}
+        {{- if .Computed.use_viem}}"@nomicfoundation/hardhat-viem": "^3.0.1",{{end}}
+        {{- if .Computed.use_viem}}"@nomicfoundation/hardhat-viem-assertions": "^3.0.4",{{end}}
+        {{- if .Computed.use_viem}}"viem": "^2.39.2",{{end}}
         "@types/bun": "latest",
         "@types/chai": "^4.3.20",
         "@types/chai-as-promised": "^8.0.2",
@@ -27,17 +33,15 @@
         "eslint": "^9.33.0",
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-prettier": "^5.5.4",
-        "ethers": "^6.15.0",
         "globals": "^16.3.0",
-        "hardhat": "^3.0.3",
-        {{- if .use_husky_commitlint}}"husky": "^9.1.7",{{end}}
+        "hardhat": "^3.0.15",
         "mocha": "^11.7.1",
         "node-jq": "^6.0.1",
         "prettier": "^3.6.2",
         {{- .Computed.tsnode_name }}
         "typescript": "~5.8.0"
-    }{{if .use_husky_commitlint}},
+    } {{if .use_husky_commitlint}},
     "scripts": {
         "prepare": "husky"
-    }{{end}}
+    } {{end}}
 }
