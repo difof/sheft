@@ -58,6 +58,8 @@ rm -rf test/hardhat/*.ts
   {{ end }}
 {{ end }}
 
+task sort-package.json
+
 info "Initializing git repo"
 git init
 git add .gitignore
