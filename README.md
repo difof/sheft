@@ -116,7 +116,7 @@ Tips:
 - [x] Use proper `internal` tasks and `sh` execution for `{{.Project}}/Taskfile.yaml`
 - [x] Add ABI JSON export to package, using yaml list in taskfile
 - [x] Start empty without airdrop and token
-- [ ] Add viem
+- [x] Add viem
 - [ ] Smart contract and test templates
 - [ ] Custom cursor rules and commands
 - [ ] Dedicated project contribution guideline file
