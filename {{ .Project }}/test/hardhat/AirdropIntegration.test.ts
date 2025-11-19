@@ -1,5 +1,6 @@
+
 import { expect } from "chai"
-import { describe, it, beforeEach } from "mocha"
+import { describe, it } from "mocha"
 import { network } from "hardhat"
 import { type HardhatEthersSigner } from "@nomicfoundation/hardhat-ethers/types"
 
@@ -13,58 +14,57 @@ import {
 } from "../../typechain/index.ts"
 import { type AirdropMembershipStruct } from "../../typechain/Airdrop.sol/Airdrop.ts"
 
-const { ethers } = await network.connect()
+const { ethers, networkHelpers } = await network.connect()
+
+async function setupFixture() {
+    const owner = await getSigner()
+    const contracts = await deployContracts(owner)
+    const whitelist = generateTestWhitelist()
+    const merkleTree = await makeMerkleTree(contracts.token, whitelist)
+    await fundAirdropWithTotalAllocation(whitelist, contracts.airdrop, contracts.token)
+
+    return {
+        airdrop: contracts.airdrop,
+        token: contracts.token,
+        owner, whitelist, merkleTree
+    }
+}
 
 describe("Airdrop contract", () => {
-    let token: {{.ProjectPascal}}Token
-    let airdrop: Airdrop
-    let owner: HardhatEthersSigner
-    let whitelist: AirdropMembershipStruct[]
-    let merkle: Merkle<AirdropMembershipStruct>
-
-    beforeEach(async () => {
-        owner = await getSigner()
-
-        const contracts = await loadContracts(owner)
-        airdrop = contracts.airdrop
-        token = contracts.token
-
-        whitelist = generateTestWhitelist()
-        merkle = await makeMerkleTree(token, whitelist)
-
-        await fundAirdropWithTotalAllocation(whitelist, airdrop, token)
-    })
-
     it("Should update merkle root", async () => {
-        const root = merkle.getRoot()
+        const { merkleTree, airdrop } = await networkHelpers.loadFixture(setupFixture)
+        const root = merkleTree.getRoot()
         const updatedRoot = await updateMerkleRoot(airdrop, root)
         expect(updatedRoot).to.eq(root)
     })
 
     it("Merkle leaf at index 0 should equal to mapped allocation", async () => {
+        const { token, whitelist, merkleTree } = await networkHelpers.loadFixture(setupFixture)
         const mapper = await buildMapperFunction(token)
 
         const index = 0
         const allocation = whitelist[index]!
         const hashedAllocation = ethers.keccak256(mapper(allocation))
-        const leaf = "0x" + merkle.getTree().getLeaf(index).toString("hex")
+        const leaf = "0x" + merkleTree.getTree().getLeaf(index).toString("hex")
         expect(leaf).to.eq(hashedAllocation)
     })
 
-    it("Should locally verify whitelist", () => {
+    it("Should locally verify whitelist", async () => {
+        const { merkleTree } = await networkHelpers.loadFixture(setupFixture)
         const index = 0
-        const leaf = merkle.getItem(index)
-        const proof = merkle.getProof(index)
-        const root = merkle.getRoot().substring(2)
-        const result = merkle.getTree().verify(proof, leaf, root)
+        const leaf = merkleTree.getItem(index)
+        const proof = merkleTree.getProof(index)
+        const root = merkleTree.getRoot().substring(2)
+        const result = merkleTree.getTree().verify(proof, leaf, root)
         expect(result).to.be.true
     })
 
     it("Should airdrop", async () => {
-        await updateMerkleRoot(airdrop, merkle.getRoot())
+        const { merkleTree, airdrop, whitelist, token } = await networkHelpers.loadFixture(setupFixture)
+        await updateMerkleRoot(airdrop, merkleTree.getRoot())
 
         const index = 0
-        const proof = merkle.getProof(index)
+        const proof = merkleTree.getProof(index)
         const userWallet = whitelist[index]!.userWallet
         const expectedAmount = BigInt(whitelist[index]!.claimAmount)
 
@@ -84,12 +84,13 @@ describe("Airdrop contract", () => {
     })
 
     it("Should fail airdrop", async () => {
-        await updateMerkleRoot(airdrop, merkle.getRoot())
+        const { merkleTree, airdrop, whitelist, token } = await networkHelpers.loadFixture(setupFixture)
+        await updateMerkleRoot(airdrop, merkleTree.getRoot())
 
         const index = 0
         whitelist[index]!.claimAmount += "1"
-        merkle = await makeMerkleTree(token, whitelist)
-        const proof = merkle.getProof(index)
+        const newTree = await makeMerkleTree(token, whitelist)
+        const proof = newTree.getProof(index)
 
         let failed = false
         try {
@@ -107,6 +108,24 @@ describe("Airdrop contract", () => {
         expect(failed).to.be.true
     })
 })
+
+async function getSigner(): Promise<HardhatEthersSigner> {
+    const [owner] = await ethers.getSigners()
+    if (!owner) throw new Error("No signers available")
+
+    return owner
+}
+
+async function deployContracts(
+    owner: HardhatEthersSigner
+): Promise<{ airdrop: Airdrop; token: {{.ProjectPascal}}Token }> {
+    const airdrop = new Airdrop__factory(owner).deploy(owner)
+    const token = new {{.ProjectPascal}}Token__factory(owner).deploy(
+        ethers.parseEther("1000"),
+        owner
+    )
+    return { airdrop: await airdrop, token: await token }
+}
 
 async function makeMerkleTree(
     token: {{.ProjectPascal}}Token,
@@ -131,24 +150,6 @@ async function buildMapperFunction(
             [item.userWallet, item.claimAmount, tokenAddress, chainId]
         )
     }
-}
-
-async function getSigner(): Promise<HardhatEthersSigner> {
-    const [owner] = await ethers.getSigners()
-    if (!owner) throw new Error("No signers available")
-
-    return owner
-}
-
-async function loadContracts(
-    owner: HardhatEthersSigner
-): Promise<{ airdrop: Airdrop; token: {{.ProjectPascal}}Token }> {
-    const airdrop = new Airdrop__factory(owner).deploy(owner)
-    const token = new {{.ProjectPascal}}Token__factory(owner).deploy(
-        ethers.parseEther("1000"),
-        owner
-    )
-    return { airdrop: await airdrop, token: await token }
 }
 
 function generateTestWhitelist(): AirdropMembershipStruct[] {
