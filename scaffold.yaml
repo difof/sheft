@@ -91,7 +91,7 @@ questions:
       options: *license-options
   - name: empty_start
     prompt:
-      confirm: Start with demo contracts? (recommended)
+      confirm: Start with empty project? (No is recommended)
       default: false
   - name: use_husky_commitlint
     prompt:
