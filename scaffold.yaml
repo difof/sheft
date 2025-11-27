@@ -67,7 +67,7 @@ questions:
   - name: evm_version
     prompt:
       message: EVM version
-      default: prague
+      default: cancun
       options:
         - prague # 2025
         - cancun # 2024
@@ -155,7 +155,7 @@ presets:
     description: "next pump is here"
     web3lib: Both
     solc_version: 0.8.24
-    evm_version: prague
+    evm_version: cancun
     use_husky_commitlint: true
     js_package_manager: bun
     license: MIT
