@@ -1,5 +1,6 @@
 {
     "name": "{{.ProjectKebab}}",
+    "license": "{{.Scaffold.license}}",
     "type": "module",
     "dependencies": {
         "keccak": "^3.0.4",
