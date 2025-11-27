@@ -40,6 +40,7 @@ const config: HardhatUserConfig = {
             default: {
                 version: "{{.Scaffold.solc_version}}",
                 settings: {
+                    evmVersion: "{{.Scaffold.evm_version}}",
                     optimizer: {
                         enabled: true,
                         runs: 200,
