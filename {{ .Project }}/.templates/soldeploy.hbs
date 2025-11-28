@@ -1,0 +1,22 @@
+// SPDX-License-Identifier: {{license}}
+
+pragma solidity {{solcVersion}};
+
+import { Script } from "forge-std/Script.sol";
+
+contract Deploy_{{contractName}} is Script {
+    function run() public {
+        address owner = vm.getWallets()[0];
+
+        vm.startBroadcast();
+        deploy(owner);
+        vm.stopBroadcast();
+    }
+
+    function deploy(
+        address _owner
+    ) public returns (address {{camelCase contractName}}) {
+        return address(0);
+    }
+}
+

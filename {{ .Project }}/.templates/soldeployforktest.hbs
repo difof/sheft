@@ -1,0 +1,23 @@
+// SPDX-License-Identifier: {{license}}
+
+pragma solidity {{solcVersion}};
+
+import { Test } from "forge-std/Test.sol";
+
+import { Deploy_{{contractName}} } from "../../../{{outputDir}}/{{contractName}}.s.sol";
+
+contract TestFork_Deploy{{contractName}} is Test {
+    address owner = vm.addr(0x200);
+
+    Deploy_{{contractName}} deployScript;
+
+    function setUp() public {
+        deployScript = new Deploy_{{contractName}}();
+    }
+
+    function testFork_Deploy{{contractName}}() public {
+        address deployed = deployScript.deploy(owner);
+        assertNotEq(deployed, address(0), "Deployment should return non-zero address");
+    }
+}
+
