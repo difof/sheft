@@ -274,4 +274,17 @@ export default function (plop: NodePlopAPI) {
             "{{outputDir}}/{{contractName}}.sol"
         ),
     })
+
+    plop.setGenerator("test", {
+        description: "Generate a new Solidity test contract",
+        prompts: [
+            contractNamePrompt(),
+            outputDirPrompt("test/foundry"),
+            solcVersionPrompt(),
+            licensePrompt(),
+        ],
+        actions: [
+            addAction("soltest.hbs", "{{outputDir}}/{{contractName}}.test.sol"),
+        ],
+    })
 }
