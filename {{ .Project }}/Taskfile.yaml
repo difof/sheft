@@ -574,6 +574,19 @@ tasks:
               vars:
                 X_ARGS: plop erc1155
 
+    new-test:sol:
+        desc: Generate a new Solidity test contract
+        summary: |
+            Using `plopfile.ts`, generates a new Solidity test contract at `test/foundry`
+
+            Usage: `task new-test`
+        aliases:
+            - new-test
+        cmds:
+            - task: internal:jpmx
+              vars:
+                X_ARGS: plop test
+
     docs:
         desc: Generate Solidity docs from natspec comments in source codes
         cmd: forge doc -o docs -b -j 0 {{.CLI_ARGS}}
