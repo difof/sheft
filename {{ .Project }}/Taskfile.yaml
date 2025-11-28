@@ -528,6 +528,19 @@ tasks:
     # Utility
     #######################################################
 
+    new-contract:
+        desc: Generate a new smart contract
+        summary: |
+            Using `plopfile.ts`, generates a new smart contract at `src/contracts`
+
+            Usage: `task new-contract`
+        aliases:
+          - new-sc
+        cmds:
+            - task: internal:jpmx
+              vars:
+                X_ARGS: plop contract
+
     docs:
         desc: Generate Solidity docs from natspec comments in source codes
         cmd: forge doc -o docs -b -j 0 {{.CLI_ARGS}}
