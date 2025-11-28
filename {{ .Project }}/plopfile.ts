@@ -220,4 +220,26 @@ export default function (plop: NodePlopAPI) {
             "{{outputDir}}/{{contractName}}.sol"
         ),
     })
+
+    plop.setGenerator("erc721", {
+        description: "Generate a new ERC721 NFT contract",
+        prompts: [
+            contractNamePrompt(),
+            outputDirPrompt("src/contracts"),
+            tokenNamePrompt(),
+            tokenSymbolPrompt(),
+            solcVersionPrompt(),
+            licensePrompt(),
+            {
+                type: "confirm",
+                name: "addToContractsYaml",
+                message: "Add contract name to contracts.yaml?",
+                default: false,
+            },
+        ],
+        actions: addWithUpdateContracts(
+            "erc721.hbs",
+            "{{outputDir}}/{{contractName}}.sol"
+        ),
+    })
 }
