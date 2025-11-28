@@ -287,4 +287,39 @@ export default function (plop: NodePlopAPI) {
             addAction("soltest.hbs", "{{outputDir}}/{{contractName}}.test.sol"),
         ],
     })
+
+    plop.setGenerator("deploy", {
+        description: "Generate a new Solidity deploy script",
+        prompts: [
+            contractNamePrompt(),
+            outputDirPrompt("script/foundry/deploy"),
+            solcVersionPrompt(),
+            {
+                type: "confirm",
+                name: "generateForkTest",
+                message: "Generate fork test?",
+                default: false,
+            },
+            licensePrompt(),
+        ],
+        actions: (data?: Answers): ActionType[] => {
+            const actions = [
+                addAction(
+                    "soldeploy.hbs",
+                    "{{outputDir}}/{{contractName}}.s.sol"
+                ),
+            ]
+
+            if (data!.generateForkTest) {
+                actions.push(
+                    addAction(
+                        "soldeployforktest.hbs",
+                        "test/foundry/fork/Fork_Deploy{{contractName}}.test.sol"
+                    )
+                )
+            }
+
+            return actions
+        },
+    })
 }
