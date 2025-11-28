@@ -552,6 +552,17 @@ tasks:
               vars:
                 X_ARGS: plop erc20
 
+    new-erc721:
+        desc: Generate a new ERC721 contract
+        summary: |
+            Using `plopfile.ts`, generates a new ERC721 contract at `src/contracts`
+
+            Usage: `task new-erc721`
+        cmds:
+            - task: internal:jpmx
+              vars:
+                X_ARGS: plop erc721
+
     docs:
         desc: Generate Solidity docs from natspec comments in source codes
         cmd: forge doc -o docs -b -j 0 {{.CLI_ARGS}}
