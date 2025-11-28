@@ -587,6 +587,17 @@ tasks:
               vars:
                 X_ARGS: plop test
 
+    new-deploy:
+        desc: Generate a new Solidity deploy script
+        summary: |
+            Using `plopfile.ts`, generates a new Solidity deploy script at `script/foundry/deploy`
+
+            Usage: `task new-deploy`
+        cmds:
+            - task: internal:jpmx
+              vars:
+                X_ARGS: plop deploy
+
     docs:
         desc: Generate Solidity docs from natspec comments in source codes
         cmd: forge doc -o docs -b -j 0 {{.CLI_ARGS}}
