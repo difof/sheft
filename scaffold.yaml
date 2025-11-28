@@ -149,6 +149,10 @@ delimiters:
     left: "[["
     right: "]]"
 
+skip:
+  - ".templates/**/*.*"
+  - "plopfile.ts"
+
 presets:
   sandbox:
     Project: sandbox
