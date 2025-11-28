@@ -242,4 +242,36 @@ export default function (plop: NodePlopAPI) {
             "{{outputDir}}/{{contractName}}.sol"
         ),
     })
+
+    plop.setGenerator("erc1155", {
+        description: "Generate a new ERC1155 multi-token contract",
+        prompts: [
+            contractNamePrompt(),
+            outputDirPrompt("src/contracts"),
+            {
+                type: "input",
+                name: "baseURI",
+                message:
+                    "Base URI for metadata (e.g., https://example.com/api/item/):",
+                validate: (value: string) => {
+                    if (!value || value.trim().length === 0) {
+                        return "Base URI is required"
+                    }
+                    return true
+                },
+            },
+            solcVersionPrompt(),
+            licensePrompt(),
+            {
+                type: "confirm",
+                name: "addToContractsYaml",
+                message: "Add contract name to contracts.yaml?",
+                default: false,
+            },
+        ],
+        actions: addWithUpdateContracts(
+            "erc1155.hbs",
+            "{{outputDir}}/{{contractName}}.sol"
+        ),
+    })
 }
