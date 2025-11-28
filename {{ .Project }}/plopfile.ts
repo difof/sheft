@@ -81,6 +81,37 @@ function licensePrompt(): ActionType {
     }
 }
 
+function tokenNamePrompt(): ActionType {
+    return {
+        type: "input",
+        name: "tokenName",
+        message: "Token name (e.g., My Token):",
+        validate: (value: string) => {
+            if (!value || value.trim().length === 0) {
+                return "Token name is required"
+            }
+            return true
+        },
+    }
+}
+
+function tokenSymbolPrompt(): ActionType {
+    return {
+        type: "input",
+        name: "tokenSymbol",
+        message: "Token symbol (e.g., MTK):",
+        validate: (value: string) => {
+            if (!value || value.trim().length === 0) {
+                return "Token symbol is required"
+            }
+            if (!/^[A-Z0-9]+$/.test(value.toUpperCase())) {
+                return "Token symbol should contain only alphanumeric characters"
+            }
+            return true
+        },
+        filter: (value: string) => value.toUpperCase(),
+    }
+}
 
 function outputDirPrompt(defaultDir: string): ActionType {
     return {
@@ -164,6 +195,28 @@ export default function (plop: NodePlopAPI) {
         ],
         actions: addWithUpdateContracts(
             "contract.hbs",
+            "{{outputDir}}/{{contractName}}.sol"
+        ),
+    })
+
+    plop.setGenerator("erc20", {
+        description: "Generate a new ERC20 token contract",
+        prompts: [
+            contractNamePrompt(),
+            outputDirPrompt("src/contracts"),
+            tokenNamePrompt(),
+            tokenSymbolPrompt(),
+            solcVersionPrompt(),
+            licensePrompt(),
+            {
+                type: "confirm",
+                name: "addToContractsYaml",
+                message: "Add contract name to contracts.yaml?",
+                default: false,
+            },
+        ],
+        actions: addWithUpdateContracts(
+            "erc20.hbs",
             "{{outputDir}}/{{contractName}}.sol"
         ),
     })
