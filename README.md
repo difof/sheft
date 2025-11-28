@@ -117,7 +117,7 @@ Tips:
 - [x] Add ABI JSON export to package, using yaml list in taskfile
 - [x] Start empty without airdrop and token
 - [x] Add viem
-- [ ] Smart contract and test templates
+- [x] Smart contract and test templates
 - [ ] Custom cursor rules and commands
 - [ ] Dedicated project contribution guideline file
 - [ ] Github actions
