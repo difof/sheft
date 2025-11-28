@@ -119,8 +119,22 @@ Tips:
 - [x] Add viem
 - [x] Smart contract and test templates
 - [ ] Custom cursor rules and commands
+  - taskfile usage
+  - solidity files
+  - solidity test
+  - hardhat test
+  - typescript test
+  - plop and templates
+  - foundry and hardhat configs
+  - deploy scripts
+  - audit
 - [ ] Dedicated project contribution guideline file
+  - issue template
+  - discussion template
+  - pr template
 - [ ] Github actions
+  - sheft docs builder and deployer
+  - sandbox gen and test
 - [ ] Dedicated merkle and keccak npm package
 - [ ] Support Optimism (In Hardhat) and other EVM variants
 
