@@ -1,0 +1,94 @@
+version: "3.44"
+
+tasks:
+    new:contract:
+        desc: Generate a new smart contract
+        summary: |
+            Using `plopfile.ts`, generates a new smart contract at `src/contracts`
+
+            Usage: `task new:contract`
+        aliases:
+            - new:sc
+        cmds:
+            - task: internal:jpmx
+              vars:
+                  X_ARGS: plop contract
+
+    new:erc20:
+        desc: Generate a new ERC20 contract
+        summary: |
+            Using `plopfile.ts`, generates a new ERC20 contract at `src/contracts`
+
+            Usage: `task new:erc20`
+        cmds:
+            - task: internal:jpmx
+              vars:
+                  X_ARGS: plop erc20
+
+    new:erc721:
+        desc: Generate a new ERC721 contract
+        summary: |
+            Using `plopfile.ts`, generates a new ERC721 contract at `src/contracts`
+
+            Usage: `task new:erc721`
+        cmds:
+            - task: internal:jpmx
+              vars:
+                  X_ARGS: plop erc721
+
+    new:erc1155:
+        desc: Generate a new ERC1155 contract
+        summary: |
+            Using `plopfile.ts`, generates a new ERC1155 contract at `src/contracts`
+
+            Usage: `task new:erc1155`
+        cmds:
+            - task: internal:jpmx
+              vars:
+                  X_ARGS: plop erc1155
+
+    new:appstorage:
+        desc: Generate a new App Storage library
+        summary: |
+            Using `plopfile.ts`, generates a new App Storage library at `src/contracts`
+
+            Usage: `task new:appstorage`
+        cmds:
+            - task: internal:jpmx
+              vars:
+                  X_ARGS: plop appstorage
+
+    new:uups:
+        desc: Generate a new UUPS contract
+        summary: |
+            Using `plopfile.ts`, generates a new UUPS contract at `src/contracts`
+
+            Usage: `task new:uups`
+        cmds:
+            - task: internal:jpmx
+              vars:
+                  X_ARGS: plop uups
+
+    new:test:sol:
+        desc: Generate a new Solidity test contract
+        summary: |
+            Using `plopfile.ts`, generates a new Solidity test contract at `test/foundry`
+
+            Usage: `task new:test`
+        aliases:
+            - new:test
+        cmds:
+            - task: internal:jpmx
+              vars:
+                  X_ARGS: plop test
+
+    new:deploy:
+        desc: Generate a new Solidity deploy script
+        summary: |
+            Using `plopfile.ts`, generates a new Solidity deploy script at `script/foundry/deploy`
+
+            Usage: `task new:deploy`
+        cmds:
+            - task: internal:jpmx
+              vars:
+                  X_ARGS: plop deploy
