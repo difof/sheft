@@ -58,17 +58,6 @@ tasks:
               vars:
                   X_ARGS: plop appstorage
 
-    new:uups:
-        desc: Generate a new UUPS contract
-        summary: |
-            Using `plopfile.ts`, generates a new UUPS contract at `src/contracts`
-
-            Usage: `task new:uups`
-        cmds:
-            - task: internal:jpmx
-              vars:
-                  X_ARGS: plop uups
-
     new:test:sol:
         desc: Generate a new Solidity test contract
         summary: |
@@ -92,3 +81,14 @@ tasks:
             - task: internal:jpmx
               vars:
                   X_ARGS: plop deploy
+
+    new:uups:
+        desc: Generate a new UUPS upgradeable contract
+        summary: |
+            Using `plopfile.ts`, generates a new UUPS upgradeable contract at `src/contracts`
+
+            Usage: `task new:uups`
+        cmds:
+            - task: internal:jpmx
+              vars:
+                  X_ARGS: plop uups

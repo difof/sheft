@@ -2,15 +2,11 @@ import type { NodePlopAPI, ActionType } from "plop"
 import type { Answers } from "inquirer"
 import { parse, stringify } from "yaml"
 import { pascalCase } from "change-case"
-import {
-    existsSync,
-    statSync,
-    mkdirSync,
-    readFileSync,
-} from "fs"
+import { existsSync, statSync, mkdirSync, readFileSync } from "fs"
 import { resolve, join } from "path"
+import keccak from "./src/ts/keccak.ts"
 
-function contractNamePrompt(): ActionType {
+function contractNamePrompt() {
     return {
         type: "input",
         name: "contractName",
@@ -28,7 +24,7 @@ function contractNamePrompt(): ActionType {
     }
 }
 
-function solcVersionPrompt(): ActionType {
+function solcVersionPrompt() {
     return {
         type: "input",
         name: "solcVersion",
@@ -43,7 +39,7 @@ function solcVersionPrompt(): ActionType {
     }
 }
 
-function licensePrompt(): ActionType {
+function licensePrompt() {
     const licenseChoices = [
         "MIT",
         "Apache-2.0",
@@ -81,7 +77,7 @@ function licensePrompt(): ActionType {
     }
 }
 
-function tokenNamePrompt(): ActionType {
+function tokenNamePrompt() {
     return {
         type: "input",
         name: "tokenName",
@@ -95,7 +91,7 @@ function tokenNamePrompt(): ActionType {
     }
 }
 
-function tokenSymbolPrompt(): ActionType {
+function tokenSymbolPrompt() {
     return {
         type: "input",
         name: "tokenSymbol",
@@ -113,7 +109,24 @@ function tokenSymbolPrompt(): ActionType {
     }
 }
 
-function outputDirPrompt(defaultDir: string): ActionType {
+function storageDomainPrompt() {
+    return {
+        type: "input",
+        name: "storageDomain",
+        message: "Storage domain (e.g., com.example.MyContract):",
+        validate: (value: string) => {
+            if (!value || value.trim().length === 0) {
+                return "Storage domain is required"
+            }
+            if (!/^[a-zA-Z0-9._-]+$/.test(value)) {
+                return "Storage domain must contain only alphanumeric characters, dots, hyphens, and underscores"
+            }
+            return true
+        },
+    }
+}
+
+function outputDirPrompt(defaultDir: string) {
     return {
         type: "input",
         name: "outputDir",
@@ -321,5 +334,56 @@ export default function (plop: NodePlopAPI) {
 
             return actions
         },
+    })
+
+    plop.setGenerator("appstorage", {
+        description: "Generate a new App Storage library",
+        prompts: [
+            contractNamePrompt(),
+            storageDomainPrompt(),
+            outputDirPrompt("src/contracts"),
+            solcVersionPrompt(),
+            licensePrompt(),
+        ],
+        actions: (data?: Answers): ActionType[] => {
+            const storageDomain = data!.storageDomain as string
+            const storageHash = keccak(storageDomain)
+
+            return [
+                {
+                    type: "add",
+                    path: "{{outputDir}}/{{contractName}}Storage.sol",
+                    templateFile: ".templates/appstorage.hbs",
+                    data: {
+                        storageHash,
+                        storageDomain,
+                    },
+                },
+            ]
+        },
+    })
+
+    plop.setGenerator("uups", {
+        description: "Generate a new UUPS upgradeable contract",
+        prompts: [
+            contractNamePrompt(),
+            outputDirPrompt("src/contracts"),
+            solcVersionPrompt(),
+            licensePrompt(),
+            {
+                type: "confirm",
+                name: "addToContractsYaml",
+                message: "Add contract name to tasks/contracts.yaml?",
+                default: true,
+            },
+        ],
+        actions: addWithUpdateContracts(
+            "uups.hbs",
+            "{{outputDir}}/{{contractName}}.sol"
+        ),
+    })
+
+    plop.setHelper('loud', (v) => {
+        return v.toUpperCase()
     })
 }
