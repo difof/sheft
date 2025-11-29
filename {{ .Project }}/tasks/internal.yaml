@@ -29,6 +29,7 @@ tasks:
             - package.json
         generates:
             - [[.Computed.jpm_lock]]
+            - node_modules/**/*
         cmd: [[.Computed.jpm_install]] {{.PACKAGE_NAMES}}
 
     install:deps:sol:
