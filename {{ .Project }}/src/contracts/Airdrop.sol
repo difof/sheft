@@ -1,16 +1,14 @@
-// SPDX-License-Identifier: {{.Scaffold.license}}
+// SPDX-License-Identifier: MIT
 
-pragma solidity {{.Scaffold.solc_version}};
+pragma solidity 0.8.24;
 
-import { Ownable } from "openzeppelin/contracts/access/Ownable.sol";
-import { IERC20 } from "openzeppelin/contracts/token/ERC20/IERC20.sol";
-import { SafeERC20 } from
-    "openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
-import { Address } from "openzeppelin/contracts/utils/Address.sol";
-import { Pausable } from "openzeppelin/contracts/utils/Pausable.sol";
-import { ReentrancyGuard } from
-    "openzeppelin/contracts/utils/ReentrancyGuard.sol";
-import { MerkleProofLib } from "solady/utils/MerkleProofLib.sol";
+import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
+import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import {Address} from "@openzeppelin/contracts/utils/Address.sol";
+import {Pausable} from "@openzeppelin/contracts/utils/Pausable.sol";
+import {ReentrancyGuard} from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import {MerkleProofLib} from "solady/utils/MerkleProofLib.sol";
 
 /// @notice Data describing a single eligible membership claim.
 /// @dev The Merkle leaf for each membership is derived from the fields of this struct.
@@ -30,9 +28,7 @@ interface IAirdrop {
     /// @notice Returns whether the given Merkle leaf has been claimed already.
     /// @param _leaf The Merkle leaf associated with a membership.
     /// @return True if the leaf has been marked as claimed.
-    function claimed(
-        bytes32 _leaf
-    ) external view returns (bool);
+    function claimed(bytes32 _leaf) external view returns (bool);
 
     /// @notice Withdraws an arbitrary token (or native if `_token == address(0)`) to a recipient.
     /// @dev Only callable by the owner.
@@ -48,9 +44,7 @@ interface IAirdrop {
     /// @notice Updates the Merkle root controlling eligibility.
     /// @dev Only callable by the owner.
     /// @param _root The new Merkle root to set.
-    function updateMerkleRoot(
-        bytes32 _root
-    ) external;
+    function updateMerkleRoot(bytes32 _root) external;
 
     /// @notice Pauses claim functionality.
     function pause() external;
@@ -140,7 +134,9 @@ contract Airdrop is
     /// @param receiver The wallet that received the airdrop.
     /// @param amount The amount of tokens/native (in wei) sent to the receiver.
     event TokensClaimed(
-        IERC20 indexed token, address indexed receiver, uint256 amount
+        IERC20 indexed token,
+        address indexed receiver,
+        uint256 amount
     );
 
     /// @notice Emitted after a successful administrative withdrawal.
@@ -148,14 +144,14 @@ contract Airdrop is
     /// @param receiver The wallet that received the withdrawn funds.
     /// @param amount The amount withdrawn.
     event TokensWithdrawn(
-        IERC20 indexed token, address indexed receiver, uint256 amount
+        IERC20 indexed token,
+        address indexed receiver,
+        uint256 amount
     );
 
     /// @notice Deploys the airdrop contract and sets the initial owner.
     /// @param _admin The address that will be set as the contract owner.
-    constructor(
-        address _admin
-    ) Ownable(_admin) { }
+    constructor(address _admin) Ownable(_admin) {}
 
     /// @notice Accepts plain ETH transfers sent to the contract.
     /// @dev Emits a {ReceivedNative} event.
@@ -182,9 +178,7 @@ contract Airdrop is
     /// @dev Only callable by the contract owner.
     /// @dev Emits a {MerkleRootUpdated} event.
     /// @param _root The new Merkle root.
-    function updateMerkleRoot(
-        bytes32 _root
-    ) external onlyOwner {
+    function updateMerkleRoot(bytes32 _root) external onlyOwner {
         if (_root == bytes32(0)) {
             revert ZeroMerkleRoot();
         }

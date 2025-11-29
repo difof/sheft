@@ -5,7 +5,7 @@ pragma solidity {{.Scaffold.solc_version}};
 import { Test } from "forge-std/Test.sol";
 
 import { Deploy_Airdrop } from "../../../script/foundry/deploy/Airdrop.s.sol";
-import { Ownable } from "openzeppelin/contracts/access/Ownable.sol";
+import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 
 contract TestFork_DeployAirdrop is Test {
     address owner = vm.addr(0x200);

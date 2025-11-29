@@ -1,0 +1,29 @@
+// SPDX-License-Identifier: {{license}}
+
+pragma solidity {{solcVersion}};
+
+/// @notice App Storage library for {{contractName}} proxy.
+library {{contractName}}Storage {
+    /// @notice Storage layout
+    struct StorageLayout {
+        uint256 placehodler;
+    }
+
+    /// @notice Storage position `{{storageHash}}`
+    bytes32 public constant {{loud contractName}}_SLOT =
+        keccak256("{{storageDomain}}");
+
+    /**
+     * @return st StorageLayout of {{contractName}} at defined slot
+     */
+    function layout()
+        internal
+        pure
+        returns (StorageLayout storage st)
+    {
+        bytes32 position = {{loud contractName}}_SLOT;
+        assembly {
+            st.slot := position
+        }
+    }
+}

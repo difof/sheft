@@ -4,7 +4,7 @@ pragma solidity {{.Scaffold.solc_version}};
 
 import { Test } from "forge-std/Test.sol";
 
-import { IERC20 } from "openzeppelin/contracts/token/ERC20/IERC20.sol";
+import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { MerkleTreeLib } from "solady/utils/MerkleTreeLib.sol";
 
 import "../../src/contracts/{{.ProjectPascal}}Token.sol";

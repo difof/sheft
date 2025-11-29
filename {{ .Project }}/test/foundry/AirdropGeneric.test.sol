@@ -3,9 +3,9 @@
 pragma solidity {{.Scaffold.solc_version}};
 
 import { MerkleTreeLib } from "solady/utils/MerkleTreeLib.sol";
-import { IERC20 } from "openzeppelin/contracts/token/ERC20/IERC20.sol";
-import { Address } from "openzeppelin/contracts/utils/Address.sol";
-import { Pausable } from "openzeppelin/contracts/utils/Pausable.sol";
+import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import { Address } from "@openzeppelin/contracts/utils/Address.sol";
+import { Pausable } from "@openzeppelin/contracts/utils/Pausable.sol";
 
 import { AirdropSetup } from "./Airdrop.setup.sol";
 
