@@ -93,6 +93,21 @@ questions:
     prompt:
       confirm: Start with empty project? (No is recommended)
       default: false
+  - name: git_commit_init
+    prompt:
+      confirm: Commit git repo after scaffold?
+      default: true
+  - name: install_default_sol_libs
+    when: "{{not .empty_start}}"
+    prompt:
+      confirm: Install default Solidity libraries?
+      description: |
+        Libraries to install:
+        - foundry-rs/forge-std
+        - OpenZeppelin/openzeppelin-contracts
+        - OpenZeppelin/openzeppelin-contracts-upgradeable
+        - vectorized/solady
+      default: true
   - name: use_husky_commitlint
     prompt:
       confirm: Use Husky and Commitlint?
@@ -169,3 +184,5 @@ presets:
     package_name: none
     package_repo: none
     package_license: MIT
+    install_default_sol_libs: true
+    git_commit_init: true
