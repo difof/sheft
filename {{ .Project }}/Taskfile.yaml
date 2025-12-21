@@ -29,6 +29,11 @@ tasks:
               vars:
                 PACKAGE_NAMES: "{{.CLI_ARGS}}"
 
+    deps:add:sol:
+        desc: Add a new Solidity dependency
+        cmds:
+            - task: deps:sol
+
     deps:all:
         desc: Install all (Foundry/TS) dependencies
         aliases:
