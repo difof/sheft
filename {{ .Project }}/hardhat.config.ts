@@ -20,7 +20,7 @@ const config: HardhatUserConfig = {
         hardhat: {
             type: "edr-simulated",
             chainType: "l1",
-            chainId: parseInt(process.env.HARDHAT_CHAINID!),
+            chainId: parseInt(process.env.HARDHAT_CHAINID!, 10),
         },
         ...loadExternalNetworks(),
     },
@@ -82,9 +82,9 @@ function loadExternalNetworks() {
         const url = envVars[rpcKey]
 
         if (chainId && url && chainId.trim() !== "" && url.trim() !== "") {
-            const parsedChainId = parseInt(chainId.trim())
+            const parsedChainId = parseInt(chainId.trim(), 10)
             if (!isNaN(parsedChainId)) {
-                const networkKey = networkName.toLowerCase() //.replace(/_/g, '-')
+                const networkKey = networkName.toLowerCase()
                 networks[networkKey] = {
                     chainId: parsedChainId,
                     url: url.trim(),
