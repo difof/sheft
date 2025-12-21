@@ -63,26 +63,39 @@ task sort-package.json
 info "Initializing git repo"
 git init
 git add .gitignore
+
+{{ if .Scaffold.git_commit_init }}
 git commit -m "chore: initialized"
+{{ end }}
+
 ok "Git repo initialized"
 
 info "Installing TypeScript deps"
 task deps:ts
-# TODO: no lib question
+
+{{ if .Scaffold.install_default_sol_libs }}
 info "Adding Solidity dependencies"
 task deps:sol -- foundry-rs/forge-std lib/forge-std
 task deps:sol -- OpenZeppelin/openzeppelin-contracts lib/openzeppelin-contracts
 task deps:sol -- OpenZeppelin/openzeppelin-contracts-upgradeable lib/openzeppelin-contracts-upgradeable
 task deps:sol -- vectorized/solady lib/solady
+
+{{ if .Scaffold.git_commit_init }}
 git commit -m "chore: added solidity dependencies"
+{{ end }}
+
 ok "Solidity deps added"
+{{end}}
 
 info "Formatting files"
 task fmt
-# TODO: no git question
-info "Commiting all changes"
+
+info "Adding all changes to git"
 git add .
+
+{{ if .Scaffold.git_commit_init }}
 git commit -m "chore: post SHEFT setup"
+{{ end }}
 
 info_input "Creating new dev wallet"
 task wallet:new -- dev
