@@ -68,7 +68,7 @@ ok "Git repo initialized"
 
 info "Installing TypeScript deps"
 task deps:ts
-
+# TODO: no lib question
 info "Adding Solidity dependencies"
 task deps:sol -- foundry-rs/forge-std lib/forge-std
 task deps:sol -- OpenZeppelin/openzeppelin-contracts lib/openzeppelin-contracts
@@ -79,7 +79,7 @@ ok "Solidity deps added"
 
 info "Formatting files"
 task fmt
-
+# TODO: no git question
 info "Commiting all changes"
 git add .
 git commit -m "chore: post SHEFT setup"
