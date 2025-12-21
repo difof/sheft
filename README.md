@@ -121,9 +121,9 @@ Tips:
 - [x] Smart contract and test templates
 - [ ] Fixes and improvements
   - [x] Check post hook script for some TODOs on more scaffold questions
-  - [ ] Different hardhat and anvil node RPC's and chainIds (hardhat.config.ts, Taskfile.yaml)
+  - [ ] FIX task for ts and sol dependency installation
   - [ ] This readme's header need to specify npm and viem support
-  - [ ] specific task for ts and sol dependency installation
+  - [ ] Different hardhat and anvil node RPC's and chainIds (hardhat.config.ts, Taskfile.yaml)
   - [ ] fmt the files because in crosschain escrow the sol's fmt is not fmted
   - [ ] copy plopfile and interface.hbs from crosschain escrow to here
 - [ ] Add curl | sh installer script for dependencies
