@@ -118,6 +118,12 @@ Tips:
 - [x] Start empty without airdrop and token
 - [x] Add viem
 - [x] Smart contract and test templates
+- [ ] Fixes and improvements
+  - Different hardhat and anvil node RPC's and chainIds (hardhat.config.ts, Taskfile.yaml)
+  - Check post hook script for some TODOs on more scaffold questions
+  - specific task for ts and sol dependency installation
+  - fmt the files because in crosschain escrow the sol's fmt is not fmted
+  - copy plopfile and interface.hbs from crosschain escrow to here
 - [ ] Custom cursor rules and commands
   - taskfile usage
   - solidity files
