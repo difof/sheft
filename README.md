@@ -21,6 +21,7 @@ Make sure you have the following installed:
 Scaffold a new project (you will be prompted):
 
 ```sh
+scaffold update
 scaffold new --run-hooks always https://github.com/difof/sheft
 ```
 
@@ -121,9 +122,11 @@ Tips:
 - [ ] Fixes and improvements
   - Different hardhat and anvil node RPC's and chainIds (hardhat.config.ts, Taskfile.yaml)
   - Check post hook script for some TODOs on more scaffold questions
+  - This readme's header need to specify npm and viem support
   - specific task for ts and sol dependency installation
   - fmt the files because in crosschain escrow the sol's fmt is not fmted
   - copy plopfile and interface.hbs from crosschain escrow to here
+- [ ] Add curl | sh installer script for dependencies
 - [ ] Custom cursor rules and commands
   - taskfile usage
   - solidity files
