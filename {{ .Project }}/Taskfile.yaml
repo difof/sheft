@@ -4,7 +4,7 @@ dotenv:
     - .env
 
 vars:
-    SOLC_VERSION: "{{.Scaffold.solc_version}}"
+    SOLC_VERSION: "[[.Scaffold.solc_version]]"
 
 tasks:
     #######################################################
@@ -289,6 +289,8 @@ tasks:
     #######################################################
     # Node and REPL
     #######################################################
+
+    # TODO: missing anvil chain id and rpc url listen
 
     node:anvil:
         desc: Run an Anvil node locally
