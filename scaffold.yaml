@@ -89,16 +89,7 @@ questions:
       message: License of the project
       default: "MIT"
       options: *license-options
-  - name: empty_start
-    prompt:
-      confirm: Start with empty project? (No is recommended)
-      default: false
-  - name: git_commit_init
-    prompt:
-      confirm: Commit git repo after scaffold?
-      default: true
   - name: install_default_sol_libs
-    when: "{{not .empty_start}}"
     prompt:
       confirm: Install default Solidity libraries?
       description: |
@@ -107,6 +98,15 @@ questions:
         - OpenZeppelin/openzeppelin-contracts
         - OpenZeppelin/openzeppelin-contracts-upgradeable
         - vectorized/solady
+      default: true
+  - name: empty_start
+    when: "{{.install_default_sol_libs}}"
+    prompt:
+      confirm: Start with empty project? (No is recommended)
+      default: false
+  - name: git_commit_init
+    prompt:
+      confirm: Commit git repo after scaffold?
       default: true
   - name: use_husky_commitlint
     prompt:
@@ -158,6 +158,7 @@ computed:
   tsnode_name: '{{ if eq .Scaffold.js_package_manager "node/npm" }}"ts-node": "^10.9.2",{{ else }}{{ end }}'
   use_ethers: '{{ if ne .Scaffold.web3lib "Viem" }}true{{ else }}false{{ end }}'
   use_viem: '{{ if ne .Scaffold.web3lib "Ethers v6" }}true{{ else }}false{{ end }}'
+  empty_start: '{{ if .Scaffold.install_default_sol_libs }}{{ .Scaffold.empty_start }}{{ else }}true{{ end }}'
 
 delimiters:
   - glob: "**/*.yaml"
