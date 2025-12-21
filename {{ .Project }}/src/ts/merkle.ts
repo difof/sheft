@@ -43,8 +43,13 @@ class MerkleWrapper<T extends DataItem> {
 
     getItem(indexOrItem: number | T): HexString {
         if (typeof indexOrItem === "number") {
-            return this.#hashedData[indexOrItem]!
+            const itemHash = this.#hashedData[indexOrItem]
+            if (itemHash === undefined) {
+                throw new Error(`Item at index ${indexOrItem} not found`)
+            }
+            return itemHash
         }
+
         return this.#hashFunction(this.#mapperFunction(indexOrItem))
     }
 }
