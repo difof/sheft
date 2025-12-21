@@ -44,7 +44,7 @@ info "Post-scaffold hook running in $(pwd)"
 [ -d tasks/contracts.yaml ] && rm -rf tasks/contracts.yaml
 {{ end }}
 
-{{ if .Scaffold.empty_start }}
+{{ if .Computed.empty_start }}
 rm -rf src/contracts/*.sol
 find test/foundry -type f -name '*.sol' -delete
 find script/foundry -type f -name '*.sol' -delete
@@ -103,7 +103,7 @@ task wallet:new -- dev
 info "Copying .env.example → .env"
 cp .env.example .env
 
-{{ if not .Scaffold.empty_start }}
+{{ if not .Computed.empty_start }}
 info "Running all tests"
 task test:all
 ok "All tests passed successfully"
