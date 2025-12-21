@@ -20,7 +20,7 @@ const config: HardhatUserConfig = {
         hardhat: {
             type: "edr-simulated",
             chainType: "l1",
-            chainId: parseInt(process.env.HARDHAT_CHAINID!, 10),
+                chainId: parseInt(process.env.HARDHAT_CHAINID || "31337", 10),
         },
         ...loadExternalNetworks(),
     },
