@@ -181,6 +181,7 @@ function addWithUpdateContracts(
     return (data?: Answers): ActionType[] => {
         const actions = [addAction(from, to)]
 
+        // NOTE: probably do a simple null check here
         if (data!.addToContractsYaml) {
             actions.push(
                 modifyContractsYamlAction(data!.contractName as string)
