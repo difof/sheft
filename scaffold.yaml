@@ -25,7 +25,7 @@ messages:
     **NOTE:** You will be prompted for dev wallet password at project initialization. If you want to skip the prompt, provide the password as SHEFT_NEW_WALLET_PW_RAW env var for scaffold.
 
     **NOTE:** You need the following dependencies installed:
-    - [bun](https://bun.com/docs/installation)
+    - [bun](https://bun.com/docs/installation) or [npm](https://nodejs.org/en/download)
     - [foundry](https://getfoundry.sh/introduction/installation)
     - [taskfile](https://taskfile.dev/installation/)
   post: |
