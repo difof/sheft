@@ -75,10 +75,10 @@ task deps:ts
 
 {{ if .Scaffold.install_default_sol_libs }}
 info "Adding Solidity dependencies"
-task deps:sol -- foundry-rs/forge-std lib/forge-std
-task deps:sol -- OpenZeppelin/openzeppelin-contracts lib/openzeppelin-contracts
-task deps:sol -- OpenZeppelin/openzeppelin-contracts-upgradeable lib/openzeppelin-contracts-upgradeable
-task deps:sol -- vectorized/solady lib/solady
+task add:sol -- foundry-rs/forge-std lib/forge-std
+task add:sol -- OpenZeppelin/openzeppelin-contracts lib/openzeppelin-contracts
+task add:sol -- OpenZeppelin/openzeppelin-contracts-upgradeable lib/openzeppelin-contracts-upgradeable
+task add:sol -- vectorized/solady lib/solady
 
 {{ if .Scaffold.git_commit_init }}
 git commit -m "chore: added solidity dependencies"
