@@ -129,13 +129,13 @@ Tips:
 - [x] Start empty without airdrop and token
 - [x] Add viem
 - [x] Smart contract and test templates
-- [ ] Fixes and improvements
+- [x] Fixes and improvements
   - [x] Check post hook script for some TODOs on more scaffold questions
   - [x] FIX task for ts and sol dependency installation
   - [x] Add docs for `{{ .Project }}/.templates/soldeploy.hbs`
   - [x] This readme's header need to specify npm and viem support (list just like the prompts)
-  - [ ] Different hardhat and anvil node RPC's and chainIds (hardhat.config.ts, Taskfile.yaml)
-  - [ ] fmt the files because in crosschain escrow the sol's fmt is not fmted
+  - [x] Different hardhat and anvil node RPC's and chainIds (hardhat.config.ts, Taskfile.yaml)
+  - [x] fmt the files because in crosschain escrow the sol's fmt is not fmted
   - [x] copy plopfile and interface.hbs from crosschain escrow to here
 - [ ] Add curl | sh installer script for dependencies
 - [ ] Custom cursor rules and commands
@@ -157,6 +157,7 @@ Tips:
   - sandbox gen and test
 - [ ] Dedicated merkle and keccak npm package
 - [ ] Support Optimism (In Hardhat) and other EVM variants
+  - mention somewhere in docs that zk based chains need a different set of foundry and hardhat stuff. I may need to setup hardhat configs for zk's but foundry is up to user to install.
 
 ## License
 
