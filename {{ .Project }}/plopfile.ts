@@ -24,6 +24,26 @@ function contractNamePrompt() {
     }
 }
 
+function interfaceNamePrompt() {
+    return {
+        type: "input",
+        name: "interfaceName",
+        message:
+            "Interface name (Preferred with 'I' prefix):",
+        validate: (value: string) => {
+            if (!value || value.trim().length === 0) {
+                return "Interface name is required"
+            }
+            const trimmed = value.trim()
+            if (!/^[a-zA-Z][a-zA-Z0-9\s\-_]*$/.test(trimmed)) {
+                return "Interface name must start with a letter and contain only alphanumeric characters, spaces, hyphens, and underscores"
+            }
+            return true
+        },
+        filter: pascalCase,
+    }
+}
+
 function solcVersionPrompt() {
     return {
         type: "input",
@@ -380,7 +400,34 @@ export default function (plop: NodePlopAPI) {
         ),
     })
 
-    plop.setHelper('loud', (v) => {
+    plop.setGenerator("interface", {
+        description:
+            "Generate a new interface (automatically prepends 'I' to the name)",
+        prompts: [
+            interfaceNamePrompt(),
+            outputDirPrompt("src/contracts"),
+            solcVersionPrompt(),
+            licensePrompt()
+        ],
+        actions: (data?: Answers): ActionType[] => {
+            const actions = [
+                addAction(
+                    "interface.hbs",
+                    "{{outputDir}}/{{interfaceName}}.sol"
+                ),
+            ]
+
+            if (data!.addToContractsYaml) {
+                actions.push(
+                    modifyContractsYamlAction(data!.interfaceName as string)
+                )
+            }
+
+            return actions
+        },
+    })
+
+    plop.setHelper("loud", (v) => {
         return v.toUpperCase()
     })
 }
