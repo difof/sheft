@@ -32,6 +32,10 @@ tasks:
             - node_modules/**/*
         cmd: [[.Computed.jpm_install]] {{.PACKAGE_NAMES}}
 
+    deps:add:ts:
+        internal: true
+        cmd: [[.Computed.jpm_install]] {{.PACKAGE_NAMES}}
+
     install:deps:sol:
         internal: true
         sources:
