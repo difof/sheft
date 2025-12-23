@@ -31,8 +31,17 @@ tasks:
 
     deps:add:sol:
         desc: Add a new Solidity dependency
+        aliases:
+          - add:sol
         cmds:
             - task: deps:sol
+
+    deps:add:ts:
+        desc: Add a new TypeScript dependency (package.json)
+        aliases:
+          - add:ts
+        cmds:
+            - task: internal:deps:add:ts
 
     deps:all:
         desc: Install all (Foundry/TS) dependencies
