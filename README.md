@@ -29,6 +29,12 @@ scaffold new --run-hooks always https://github.com/difof/sheft
 
 And you will have your new project ready to work with.
 
+Add a new ERC20 token:
+
+```sh
+task new:erc20 # will prompt for necessary info
+```
+
 ## What You Get
 
 - Foundry and Hardhat configured to the same `src/contracts` and `test` layout
