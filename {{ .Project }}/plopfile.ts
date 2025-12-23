@@ -154,6 +154,19 @@ function outputDirPrompt(defaultDir: string) {
     }
 }
 
+function addToContractsPrompt(options?: {
+    message?: string
+    defaultValue?: boolean
+}) {
+    const { message, defaultValue } = options ?? {}
+    return {
+        type: "confirm",
+        name: "addToContractsYaml",
+        message: message ?? "Add contract name to tasks/contracts.yaml?",
+        default: defaultValue ?? true,
+    }
+}
+
 function addAction(from: string, to: string): ActionType {
     return {
         type: "add",
