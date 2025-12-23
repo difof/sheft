@@ -92,3 +92,17 @@ tasks:
             - task: internal:jpmx
               vars:
                   X_ARGS: plop uups
+
+    new:interface:
+        desc: Generate a new interface (automatically prepends 'I' to the name)
+        summary: |
+            Using `plopfile.ts`, generates a new interface at `src/contracts`
+            The interface name will automatically be prefixed with 'I' (e.g., "Manager" becomes "IManager")
+
+            Usage: `task new:interface`
+        aliases:
+            - new:iface
+        cmds:
+            - task: internal:jpmx
+              vars:
+                  X_ARGS: plop interface
