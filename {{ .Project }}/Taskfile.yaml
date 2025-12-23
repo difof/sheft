@@ -304,15 +304,28 @@ tasks:
     # Node and REPL
     #######################################################
 
-    # TODO: missing anvil chain id and rpc url listen
-
     node:anvil:
         desc: Run an Anvil node locally
-        cmd: anvil -b 13 --accounts 1 {{.CLI_ARGS}}
+        vars:
+            NETWORK:
+                sh: task internal:ensure-arg -- "network name" {{index .CLI_ARGS_LIST 0}}
+            CHAIN_ID: "${{.NETWORK}}_CHAINID"
+            RPC:
+                sh: echo ${{.NETWORK}}_RPC | sed 's/^http:\/\///' | sed 's/\/$//'
+            LISTEN_ADDR:
+                sh: "echo {{.RPC}} | cut -d: -f1"
+            LISTEN_PORT:
+                sh: "echo {{.RPC}} | cut -d: -f2"
+        cmds:
+            - anvil -b 13 --accounts 1 --chain-id {{.CHAIN_ID}} --port {{.LISTEN_PORT}} --host {{.LISTEN_ADDR}} {{slice .CLI_ARGS_LIST 1 | join " "}}
 
-    node:anvil:state:
-        desc: Run an Anvil node forking another network with persistent storage
-        cmd: task node:anvil --  --state cache/anvil/state.json --preserve-historical-states -s 13 {{.CLI_ARGS}}
+    # node:anvil:state:
+    #     desc: Run an Anvil node forking another network with persistent storage
+    #     vars:
+    #         ARGS: "{{.CLI_ARGS}}"
+    #         NETWORK: "{{if gt (len .CLI_ARGS_LIST) 1}}{{index .CLI_ARGS_LIST 0}}{{end}}"
+    #         ARGS_REST: "{{if gt (len .CLI_ARGS_LIST) 1}}{{slice .CLI_ARGS_LIST 1}}{{else}}{{.CLI_ARGS_LIST}}{{end}}"
+    #     cmd: task node:anvil -- {{index .CLI_ARGS_LIST 0}} --state cache/anvil/state.json --preserve-historical-states -s 13 {{.CLI_ARGS}}
 
     node:hardhat:
         desc: Run a Hardhat node locally
