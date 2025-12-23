@@ -4,7 +4,14 @@ pragma solidity {{solcVersion}};
 
 import { Script } from "forge-std/Script.sol";
 
+/// @title Deployment script for {{contractName}}
+/// @dev To run the deploy script you must have local keystore (e.g. `task wallet:new -- testnet_wallet`)
+/// @dev Use `task deploy -- ETHEREUM_TESTNET testnet_wallet Deploy_{{contractName}}` to deploy the contract
+/// @dev To both deploy and verify, append `--verify` to `task deploy` command
+/// @dev Make sure the `deploy()` function is covered by a fork test
+/// @dev You should run on-chain changes inside `deploy()` function so that it can be tested
 contract Deploy_{{contractName}} is Script {
+    /// @notice Main entry point for the deployment script
     function run() public {
         address owner = vm.getWallets()[0];
 
@@ -13,6 +20,9 @@ contract Deploy_{{contractName}} is Script {
         vm.stopBroadcast();
     }
 
+    /// @notice Deploys the contract
+    /// @param _owner The owner address for the deployed contract
+    /// @return {{camelCase contractName}} The address of the deployed contract
     function deploy(
         address _owner
     ) public returns (address {{camelCase contractName}}) {
