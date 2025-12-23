@@ -8,29 +8,29 @@ import { ERC721 } from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 /// @notice A basic ERC721 NFT token contract.
 /// @dev This token has no pausable functionality and provides basic minting capabilities.
 contract {{contractName}} is ERC721 {
-/// @notice Counter for the next token ID to be minted.
-uint256 private _nextTokenId;
+    /// @notice Counter for the next token ID to be minted.
+    uint256 private _nextTokenId;
 
-/// @notice Creates the {{contractName}} NFT contract.
-/// @dev Initializes the ERC721 token with the given name and symbol.
-/// The first token ID will be 1 (incremented from 0).
-constructor() ERC721("{{tokenName}}", "{{tokenSymbol}}") {
-_nextTokenId = 1;
-}
+    /// @notice Creates the {{contractName}} NFT contract.
+    /// @dev Initializes the ERC721 token with the given name and symbol.
+    /// The first token ID will be 1 (incremented from 0).
+    constructor() ERC721("{{tokenName}}", "{{tokenSymbol}}") {
+        _nextTokenId = 1;
+    }
 
-/// @notice Mints a new token to the specified address.
-/// @dev Increments the token ID counter and mints the token.
-/// @param _to The address that will receive the minted token.
-/// @return The token ID of the newly minted token.
-function mint(address _to) public returns (uint256) {
-uint256 tokenId = _nextTokenId++;
-_safeMint(_to, tokenId);
-return tokenId;
-}
+    /// @notice Mints a new token to the specified address.
+    /// @dev Increments the token ID counter and mints the token.
+    /// @param _to The address that will receive the minted token.
+    /// @return The token ID of the newly minted token.
+    function mint(address _to) public returns (uint256) {
+        uint256 tokenId = _nextTokenId++;
+        _safeMint(_to, tokenId);
+        return tokenId;
+    }
 
-/// @notice Returns the next token ID that will be minted.
-/// @return The next token ID.
-function nextTokenId() public view returns (uint256) {
-return _nextTokenId;
-}
+    /// @notice Returns the next token ID that will be minted.
+    /// @return The next token ID.
+    function nextTokenId() public view returns (uint256) {
+        return _nextTokenId;
+    }
 }
