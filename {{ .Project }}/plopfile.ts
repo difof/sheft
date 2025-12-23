@@ -212,12 +212,7 @@ export default function (plop: NodePlopAPI) {
             outputDirPrompt("src/contracts"),
             solcVersionPrompt(),
             licensePrompt(),
-            {
-                type: "confirm",
-                name: "addToContractsYaml",
-                message: "Add contract name to tasks/contracts.yaml?",
-                default: true,
-            },
+            addToContractsPrompt(),
         ],
         actions: addWithUpdateContracts(
             "contract.hbs",
@@ -234,12 +229,10 @@ export default function (plop: NodePlopAPI) {
             tokenSymbolPrompt(),
             solcVersionPrompt(),
             licensePrompt(),
-            {
-                type: "confirm",
-                name: "addToContractsYaml",
+            addToContractsPrompt({
                 message: "Add contract name to contracts.yaml?",
-                default: false,
-            },
+                defaultValue: false,
+            }),
         ],
         actions: addWithUpdateContracts(
             "erc20.hbs",
@@ -256,12 +249,10 @@ export default function (plop: NodePlopAPI) {
             tokenSymbolPrompt(),
             solcVersionPrompt(),
             licensePrompt(),
-            {
-                type: "confirm",
-                name: "addToContractsYaml",
+            addToContractsPrompt({
                 message: "Add contract name to contracts.yaml?",
-                default: false,
-            },
+                defaultValue: false,
+            }),
         ],
         actions: addWithUpdateContracts(
             "erc721.hbs",
@@ -288,12 +279,10 @@ export default function (plop: NodePlopAPI) {
             },
             solcVersionPrompt(),
             licensePrompt(),
-            {
-                type: "confirm",
-                name: "addToContractsYaml",
+            addToContractsPrompt({
                 message: "Add contract name to contracts.yaml?",
-                default: false,
-            },
+                defaultValue: false,
+            }),
         ],
         actions: addWithUpdateContracts(
             "erc1155.hbs",
@@ -383,12 +372,7 @@ export default function (plop: NodePlopAPI) {
             outputDirPrompt("src/contracts"),
             solcVersionPrompt(),
             licensePrompt(),
-            {
-                type: "confirm",
-                name: "addToContractsYaml",
-                message: "Add contract name to tasks/contracts.yaml?",
-                default: true,
-            },
+            addToContractsPrompt(),
         ],
         actions: addWithUpdateContracts(
             "uups.hbs",
