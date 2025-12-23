@@ -15,7 +15,7 @@ Make sure you have the following installed:
 - Git
 - [Scaffold](https://hay-kot.github.io/scaffold/introduction/quick-start.html)
 - [Foundry](https://getfoundry.sh/introduction/installation) (forge, cast)
-- [Bun](https://bun.com/docs/installation)
+- [Bun](https://bun.com/docs/installation) or [npm](https://nodejs.org/en/download)
 - [Taskfile](https://taskfile.dev/installation/)
 
 Scaffold a new project (you will be prompted):
@@ -32,7 +32,9 @@ And you will have your new project ready to work with.
 - Foundry and Hardhat configured to the same `src/contracts` and `test` layout
 - OpenZeppelin and Solady pre-installed
 - Ethers v6 with TypeChain output in `typechain/`
+- Viem support
 - Bun for TypeScript runner and package manager
+- npm support if you choose it in the prompts
 - ESLint + Prettier (TS), Forge lint/fmt (Solidity)
 - Conventional Commits via commitlint (optional)
 - Taskfile-powered workflows for build/test/deploy/verify/docs
