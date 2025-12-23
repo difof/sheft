@@ -21,7 +21,9 @@ Make sure you have the following installed:
 Scaffold a new project (you will be prompted):
 
 ```sh
+# fetch SHEFT updates into cache
 scaffold update
+# without `run-hooks` the project will not be properly setup
 scaffold new --run-hooks always https://github.com/difof/sheft
 ```
 
