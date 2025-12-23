@@ -122,6 +122,7 @@ Tips:
 - [ ] Fixes and improvements
   - [x] Check post hook script for some TODOs on more scaffold questions
   - [ ] FIX task for ts and sol dependency installation
+  - [ ] Add docs for `{{ .Project }}/.templates/soldeploy.hbs`
   - [ ] This readme's header need to specify npm and viem support (list just like the prompts)
   - [ ] Different hardhat and anvil node RPC's and chainIds (hardhat.config.ts, Taskfile.yaml)
   - [ ] fmt the files because in crosschain escrow the sol's fmt is not fmted
