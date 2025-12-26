@@ -555,6 +555,18 @@ tasks:
     # Utility
     #######################################################
 
+    slither:
+        desc: Run Slither code analysis on Foundry artifacts
+        summary: |
+            Run Slither code analysis on Foundry artifacts
+
+            Examples:
+                `task slither` - Run Slither code analysis on all smart contracts
+                `task slither -- src/contracts/Airdrop.sol` - Run Slither code analysis on specific smart contract
+        vars:
+            ARGS: '{{if eq (len .CLI_ARGS) 0}}.{{else}}{{.CLI_ARGS}}{{end}}'
+        cmd: slither --foundry-out-directory artifacts/foundry --exclude-dependencies --exclude-informational {{ .ARGS }}
+
     docs:
         desc: Generate Solidity docs from natspec comments in source codes
         cmd: forge doc -o docs -b -j 0 {{.CLI_ARGS}}
