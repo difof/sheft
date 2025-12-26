@@ -137,8 +137,9 @@ Tips:
   - [x] Different hardhat and anvil node RPC's and chainIds (hardhat.config.ts, Taskfile.yaml)
   - [x] fmt the files because in crosschain escrow the sol's fmt is not fmted
   - [x] copy plopfile and interface.hbs from crosschain escrow to here
-- [ ] Add curl | sh installer script for dependencies
 - [ ] Custom cursor rules and commands
+  - [ ] put the .cursor inside {{ .Project }}
+  - [ ] update scaffold.yaml to question whether to add Cursor rules
   - taskfile usage
   - solidity files
   - solidity test
@@ -147,7 +148,16 @@ Tips:
   - plop and templates
   - foundry and hardhat configs
   - deploy scripts
-  - audit
+  - audit:
+    - [x] add slither
+    - [ ] add mythril
+    - [ ] define cursor rules for slither and mythril
+      - [x] slither
+      - [ ] mythril
+    - [ ] define taskfile tasks for slither and mythril
+      - [x] slither
+      - [ ] mythril
+- [ ] Add curl | sh installer script for dependencies
 - [ ] Dedicated project contribution guideline file
   - issue template
   - discussion template
