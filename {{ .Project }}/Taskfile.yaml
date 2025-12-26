@@ -533,11 +533,9 @@ tasks:
         desc: Generate coverage report. Accepts CLI args for `forge coverage`
         aliases:
             - cover
-        sources:
-            - src/contracts/**/*.sol
-            - test/foundry/**/*.sol
         generates:
             - coverage/**/*
+            - lcov.info
         deps:
             - internal:ensure-cov-tools
         cmds:
@@ -589,7 +587,7 @@ tasks:
 
     clean:coverage:
         desc: Remove Foundry generated ./coverage
-        cmd: rm -fr coverage
+        cmd: rm -fr coverage lcov.info
 
     clean:docs:
         desc: Remove Foundry generated ./docs
